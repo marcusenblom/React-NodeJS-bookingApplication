@@ -10,11 +10,12 @@ const {
     validateUser
 } = require('../model/userModel');
 
-router.get("/getAvailability", (req, res) => {
+router.get("/getAvailability", async (req, res) => {
     
     // Skickar med user input: Date + # of people
 
-    res.send("Bokningar för ditt datum..")
+    res.send(bookings)
+
     // Få tillbaka: Tillgängliga tider för det datumet / alternativt felmeddelande som säger att det inte finns tillräckligt många bord för det sällskapet
 
 });
