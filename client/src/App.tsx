@@ -1,25 +1,48 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import Nav from './components/nav/nav';
+import Home from './components/home/home';
+import Booking from './components/booking/booking';
+import Admin from './components/admin/admin';
+import NoMatch from './components/noMatch/noMatch';
+import Footer from './components/footer/footer';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Nav></Nav>
+          <h2><Link to="/booking">Book table</Link></h2>
+
+            <Switch>
+
+              <Route path='/booking'>
+                <Booking />
+              </Route>
+
+              <Route path='/admin'>
+                <Admin />
+              </Route>
+
+              <Route exact path="/">
+                <Home />
+              </Route>
+
+              <Route path='*'>
+                <NoMatch />
+              </Route>
+
+            </Switch>
+          <Footer></Footer>        
+      </div>
+    </Router>
   );
 }
 
