@@ -56,7 +56,7 @@ router.post("/createBooking/:date/:sitting/:people/:restaurantId", async (req, r
 
     // Ta in user input för: Förnamn, Efternamn, Mail, Tele. Kolla sedan om mailen är ledig och skapa upp ett user objekt och skickar till databasen. Om mailen redan finns på ett user objekt i databasen så överskrivs övriga inputs (namn, tele) på det redan befintliga user objektet i databasen
 
-    let email = "nymaila@mail.com";
+    let email = "nymail@mail.com";
 
     const userToFind = await User.findOne({email: email});
     const allUsers = await User.find();
@@ -80,6 +80,8 @@ router.post("/createBooking/:date/:sitting/:people/:restaurantId", async (req, r
         currentUser = userToFind;
     }
 
+    // Skapa en ny booking med nya alt redan existerande användaren (se ovan)
+
     const bookings = await Booking.find();
 
     let newBooking = new Booking({
@@ -97,27 +99,6 @@ router.post("/createBooking/:date/:sitting/:people/:restaurantId", async (req, r
             res.send("Tillagd: " + newBooking);
         }
     });
-
-    
-
-   
-
-    // const user = new User({
-    //     userId: 1,
-    //     firstName: "Linda",
-    //     surName: "Andersson",
-    //     email: "Hej@gmial.ciom",
-    //     phoneNumber: 07012312323
-    // });
-
-    // await user.save((error, succes) => {
-    //     if (error) {
-    //         res.send(error.message)
-    //     }
-    // });
-
-
-    // Ta in user input för restaurang, datum, tid och antal personer. Skapa sedan upp ett bokingsobjekt i databasen
 
     // Skicka bekräftelsemail till kunden där denne kan avboka tiden
 
