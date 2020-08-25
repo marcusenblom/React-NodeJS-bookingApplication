@@ -49,11 +49,7 @@ router.get("/getAvailability/:restaurantId/:date", async (req, res) => {
 
 
     // Få tillbaka: Tillgängliga tider för det datumet / alternativt felmeddelande som säger att det inte finns tillräckligt många bord för det sällskapet
-    if (bookings.length > 0) {
-        res.send("Tables available" + JSON.stringify(availabilityPerSitting))
-    } else {
-        res.send(restaurant)
-    }
+    res.send("Tables available" + JSON.stringify(availabilityPerSitting))
     
 });
 
