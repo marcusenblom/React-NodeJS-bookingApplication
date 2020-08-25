@@ -12,11 +12,10 @@ router.get("/getAvailability/:date", async (req, res) => {
     
     // Skickar med user input: Date + # of people. OBS: Just nu så blir datumet en dag tidigare
 
-    // Inte klart ännu!!
     var date = new moment(req.params.date).format('L');
     const bookings = await Booking.find({date: date});
-    const restaurant = await Restaurant.find({restaurantId: 1});
-    let tableSize = 6;
+    const restaurant = await Restaurant.findOne({restaurantId: 1});
+    let tableSize = restaurant.tableSize;
 
     let tablesOccupied = 0;
 
@@ -24,8 +23,8 @@ router.get("/getAvailability/:date", async (req, res) => {
     
     bookings.forEach(booking => {
         if (booking.numberOfPeople > tableSize) {
-            tablesOccupied += booking.numberOfPeople % tableSize;
-            console.log(booking.numberOfPeople % tableSize);
+            tablesOccupied += Math.ceil(booking.numberOfPeople / tableSize);
+
         } else {
             tablesOccupied += 1;
         }
