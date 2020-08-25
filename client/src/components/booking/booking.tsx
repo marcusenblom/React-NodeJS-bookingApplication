@@ -1,11 +1,12 @@
 import React from 'react';
 import './booking.scss';
+import Date from './date/date';
 
 export default function Booking() {
 
     return (
         <div>
-            <h2>Booking works!</h2>
+            <Date />
         </div>
         
     );
