@@ -11,31 +11,20 @@ interface IDateProps {
 
 export default function DateComponent(props: IDateProps) {
 
-    
     const [date, setDate] = useState(new Date());
     const [people, setPeople] = useState(0);
 
     function updateDate(selectedDate: any) {
+        props.updateDate(selectedDate);
         setDate(selectedDate);
-        console.log(date);
-        updateParentDate();
     };
-
-    function updateParentDate() {
-        props.updateDate(date);
-    }
 
     function updateSelect(e: ChangeEvent<HTMLSelectElement>) {
         let p = parseInt(e.currentTarget.value);
-        setPeople(p)
-        props.updatePeople(people)
-    }
-
-    function updateParentPeople() {
         props.updatePeople(people);
+        setPeople(p);
     }
     
-
     return (
         <div className='date-container'>
             <h2>Make a reservation</h2>
@@ -73,8 +62,6 @@ export default function DateComponent(props: IDateProps) {
                         <option value='14'>14</option>
                         <option value='15'>15</option>
                     </select>
-                    <button type='button' onClick={updateParentPeople}>Klicka</button>
-                    {people.toString()}
                 </div>
 
                 <div className='date'>
