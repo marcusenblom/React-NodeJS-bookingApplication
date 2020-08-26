@@ -7,9 +7,6 @@ import 'react-calendar/dist/Calendar.css';
 
     const [date, setDate] = useState(new Date());
 
-<<<<<<< HEAD
-    function onChange(date: any){
-=======
     function onChange(date: any) {
         setDate(date);
         console.log(date);
