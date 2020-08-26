@@ -67,7 +67,7 @@ router.get("/getAvailability/:restaurantId/:date", async (req, res) => {
     }
 
     // Få tillbaka: Tillgängliga tider för det datumet / alternativt felmeddelande som säger att det inte finns tillräckligt många bord för det sällskapet
-    res.send("Tables available" + JSON.stringify(availabilityPerSitting))
+    res.send(JSON.stringify(availabilityPerSitting))
     
 });
 
