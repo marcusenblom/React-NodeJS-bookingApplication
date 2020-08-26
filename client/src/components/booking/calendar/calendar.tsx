@@ -7,14 +7,23 @@ import 'react-calendar/dist/Calendar.css';
 
     const [date, setDate] = useState(new Date());
 
+<<<<<<< HEAD
     function onChange(date: any){
+=======
+    function onChange(date: any) {
+>>>>>>> b8de13e87f54bdd74c69fffc58f84cab9b0f5a3b
         setDate(date);
         console.log(date);
     }
 
     return (
         <div>
-            <Calendar onChange={onChange} value={date} />
+            <Calendar
+             onChange= {onChange} 
+             value= {date} 
+             minDate= {new Date()} />
+
+            {date.toString()}
         </div>
     );
 }
