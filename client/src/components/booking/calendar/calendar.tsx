@@ -10,7 +10,7 @@ import 'react-calendar/dist/Calendar.css';
     function onChange(date: any) {
         setDate(date);
         console.log(date);
-    };
+    }
 
     return (
         <div>
