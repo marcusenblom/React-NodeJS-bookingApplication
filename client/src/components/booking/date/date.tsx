@@ -1,9 +1,41 @@
-import React from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import './date.scss';
-import Calendar from '../calendar/calendar';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
-export default function Date() {
+
+interface IDateProps {
+    updateDate(date: Date): void;
+    updatePeople(people: number): void;
+}
+
+export default function DateComponent(props: IDateProps) {
+
     
+    const [date, setDate] = useState(new Date());
+    const [people, setPeople] = useState(0);
+
+    function updateDate(selectedDate: any) {
+        setDate(selectedDate);
+        console.log(date);
+        updateParentDate();
+    };
+
+    function updateParentDate() {
+        props.updateDate(date);
+    }
+
+    function updateSelect(e: ChangeEvent<HTMLSelectElement>) {
+        let p = parseInt(e.currentTarget.value);
+        setPeople(p)
+        props.updatePeople(people)
+    }
+
+    function updateParentPeople() {
+        props.updatePeople(people);
+    }
+    
+
     return (
         <div className='date-container'>
             <h2>Make a reservation</h2>
@@ -23,7 +55,7 @@ export default function Date() {
             <div className='date-and-guests'>
                 <div className='guests'>
                     <p>Choose the number of your party</p>
-                    <select className='select'>
+                    <select onChange={updateSelect} className='select' value={people}>
                         <option value='0'>Guests</option>
                         <option value='1'>1</option>
                         <option value='2'>2</option>
@@ -41,11 +73,16 @@ export default function Date() {
                         <option value='14'>14</option>
                         <option value='15'>15</option>
                     </select>
+                    <button type='button' onClick={updateParentPeople}>Klicka</button>
+                    {people.toString()}
                 </div>
 
                 <div className='date'>
                     <p>Choose date</p>
-                    <Calendar />
+                    <Calendar
+                        onChange= {updateDate} 
+                        value= {date} 
+                        minDate= {new Date()} />
                 </div>
             </div>
         </div>
