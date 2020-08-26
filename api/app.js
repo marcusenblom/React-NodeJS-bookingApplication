@@ -4,13 +4,17 @@ const mongoose = require("mongoose");
 const config = require("./config/config");
 const adminRouter = require("./router/adminRouter");
 const bookingRouter = require("./router/bookingRouter");
-const port = 4000;
+var cors = require("cors");
+
 
 app.use(
     adminRouter,
     bookingRouter
 );
+app.use(cors());
 
+
+const port = 4000;
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true
