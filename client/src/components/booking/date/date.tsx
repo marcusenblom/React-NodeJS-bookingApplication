@@ -10,31 +10,20 @@ interface IDateProps {
 }
 
 export default function DateComponent(props: IDateProps) {
-
     
     const [date, setDate] = useState(new Date());
     const [people, setPeople] = useState(0);
 
     function updateDate(selectedDate: any) {
+        props.updateDate(selectedDate);
         setDate(selectedDate);
-        console.log(date);
-        updateParentDate();
     };
-
-    function updateParentDate() {
-        props.updateDate(date);
-    }
 
     function updateSelect(e: ChangeEvent<HTMLSelectElement>) {
         let p = parseInt(e.currentTarget.value);
-        setPeople(p)
-        props.updatePeople(people)
+        props.updatePeople(p);
+        setPeople(p);
     }
-
-    function updateParentPeople() {
-        props.updatePeople(people);
-    }
-    
 
     return (
         <div className='date-container'>
@@ -42,10 +31,9 @@ export default function DateComponent(props: IDateProps) {
             <hr className='hr-line'/>
             
             <p className='text-left'>Dinner - Restaurant Vasagatan can be found on Tulegatan</p>
-            <p className='text-left'>FML is a "Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque laudantium, totam rem aperiam,
-                eaque ipsa quaeb ab illo inventore veritatis et quasi architecto
-                beatae vitae dicta sunt explicabo."
+            <p className='text-left'>FML is an Italian Restaurant,
+             featuring homemade fresh pasta, traditional Roman dishes expertly prepared using the finest ingredients.
+              Fine wines and signature cocktails in a spacious, white tablecloth venue.
             </p>
             <hr className='hr-line'/>
 
@@ -73,8 +61,6 @@ export default function DateComponent(props: IDateProps) {
                         <option value='14'>14</option>
                         <option value='15'>15</option>
                     </select>
-                    <button type='button' onClick={updateParentPeople}>Klicka</button>
-                    {people.toString()}
                 </div>
 
                 <div className='date'>
