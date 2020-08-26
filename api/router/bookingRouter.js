@@ -7,6 +7,25 @@ const { Restaurant, validateRestaurant } = require('../model/restaurantModel');
 // Importerade Moment i både api samt client för att lättare kunna arbeta med datumformatering
 const moment = require('moment');
 
+router.get("/test", async (req, res) => {
+    const allUsers = await User.find();
+    // res.send(allUsers);
+
+    let user = new User({
+        userId: allUsers.length + 1,
+        firstName: "Ny användare",
+        surName: "Efternamn",
+        email: "testarTele@gmail.com",
+        phoneNumber: 0701234567
+    });
+    await user.save((error, succes) => {
+        if (error) {
+            res.send(error.message)
+        }
+    });
+
+});
+
 router.get("/getAvailability/:restaurantId/:date", async (req, res) => {
     
     // Skickar med user input: Date + # of people. OBS: Just nu så blir datumet en dag tidigare
