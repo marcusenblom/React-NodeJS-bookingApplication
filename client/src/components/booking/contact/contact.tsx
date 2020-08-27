@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 import './contact.scss';
 
 
@@ -29,7 +29,8 @@ export default function ContactComponent(props: IContactProps) {
         setPhoneNumber(parseInt(e.target.value));
     };
 
-    function updateParent(){
+    function updateParent(e: FormEvent) {
+        e.preventDefault();
         props.updateUser(firstName, lastName, email, phoneNumber);
     }
 
@@ -51,7 +52,8 @@ export default function ContactComponent(props: IContactProps) {
             <p>{props.sitting.toString()}.00</p>
           </div>
           <hr />
-          <form>
+
+          <form onSubmit={updateParent}>
             <label>
               First name:
               <input type="text" name="firstName" onChange={updateFirstName} value={firstName} required/>
@@ -68,7 +70,7 @@ export default function ContactComponent(props: IContactProps) {
               Phone Number:
               <input type="text" name="phoneNumber" onChange={updatePhoneNumber} value={phoneNumber} required/>
             </label>
-            <button type="button" onClick={updateParent}>Boka!</button>
+            <button type='submit' /* onClick={updateParent} */>Boka!</button>
           </form>
         </div>
       );
