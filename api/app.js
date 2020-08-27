@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const config = require("./config/config");
 const adminRouter = require("./router/adminRouter");
 const bookingRouter = require("./router/bookingRouter");
-var cors = require("cors");
+const cors = require("cors");
 
 
 app.use(

@@ -1,0 +1,39 @@
+.contact-container {
+
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+    font-weight: 400;
+    font-size: 90%;
+
+    h2 {
+        text-align: center;
+        font-weight: 400;
+        font-size: 20px;
+    }
+
+    .text-left {
+        text-align: left;
+        font-size: 17px;
+    }
+
+    .text-left-second {
+        text-align: left;
+        font-size: 90%;
+    }
+
+    .date-guest-time-container{
+        flex-direction: row;
+
+    .span{
+        justify-content: space-evenly;
+    }
+
+    }
+
+    form {
+        input {
+            width: 60%;
+        }
+    }
+}

@@ -15,7 +15,7 @@ router.get("/test", async (req, res) => {
         userId: allUsers.length + 1,
         firstName: "Ny användare",
         surName: "Efternamn",
-        email: "testarTele@gmail.com",
+        email: "testarTele@gmail.com" + allUsers.length + 1,
         phoneNumber: 0701234567
     });
     await user.save((error, succes) => {
