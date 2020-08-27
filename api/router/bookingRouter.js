@@ -1,9 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require("mongoose");
-const { Booking, validateBooking } = require('../model/bookingModel');
-const { User, validateUser } = require('../model/userModel');
-const { Restaurant, validateRestaurant } = require('../model/restaurantModel');
+const {
+    Booking,
+    validateBooking
+} = require('../model/bookingModel');
+const {
+    User,
+    validateUser
+} = require('../model/userModel');
+const {
+    Restaurant,
+    validateRestaurant
+} = require('../model/restaurantModel');
 // Importerade Moment i både api samt client för att lättare kunna arbeta med datumformatering
 const moment = require('moment');
 
@@ -15,12 +24,16 @@ router.get("/test", async (req, res) => {
 });
 
 router.get("/getAvailability/:restaurantId/:date", async (req, res) => {
-    
+
     // Skickar med user input: Date + # of people. OBS: Just nu så blir datumet en dag tidigare
     // I post-requestens params så måste restaurangens ID (drop down?) samt datum i format YYYY-MM-DD
     var date = new moment(req.params.date).format('L');
-    const bookings = await Booking.find({date: date});
-    const restaurant = await Restaurant.findOne({restaurantId: req.params.restaurantId});
+    const bookings = await Booking.find({
+        date: date
+    });
+    const restaurant = await Restaurant.findOne({
+        restaurantId: req.params.restaurantId
+    });
     let tableSize = restaurant.tableSize;
     let sittings = restaurant.sitting;
     let tableAmount = restaurant.tables;
@@ -56,7 +69,7 @@ router.get("/getAvailability/:restaurantId/:date", async (req, res) => {
 
     // Få tillbaka: Tillgängliga tider för det datumet / alternativt felmeddelande som säger att det inte finns tillräckligt många bord för det sällskapet
     res.send(JSON.stringify(availabilityPerSitting))
-    
+
 });
 
 router.post("/createBooking/:date/:sitting/:people/:restaurantId", async (req, res) => {
@@ -65,7 +78,9 @@ router.post("/createBooking/:date/:sitting/:people/:restaurantId", async (req, r
 
     let email = "nymail@mail.com";
 
-    const userToFind = await User.findOne({email: email});
+    const userToFind = await User.findOne({
+        email: email
+    });
     const allUsers = await User.find();
 
     // Om inte användaren finns så skapas en ny user
@@ -111,12 +126,17 @@ router.post("/createBooking/:date/:sitting/:people/:restaurantId", async (req, r
 
 });
 
-router.delete("/deleteBooking", (req, res) => {
+
+
+router.delete("/deleteBooking/:id", async (req, res) => {
 
     // Tar bort en bokning från databasen. Användaren skickar en delete-request i form av en knapp eller länk där bokingsId skickas med.
+    const booking = await Booking.remove({
+        bookingId: req.params.id
+    });
 
+    res.send(booking)
 
 });
-
 
 module.exports = router;
