@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require("mongoose");
 const {
     Booking,
     validateBooking
@@ -15,13 +14,17 @@ const {
 } = require('../model/restaurantModel');
 // Importerade Moment i både api samt client för att lättare kunna arbeta med datumformatering
 const moment = require('moment');
+const { request } = require('express');
 
-router.get("/test", async (req, res) => {
+
+router.get("/", async (req, res) => {
+
     const allUsers = await User.find();
-
+    
     res.send(allUsers);
-
+    
 });
+
 
 router.get("/getAvailability/:restaurantId/:date", async (req, res) => {
 
