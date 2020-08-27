@@ -82,7 +82,7 @@ router.post("/createBooking/:email/:date/:sitting/:people/:restaurantId", async 
     });
     const allUsers = await User.find();
 
-    // Om inte användaren finns så skapas en ny user
+    // Om inte användaren finns så skapas en ny user. Detta måste ändras från hårdkodad
     let currentUser;
     if (!userToFind) {
         currentUser = new User({
