@@ -34,42 +34,52 @@ export default function ContactComponent(props: IContactProps) {
         props.updateUser(firstName, lastName, email, phoneNumber);
     }
 
-
     return (
         <div className="contact-container">
           <h2>FML</h2>
           <hr />
     
           <p className="text-left">
-            Dinner - Restaurant Vasagatan can be found on Tulegatan
+            Dinner - FML Restaurant Vasagatan can be found on Tulegatan
           </p>
           <hr />
           <p className="text-left">Reservation 1-15 guests</p>
           <hr />
           <div className="date-guest-time-container">
-            <p>{props.date.toString()}</p>
-            <p>{props.people.toString()}</p>
-            <p>{props.sitting.toString()}.00</p>
+            <div className='presentation'>
+              <p>Date</p>
+              <p>{props.date.getDate()}/{props.date.getMonth() + 1}</p>
+            </div>
+
+            <div className='presentation'>
+              <p>Guests</p>
+              <p>{props.people.toString()}</p>
+            </div>
+
+            <div className='presentation'>
+              <p>Time</p>
+              <p>{props.sitting.toString()}.00</p></div>
           </div>
           <hr />
 
           <form onSubmit={updateParent}>
-            <label>
-              First name:
-              <input type="text" name="firstName" onChange={updateFirstName} value={firstName} required/>
-            </label>
-            <label>
-              Last name:
-              <input type="text" name="lastName" onChange={updateLastName} value={lastName} required/>
-            </label>
-            <label>
-              Email:
-              <input type="text" name="email" onChange={updateEmail} value={email} required/>
-            </label>
-            <label>
-              Phone Number:
-              <input type="text" name="phoneNumber" onChange={updatePhoneNumber} value={phoneNumber} required/>
-            </label>
+
+            <label htmlFor='firstName'>First name:</label>
+              <input type='text' name='firstName' id='theFirstName' onChange={updateFirstName} value={firstName} required />
+            <br/>
+
+            <label htmlFor='lastName'>Last name:</label>
+              <input type='text' name='lastName' onChange={updateLastName} value={lastName} required />
+            <br/>
+
+            <label htmlFor='email'>Email:</label>
+              <input type='text' name='email' onChange={updateEmail} value={email} required />
+            <br/>
+
+            <label htmlFor='phoneNumber'>Phone Number:</label>
+              <input type='number' name='phoneNumber' onChange={updatePhoneNumber} value={phoneNumber} required />
+              <br/>
+
             <button type='submit' /* onClick={updateParent} */>Boka!</button>
           </form>
         </div>
