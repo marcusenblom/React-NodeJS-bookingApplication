@@ -42,6 +42,17 @@ export default function Booking() {
     function updateUserFromChild(firstName: string, lastName: string, email: string, phoneNumber: number) {
         let user = new userClass(firstName, lastName, email, phoneNumber);
         setUser(user);
+
+        // setTimeout(function(){
+        //     axios.post('http://localhost:4000', user).then(response => {
+        //         console.log(response.data);
+        //         console.log("Local API get is run");
+        //     }).catch(function (err){
+        //         console.log(err);
+        //     });
+        // }, 1000);
+
+        
     }
 
     useEffect(() => {
