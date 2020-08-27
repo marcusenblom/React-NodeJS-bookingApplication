@@ -21,8 +21,9 @@ const bookingSchema = new Schema({
         required: true,
         minlength: 1
     },
-    customerId: {
-        type: Number,
+    customer: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
         required: true
     },
     restaurantId: {
@@ -40,7 +41,7 @@ function validateBooking(booking) {
         date: joi.date().required(),
         time: joi.number().required(),
         numberOfPeople: joi.number().required().min(1),
-        customerId: joi.number().required(),
+        customer: joi.required(),
         restaurantId: joi.number().required()
     }
 
