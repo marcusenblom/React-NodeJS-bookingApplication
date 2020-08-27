@@ -42,11 +42,23 @@ export default function Booking() {
     function updateUserFromChild(firstName: string, lastName: string, email: string, phoneNumber: number) {
         let user = new userClass(firstName, lastName, email, phoneNumber);
         setUser(user);
-
-        axios.get("http://localhost:4000/getAvailability/1/20201111").then(axiosObject => {
-            console.log(axiosObject.data); // data from API within the Axios object
-        })
     }
+
+    useEffect(() => {
+        axios.get("https://medieinstitutet-wie-products.azurewebsites.net/api/products").then(axiosObject => {
+            console.log(axiosObject.data); // data from API within the Axios object
+            console.log("Movie get is run");
+            
+        })
+    }, [])
+
+    useEffect(() => {
+        axios.get("https://localhost:4000/test").then(axiosObject => {
+            console.log(axiosObject.data); // data from API within the Axios object
+            console.log("Local get is run");
+            
+        })
+    }, [])
 
     return (
         <div>
