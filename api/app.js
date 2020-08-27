@@ -6,12 +6,15 @@ const adminRouter = require("./router/adminRouter");
 const bookingRouter = require("./router/bookingRouter");
 const cors = require("cors");
 
+const bodyParser = require('body-parser');
+
 
 app.use(
     adminRouter,
     bookingRouter
 );
 app.use(cors());
+app.use(bodyParser.json());
 
 
 const port = 4000;

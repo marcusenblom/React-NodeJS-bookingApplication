@@ -111,10 +111,9 @@ router.post("/createBooking/:date/:sitting/:people/:restaurantId", async (req, r
 
 });
 
-router.delete("/deleteBooking", (req, res) => {
+router.delete("/deleteBooking", async (req, res) => {
 
     // Tar bort en bokning från databasen. Användaren skickar en delete-request i form av en knapp eller länk där bokingsId skickas med.
-
 
 });
 
