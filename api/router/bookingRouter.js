@@ -9,20 +9,8 @@ const moment = require('moment');
 
 router.get("/test", async (req, res) => {
     const allUsers = await User.find();
-    // res.send(allUsers);
 
-    let user = new User({
-        userId: allUsers.length + 1,
-        firstName: "Ny användare",
-        surName: "Efternamn",
-        email: "testarTele@gmail.com" + allUsers.length + 1,
-        phoneNumber: 0701234567
-    });
-    await user.save((error, succes) => {
-        if (error) {
-            res.send(error.message)
-        }
-    });
+    res.send(allUsers);
 
 });
 
