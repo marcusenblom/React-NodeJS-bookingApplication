@@ -126,7 +126,7 @@ export default function ContactComponent(props: IContactProps) {
               <input className="request" type='text' name='text' placeholder="request" />
               </div> */}
 
-        <div className="">
+        <div className="villkor">
           <div className="">
             <div className=""></div>
           </div>
