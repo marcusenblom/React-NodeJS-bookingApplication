@@ -66,7 +66,7 @@ export default function DateComponent(props: IDateProps) {
 
         <div className="date">
           <p>Choose date</p>
-          <Calendar onChange={updateDate} value={date} minDate={new Date() } />
+          <Calendar onChange={updateDate} value={date} minDate={new Date()} />
         </div>
       </div>
     </div>

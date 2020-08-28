@@ -31,11 +31,10 @@ export default function TimeComponent(props: ITimeProps) {
       </div>);
     });
 
-
     return (
         <div>
             <hr/>
-            <p>{"Datum: " + props.date}</p>
+            <p>{"Datum: " + props.date.getDate()}/{props.date.getMonth() + 1}</p>
             <p>{"People: " + props.people}</p>
             {sittingButtons}
             <hr/>

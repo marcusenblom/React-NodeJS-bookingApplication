@@ -76,7 +76,7 @@ export default function Booking() {
         <div>
             <hr/>
             <h2>Data som skickas till parent (Booking)</h2>
-            <p>{date.toString()}</p>
+            <p>{date.getDate()}/{date.getMonth() + 1}</p> 
             <p>{people.toString()}</p>
             <p>{sitting.toString()}</p>
             <p>{JSON.stringify(user)}</p>
