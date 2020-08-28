@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent } from "react";
 import "./date.scss";
 import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+//import "react-calendar/dist/Calendar.css";
 
 interface IDateProps {
   updateDate(date: Date): void;
@@ -66,7 +66,7 @@ export default function DateComponent(props: IDateProps) {
 
         <div className="date">
           <p>Choose date</p>
-          <Calendar onChange={updateDate} value={date} minDate={new Date()} />
+          <Calendar onChange={updateDate} value={date} minDate={new Date() } />
         </div>
       </div>
     </div>

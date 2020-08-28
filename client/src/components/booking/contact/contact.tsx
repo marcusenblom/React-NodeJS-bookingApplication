@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { useForm } from 'react-hook-form';
 import './contact.scss';
 
 
@@ -11,10 +12,12 @@ interface IContactProps {
 
 export default function ContactComponent(props: IContactProps) {
 
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState(0);
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState(0); 
+
+    const {register, handleSubmit, errors} = useForm();
 
     function updateFirstName(e: ChangeEvent<HTMLInputElement>) {
         setFirstName(e.target.value);
@@ -29,9 +32,11 @@ export default function ContactComponent(props: IContactProps) {
         setPhoneNumber(parseInt(e.target.value));
     };
 
-    function updateParent(e: FormEvent) {
-        e.preventDefault();
+    function updateParent(e: any) {
+       // e.preventDefault();
         props.updateUser(firstName, lastName, email, phoneNumber);
+        console.log(firstName, lastName, email, phoneNumber);
+          
     }
 
     return (
@@ -62,25 +67,48 @@ export default function ContactComponent(props: IContactProps) {
           </div>
           <hr />
 
-          <form onSubmit={updateParent}>
+          <form onSubmit={handleSubmit(updateParent)}>
 
             <label htmlFor='firstName'>First name:</label>
-              <input type='text' name='firstName' id='theFirstName' onChange={updateFirstName} value={firstName} required />
+              <input type='text' name='firstName' id='theFirstName' 
+              onChange={updateFirstName} 
+              value={firstName} 
+              ref={register({required: 'First name is required.', minLength: 2})} />
+              <div className='error-message'>{errors.firstName && errors.firstName.message}</div>
             <br/>
 
             <label htmlFor='lastName'>Last name:</label>
-              <input type='text' name='lastName' onChange={updateLastName} value={lastName} required />
+              <input type='text' name='lastName' 
+              onChange={updateLastName} 
+              value={lastName} 
+              ref={register({required: 'Last name is required.', minLength: 5})} />
+              <div className='error-message'>{errors.lastName && errors.lastName.message}</div>
+
             <br/>
 
             <label htmlFor='email'>Email:</label>
-              <input type='text' name='email' onChange={updateEmail} value={email} required />
+              <input type='text' name='email' 
+              onChange={updateEmail} 
+              value={email}
+              ref={register({required: 'Email is required',
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: 'Invalid email address.'
+                }
+              })} />
+              <div className='error-message'>{errors.email && errors.email.message}</div>
+
             <br/>
 
             <label htmlFor='phoneNumber'>Phone Number:</label>
-              <input type='number' name='phoneNumber' onChange={updatePhoneNumber} value={phoneNumber} required />
+              <input type='number' name='phoneNumber' 
+              onChange={updatePhoneNumber} 
+              value={phoneNumber} 
+              ref={register({required: 'Phonenumber is required.', minLength: 8})} />
               <br/>
+              <div className='error-message'>{errors.phoneNumber && errors.phoneNumber.message}</div>
 
-            <button type='submit' /* onClick={updateParent} */>Boka!</button>
+            <button type='submit'>Boka!</button>
           </form>
         </div>
       );
