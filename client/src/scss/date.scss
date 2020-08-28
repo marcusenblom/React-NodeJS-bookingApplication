@@ -5,6 +5,7 @@
     font-weight: 400;
     font-size: 90%;
 
+
     h2 {
         text-align: center;
         font-weight: 400;
@@ -13,7 +14,7 @@
 
     .text-left {
         text-align: left;
-        font-size: 17px;
+        font-size: 15px;
     }
 
     .text-left-second {
@@ -23,14 +24,16 @@
 
     .date-and-guests {
         display: flex;
-        justify-content: space-around;
-
+        flex-direction: column;
+        align-items: center;
     }
 
     .select {
-        width: 150px;
+
+        width: 240px;
         margin-right: 5px;
-        height: 30px;
+        height: 40px;
+        font-size: 90%;
         cursor: pointer;
 
     }
