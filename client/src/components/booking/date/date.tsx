@@ -28,7 +28,7 @@ export default function DateComponent(props: IDateProps) {
       <hr />
 
       <p className="text-left">
-        Dinner - Restaurant Vasagatan can be found on Tulegatan
+        Dinner - FML Restaurant Vasagatan can be found at Tulegatan
       </p>
       <hr />
 
