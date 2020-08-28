@@ -5,6 +5,7 @@
     font-weight: 400;
     font-size: 90%;
 
+
     h2 {
         text-align: center;
         font-weight: 400;
@@ -23,8 +24,8 @@
 
     .date-and-guests {
         display: flex;
-        justify-content: space-around;
-
+        flex-direction: column;
+        align-items: center;
     }
 
     .select {

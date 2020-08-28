@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from "react";
-import "./date.scss";
+import "../../../scss/date.scss";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
@@ -40,7 +40,7 @@ export default function DateComponent(props: IDateProps) {
       </p>
       <hr />
       <p className="text-left">Reservation 1-15 guests</p>
-
+      <hr />
       <div className="date-and-guests">
         <div className="guests">
           <p>Number of party</p>

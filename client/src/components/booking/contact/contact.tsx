@@ -14,7 +14,7 @@ export default function ContactComponent(props: IContactProps) {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState(0);
+    const [phoneNumber, setPhoneNumber] = useState();
 
     function updateFirstName(e: ChangeEvent<HTMLInputElement>) {
         setFirstName(e.target.value);
@@ -62,26 +62,47 @@ export default function ContactComponent(props: IContactProps) {
           </div>
           <hr />
 
+       
           <form onSubmit={updateParent}>
 
-            <label htmlFor='firstName'>First name:</label>
-              <input type='text' name='firstName' id='theFirstName' onChange={updateFirstName} value={firstName} required />
+          <div className="input-one">
+            <label htmlFor='firstName'></label>
+              <input className="name" type='text' name='firstName' placeholder="Firstname" id='theFirstName' onChange={updateFirstName} value={firstName} required />
             <br/>
 
-            <label htmlFor='lastName'>Last name:</label>
-              <input type='text' name='lastName' onChange={updateLastName} value={lastName} required />
+            <label htmlFor='lastName'></label>
+              <input className="lastname" type='text' name='lastName'placeholder="Lastname" onChange={updateLastName} value={lastName} required />
             <br/>
 
-            <label htmlFor='email'>Email:</label>
-              <input type='text' name='email' onChange={updateEmail} value={email} required />
+            </div>
+
+
+            <div className="input-one">
+            <label htmlFor='email'></label>
+              <input className="email" type='text' name='email'placeholder="email@adress.com" onChange={updateEmail} value={email} required />
             <br/>
 
-            <label htmlFor='phoneNumber'>Phone Number:</label>
-              <input type='number' name='phoneNumber' onChange={updatePhoneNumber} value={phoneNumber} required />
+            <label htmlFor='phoneNumber'></label>
+              <input className="phonenumber" type='number' name='phoneNumber' placeholder="+46 111 1111 111" onChange={updatePhoneNumber} value={phoneNumber} required />
               <br/>
+              </div>
+            
+              <div className="request-box">
+              <input className="request" type='text' name='text' placeholder="request" />
+              </div>
+
+
+              <div className="">
+              <div className="">
+              <div className=""></div>
+              </div>
+              </div>
+
+  
 
             <button type='submit' /* onClick={updateParent} */>Boka!</button>
           </form>
         </div>
+   
       );
 }
