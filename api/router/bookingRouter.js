@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require("mongoose");
 const {
     Booking,
     validateBooking
@@ -15,13 +14,46 @@ const {
 } = require('../model/restaurantModel');
 // Importerade Moment i både api samt client för att lättare kunna arbeta med datumformatering
 const moment = require('moment');
+const { request } = require('express');
 
-router.get("/test", async (req, res) => {
+
+router.get("/", async (req, res) => {
+
     const allUsers = await User.find();
-
+    
     res.send(allUsers);
-
+    
 });
+
+// router.post("/", async (req, res) => {
+
+//     const userToFind = await User.findOne({
+//         email: req.body.email
+//     });
+//     const allUsers = await User.find();
+
+//     // Om inte användaren finns så skapas en ny user. Detta måste ändras från hårdkodad
+//     let currentUser;
+//     if (!userToFind) {
+//         currentUser = new User({
+//             userId: allUsers.length + 1,
+//             firstName: req.body.firstName,
+//             lastName: req.body.lastName,
+//             email: req.body.email,
+//             phoneNumber: req.body.phoneNumber
+//         });
+//         await currentUser.save((error, succes) => {
+//             if (error) {
+//                 res.send(error.message)
+//             }
+//         });
+//     } else {
+//         currentUser = userToFind;
+//     }
+//     res.send("Created User: " + currentUser);
+    
+// });
+
 
 router.get("/getAvailability/:restaurantId/:date", async (req, res) => {
 
@@ -72,26 +104,25 @@ router.get("/getAvailability/:restaurantId/:date", async (req, res) => {
 
 });
 
-router.post("/createBooking/:date/:sitting/:people/:restaurantId", async (req, res) => {
+router.post("/createBooking/:email/:date/:sitting/:people/:restaurantId", async (req, res) => {
+    // :date/:sitting/:people/:restaurantId
 
     // Ta in user input för: Förnamn, Efternamn, Mail, Tele. Kolla sedan om mailen är ledig och skapa upp ett user objekt och skickar till databasen. Om mailen redan finns på ett user objekt i databasen så överskrivs övriga inputs (namn, tele) på det redan befintliga user objektet i databasen
 
-    let email = "nymail@mail.com";
-
     const userToFind = await User.findOne({
-        email: email
+        email: req.params.email
     });
     const allUsers = await User.find();
 
-    // Om inte användaren finns så skapas en ny user
+    // Om inte användaren finns så skapas en ny user. Detta måste ändras från hårdkodad
     let currentUser;
     if (!userToFind) {
         currentUser = new User({
             userId: allUsers.length + 1,
-            firstName: "Ny användare",
-            surName: "Efternamn",
-            email: email,
-            phoneNumber: 0701234567
+            firstName: "Ny",
+            lastName: "Kund",
+            email: req.params.email,
+            phoneNumber: 07070234123
         });
         await currentUser.save((error, succes) => {
             if (error) {
@@ -111,7 +142,7 @@ router.post("/createBooking/:date/:sitting/:people/:restaurantId", async (req, r
         date: new moment(req.params.date).format('L'),
         time: req.params.sitting,
         numberOfPeople: req.params.people,
-        customerId: currentUser.userId,
+        customer: currentUser,
         restaurantId: req.params.restaurantId
     });
     await newBooking.save((error, succes) => {

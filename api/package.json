@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "proxy": "http://localhost:4000/createUser",
   "author": "",
   "license": "ISC",
-  "proxy": "http://localhost:3000",
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
