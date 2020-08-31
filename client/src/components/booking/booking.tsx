@@ -25,20 +25,20 @@ export default function Booking() {
     }
   }
 
-    const [date, setDate] = useState(new Date());
-    const [people, setPeople] = useState(0);
-    const [sitting, setSitting] = useState([18, 21]);
-    const [user, setUser] = useState(new userClass("", "", "", 0));
+  const [date, setDate] = useState(new Date());
+  const [people, setPeople] = useState(0);
+  const [sitting, setSitting] = useState([18, 21]);
+  const [user, setUser] = useState(new userClass("", "", "", 0));
 
-    function updateDateFromChild(date: Date) {
-        setDate(date);
-        // Render Time component instead of Date
+  function updateDateFromChild(date: Date) {
+    setDate(date);
+    // Render Time component instead of Date
 
-        axios.get(`http://localhost:4000/getAvailability/1/${date}/${people}`).then(axiosObject => {
-            console.log(`Bord lediga ${date}: ${JSON.stringify(axiosObject.data)}`);
-            setSitting(axiosObject.data);
-        })
-    }
+    axios.get(`http://localhost:4000/getAvailability/1/${date}/${people}`).then(axiosObject => {
+        console.log(`Bord lediga ${date}: ${JSON.stringify(axiosObject.data)}`);
+        setSitting(axiosObject.data);
+    });
+  };
 
 
   function updatePeopleFromChild(people: number) {
