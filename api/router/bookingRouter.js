@@ -26,35 +26,6 @@ router.get("/", async (req, res) => {
     
 });
 
-router.post("/createUser/:email/:firstName/:lastName:/phoneNumber", async (req, res) => {
-
-    const userToFind = await User.findOne({
-        email: req.params.email
-    });
-    const allUsers = await User.find();
-
-    // Om inte användaren finns så skapas en ny user. Detta måste ändras från hårdkodad
-    let currentUser;
-    if (!userToFind) {
-        currentUser = new User({
-            userId: allUsers.length + 1,
-            firstName: req.params.firstName,
-            lastName: req.params.lastName,
-            email: req.params.email,
-            phoneNumber: req.params.phoneNumber
-        });
-        await currentUser.save((error, succes) => {
-            if (error) {
-                res.send(error.message)
-            }
-        });
-    } else {
-        currentUser = userToFind;
-    }
-    res.send("Created User: " + currentUser);
-    
-});
-
 
 router.get("/getAvailability/:restaurantId/:date/:people", async (req, res) => {
 
@@ -114,6 +85,37 @@ router.get("/getAvailability/:restaurantId/:date/:people", async (req, res) => {
     // Få tillbaka: Tillgängliga tider för det datumet / alternativt felmeddelande som säger att det inte finns tillräckligt många bord för det sällskapet
     res.send(tablesAvailable)
 
+});
+
+router.post("/createUser", async (req, res) => {
+
+    // const userToFind = await User.findOne({
+    //     email: req.body.email
+    // });
+    let userToFind = false;
+    const allUsers = await User.find();
+
+    // Om inte användaren finns så skapas en ny user
+    if (!userToFind) {
+        let newUser = await new User({
+            userId: allUsers.length + 1,
+            firstName: "test",
+            lastName: "test",
+            email: "hårdkodad5@gmail.com",
+            phoneNumber: 71238182372
+            // firstName: req.body.firstName,
+            // lastName: req.body.lastName,
+            // email: req.body.email,
+            // phoneNumber: req.body.phoneNumber
+        }).save((error, succes) => {
+            if (error) {
+                res.send(error.message)
+            }
+        });
+        res.send(newUser);
+    }
+
+    
 });
 
 router.post("/createBooking/:email/:date/:sitting/:people/:restaurantId", async (req, res) => {

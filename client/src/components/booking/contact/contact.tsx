@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useForm } from "react-hook-form";
 import "./contact.scss";
+import axios from 'axios';
 
 interface IContactProps {
   date: Date;
@@ -18,7 +19,7 @@ export default function ContactComponent(props: IContactProps) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState();
+  const [phoneNumber, setPhoneNumber] = useState(0);
 
   const { register, handleSubmit, errors } = useForm();
 
@@ -38,7 +39,27 @@ export default function ContactComponent(props: IContactProps) {
   function updateParent(e: any) {
     // e.preventDefault();
     props.updateUser(firstName, lastName, email, phoneNumber);
-    console.log(firstName, lastName, email, phoneNumber);
+
+    let user = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phoneNumber: phoneNumber,
+    }
+
+    axios.post('http://localhost:4000/createUser').then(response => {
+      console.log("CreateUser post is called from FE");
+      console.log(response);
+    }).catch(function (err){
+        console.log(err);
+    });
+
+    axios.get('http://localhost:4000').then(response => {
+      console.log("CreateUser get is called from FE");
+    }).catch(function (err){
+        console.log(err);
+    });
+    
   }
 
   return (
