@@ -17,6 +17,7 @@ const moment = require('moment');
 const { request } = require('express');
 
 
+
 router.get("/", async (req, res) => {
 
     const allUsers = await User.find();
@@ -55,7 +56,7 @@ router.post("/createUser/:email/:firstName/:lastName:/phoneNumber", async (req, 
 });
 
 
-router.get("/getAvailability/:restaurantId/:date", async (req, res) => {
+router.get("/getAvailability/:restaurantId/:date/:people", async (req, res) => {
 
     // Skickar med user input: Date + # of people. OBS: Just nu så blir datumet en dag tidigare
     // I post-requestens params så måste restaurangens ID (drop down?) samt datum i format YYYY-MM-DD
@@ -75,6 +76,17 @@ router.get("/getAvailability/:restaurantId/:date", async (req, res) => {
         return getAvailabilityPerSitting(tableSize, tableAmount, sitting);
 
     });
+
+    // Kolla upp om det finns tillräckligt med bord för varje tid. Returnera endast de tider som finns tillgängliga
+    let tablesNeeded = Math.ceil(req.params.people / tableSize);
+    let tablesAvailable = [];
+    availabilityPerSitting.forEach(sitting => {
+
+        if (sitting.tablesAvailable >= tablesNeeded) {
+            tablesAvailable.push(sitting.sitting);
+        };
+    });
+
 
     // Funktion som räknar ut hur många bord som finns tillgängliga och returnerar ett objekt innehållande bokningen samt antal lediga bord
     function getAvailabilityPerSitting(tableSize, tableAmount, sitting) {
@@ -100,7 +112,7 @@ router.get("/getAvailability/:restaurantId/:date", async (req, res) => {
     }
 
     // Få tillbaka: Tillgängliga tider för det datumet / alternativt felmeddelande som säger att det inte finns tillräckligt många bord för det sällskapet
-    res.send(JSON.stringify(availabilityPerSitting))
+    res.send(tablesAvailable)
 
 });
 
