@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent } from "react";
-import "./date.scss";
+import "../../../scss/date.scss";
 import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+//import "react-calendar/dist/Calendar.css";
 
 interface IDateProps {
   updateDate(date: Date): void;
@@ -28,7 +28,7 @@ export default function DateComponent(props: IDateProps) {
       <hr />
 
       <p className="text-left">
-        Dinner - Restaurant Vasagatan can be found on Tulegatan
+        Dinner - FML Restaurant Vasagatan can be found at Tulegatan
       </p>
       <hr />
 
@@ -40,7 +40,7 @@ export default function DateComponent(props: IDateProps) {
       </p>
       <hr />
       <p className="text-left">Reservation 1-15 guests</p>
-
+      <hr />
       <div className="date-and-guests">
         <div className="guests">
           <p>Number of party</p>

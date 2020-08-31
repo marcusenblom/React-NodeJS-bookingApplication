@@ -18,14 +18,23 @@ export default function TimeComponent(props: ITimeProps) {
     }
     
     let sittingButtons = props.sitting.map((sitting: number) => {
-        return (<button type="button" value={sitting} key={sitting} onClick={updateParent}>Tid: {sitting}.00</button>);
+        return (<div className="time-div">
+        <button
+          className="time-btn"
+          type="button"
+          value={sitting}
+          key={sitting}
+          onClick={updateParent}
+        >
+          Tid: {sitting}.00
+        </button>
+      </div>);
     });
-
 
     return (
         <div>
             <hr/>
-            <p>{"Datum: " + props.date}</p>
+            <p>{"Datum: " + props.date.getDate()}/{props.date.getMonth() + 1}</p>
             <p>{"People: " + props.people}</p>
             {sittingButtons}
             <hr/>
