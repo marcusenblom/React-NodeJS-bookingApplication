@@ -47,7 +47,7 @@ export default function Popup(props: IContactProps) {
       </div>
       <hr />
       <div className="popup-content">
-        <div className="popup-body">
+       
           <div className="popup-date-guest-time">
             <p>Your information</p>
             <p>
@@ -58,7 +58,6 @@ export default function Popup(props: IContactProps) {
             <p>Sitting {props.sitting.toString()}</p>
           </div>
           <hr />
-
           <div className="information">
             <div className="your-information">
               <p>Your information</p>
@@ -71,6 +70,6 @@ export default function Popup(props: IContactProps) {
           </div>
         </div>
       </div>
-    </div>
+   
   );
 }
