@@ -27,10 +27,6 @@ function App() {
             <Admin />
           </Route>
 
-          <Route path="/popup">
-            
-          </Route>
-
           <Route path="*">
             <NoMatch />
           </Route>
