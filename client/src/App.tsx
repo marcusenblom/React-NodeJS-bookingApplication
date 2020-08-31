@@ -7,6 +7,8 @@ import Admin from "./components/admin/admin";
 import NoMatch from "./components/noMatch/noMatch";
 import Footer from "./components/footer/footer";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import popupComponent from "./components/popup/popup";
+import Popup from "./components/popup/popup";
 
 function App() {
   return (
@@ -25,9 +27,9 @@ function App() {
             <Admin />
           </Route>
 
-          {/* <Route path="/contact">
-            <ContactComponent />
-          </Route> */}
+          <Route path="/popup">
+            
+          </Route>
 
           <Route path="*">
             <NoMatch />
