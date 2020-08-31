@@ -30,12 +30,9 @@ export default function Booking() {
         // Render Time component instead of Date
 
         axios.get(`http://localhost:4000/getAvailability/1/${date}/${people}`).then(axiosObject => {
-            console.log(`Bord lediga ${date}: ${JSON.stringify(axiosObject.data)}`); // data from API within the Axios object
-
+            console.log(`Bord lediga ${date}: ${JSON.stringify(axiosObject.data)}`);
             setSitting(axiosObject.data);
-            
         })
-
     }
 
     function updatePeopleFromChild(people: number) {
@@ -60,14 +57,6 @@ export default function Booking() {
         }).catch(function (err){
             console.log(err);
         });
-    }, [])
-
-    useEffect(() => {
-        axios.get("https://medieinstitutet-wie-products.azurewebsites.net/api/products").then(axiosObject => {
-            console.log(axiosObject.data); // data from API within the Axios object
-            console.log("movie API get is run");
-            
-        })
     }, [])
 
     return (
