@@ -52,8 +52,7 @@ export default function Booking() {
 
     useEffect(() => {
         axios.get('http://localhost:4000').then(response => {
-            console.log(response.data);
-            console.log("Local API is run");
+            console.log("Local API is run" + JSON.stringify(response.data));
         }).catch(function (err){
             console.log(err);
         });
