@@ -43,22 +43,23 @@ export default function Booking() {
         let user = new userClass(firstName, lastName, email, phoneNumber);
         setUser(user);
 
-        // setTimeout(function(){
-        //     axios.post('http://localhost:4000', user).then(response => {
-        //         console.log(response.data);
-        //         console.log("Local API get is run");
-        //     }).catch(function (err){
-        //         console.log(err);
-        //     });
-        // }, 1000);
-
+        setTimeout(function(){
+            axios.post('http://localhost:4000/createUser/test@mail/förnamn/efternamn/070723143', user).then(response => {
+                console.log(response.data);
+                console.log("Local API get is run");
+            }).catch(function (err){
+                console.log(err);
+            });
+        }, 1000);
+        console.log("Tried to post new user");
+        
         
     }
 
     useEffect(() => {
         axios.get('http://localhost:4000').then(response => {
             console.log(response.data);
-            console.log("Local API get is run");
+            console.log("Local API is run");
         }).catch(function (err){
             console.log(err);
         });

@@ -25,34 +25,34 @@ router.get("/", async (req, res) => {
     
 });
 
-// router.post("/", async (req, res) => {
+router.post("/createUser/:email/:firstName/:lastName:/phoneNumber", async (req, res) => {
 
-//     const userToFind = await User.findOne({
-//         email: req.body.email
-//     });
-//     const allUsers = await User.find();
+    const userToFind = await User.findOne({
+        email: req.params.email
+    });
+    const allUsers = await User.find();
 
-//     // Om inte användaren finns så skapas en ny user. Detta måste ändras från hårdkodad
-//     let currentUser;
-//     if (!userToFind) {
-//         currentUser = new User({
-//             userId: allUsers.length + 1,
-//             firstName: req.body.firstName,
-//             lastName: req.body.lastName,
-//             email: req.body.email,
-//             phoneNumber: req.body.phoneNumber
-//         });
-//         await currentUser.save((error, succes) => {
-//             if (error) {
-//                 res.send(error.message)
-//             }
-//         });
-//     } else {
-//         currentUser = userToFind;
-//     }
-//     res.send("Created User: " + currentUser);
+    // Om inte användaren finns så skapas en ny user. Detta måste ändras från hårdkodad
+    let currentUser;
+    if (!userToFind) {
+        currentUser = new User({
+            userId: allUsers.length + 1,
+            firstName: req.params.firstName,
+            lastName: req.params.lastName,
+            email: req.params.email,
+            phoneNumber: req.params.phoneNumber
+        });
+        await currentUser.save((error, succes) => {
+            if (error) {
+                res.send(error.message)
+            }
+        });
+    } else {
+        currentUser = userToFind;
+    }
+    res.send("Created User: " + currentUser);
     
-// });
+});
 
 
 router.get("/getAvailability/:restaurantId/:date", async (req, res) => {
