@@ -42,7 +42,6 @@ export default function Popup(props: IContactProps) {
     <div className="popup-wrapper">
       <div className="popup-header">
         <span className="close-modal-btn">X</span>
-
         <p>Thank you for your booking!</p>
         <p>Check your inbox shortly for a confirmation email.</p>
       </div>
