@@ -25,38 +25,26 @@ export default function Booking() {
     }
   }
 
-<<<<<<< HEAD
   const [date, setDate] = useState(new Date());
   const [people, setPeople] = useState(0);
   const [sitting, setSitting] = useState([18, 21]);
   const [user, setUser] = useState(new userClass("", "", "", 0));
-=======
-    const [date, setDate] = useState(new Date());
-    const [people, setPeople] = useState(0);
-    const [sitting, setSitting] = useState([18, 21]);
-    const [user, setUser] = useState(new userClass("", "", "", 0));
-
-    function updateDateFromChild(date: Date) {
-        setDate(date);
-        // Render Time component instead of Date
-
-        axios.get(`http://localhost:4000/getAvailability/1/${date}/${people}`).then(axiosObject => {
-            console.log(`Bord lediga ${date}: ${JSON.stringify(axiosObject.data)}`);
-            setSitting(axiosObject.data);
-        })
-    }
->>>>>>> bbe9655c0c601dc8a8cc1a54a6a7e44d105295ea
 
   function updateDateFromChild(date: Date) {
     setDate(date);
     // Render Time component instead of Date
-  }
+
+    axios.get(`http://localhost:4000/getAvailability/1/${date}/${people}`).then(axiosObject => {
+        console.log(`Bord lediga ${date}: ${JSON.stringify(axiosObject.data)}`);
+        setSitting(axiosObject.data);
+    });
+  };
+
 
   function updatePeopleFromChild(people: number) {
     setPeople(people);
   }
 
-<<<<<<< HEAD
   function updateSittingFromChild(sitting: number[]) {
     setSitting(sitting);
     // Render Contact component instead of Time
@@ -141,36 +129,3 @@ export default function Booking() {
     </div>
   );
 }
-=======
-    function updateUserFromChild(firstName: string, lastName: string, email: string, phoneNumber: number) {
-        let user = new userClass(firstName, lastName, email, phoneNumber);
-        setUser(user);
-        
-    }
-
-    useEffect(() => {
-        axios.get('http://localhost:4000').then(response => {
-            console.log("Local API is run" + JSON.stringify(response.data));
-        }).catch(function (err){
-            console.log(err);
-        });
-    }, [])
-
-    return (
-        <div>
-            <hr/>
-            <h2>Data som skickas till parent (Booking)</h2>
-            <p>{date.getDate()}/{date.getMonth() + 1}</p> 
-            <p>{people.toString()}</p>
-            <p>{sitting.toString()}</p>
-            <p>{JSON.stringify(user)}</p>
-            <hr/>
-            <DateComponent updateDate={updateDateFromChild} updatePeople={updatePeopleFromChild} />
-            <hr/>
-            <TimeComponent updateSitting={updateSittingFromChild} date={date} people={people} sitting={sitting}></TimeComponent>
-            <ContactComponent updateUser={updateUserFromChild} date={date} people={people} sitting={sitting}></ContactComponent>
-        </div>
-        
-    );
-}
->>>>>>> bbe9655c0c601dc8a8cc1a54a6a7e44d105295ea
