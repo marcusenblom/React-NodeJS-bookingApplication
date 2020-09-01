@@ -1,5 +1,7 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, constructor, Component } from "react";
 import "./popup.scss";
+import { render } from "@testing-library/react";
+
 
 interface IContactProps {
   date: Date;
@@ -13,8 +15,14 @@ interface IContactProps {
   ): void;
 }
 
-export default function Popup(props: IContactProps) {
+
+export default function Popup( props: IContactProps) {
+
+
   return (
+    <div>
+      <button>Open modal</button>
+
     <div className="popup-container">
       <p className="text-center">Thank you for your booking!</p>
       <p className="text-center">
@@ -54,5 +62,8 @@ export default function Popup(props: IContactProps) {
         </div>
       </div>
     </div>
+    </div>
   );
 }
+
+
