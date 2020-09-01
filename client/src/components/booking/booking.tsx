@@ -24,18 +24,18 @@ export default function Booking() {
     const [people, setPeople] = useState(0);
     const [sitting, setSitting] = useState([18, 21]);
     const [user, setUser] = useState(new userClass("", "", "", 0));
+    const [dateChosen, setDateChosen] = useState(false);
+    const [timeChosen, setTimeChosen] = useState(false);
 
     function updateDateFromChild(date: Date) {
         setDate(date);
+        setDateChosen(true);
         // Render Time component instead of Date
 
         axios.get(`http://localhost:4000/getAvailability/1/${date}/${people}`).then(axiosObject => {
             console.log(`Bord lediga ${date}: ${JSON.stringify(axiosObject.data)}`); // data from API within the Axios object
-
             setSitting(axiosObject.data);
-            
         })
-
     }
 
     function updatePeopleFromChild(people: number) {
@@ -44,13 +44,15 @@ export default function Booking() {
 
     function updateSittingFromChild(sitting: number[]) {
         setSitting(sitting);
+        setTimeChosen(true);
+        console.log(timeChosen);
+        
         // Render Contact component instead of Time
     }
 
     function updateUserFromChild(firstName: string, lastName: string, email: string, phoneNumber: number) {
         let user = new userClass(firstName, lastName, email, phoneNumber);
         setUser(user);
-        
     }
 
     useEffect(() => {
@@ -66,9 +68,16 @@ export default function Booking() {
         axios.get("https://medieinstitutet-wie-products.azurewebsites.net/api/products").then(axiosObject => {
             console.log(axiosObject.data); // data from API within the Axios object
             console.log("movie API get is run");
-            
         })
     }, [])
+
+    if(dateChosen) {
+        return <TimeComponent updateSitting={updateSittingFromChild} date={date} people={people} sitting={sitting}></TimeComponent>
+    } else if(timeChosen) {
+        return <ContactComponent updateUser={updateUserFromChild} date={date} people={people} sitting={sitting}></ContactComponent>
+    } else {
+        return <DateComponent updateDate={updateDateFromChild} updatePeople={updatePeopleFromChild} ></DateComponent>
+    };
 
     return (
         <div>
@@ -79,11 +88,7 @@ export default function Booking() {
             <p>{sitting.toString()}</p>
             <p>{JSON.stringify(user)}</p>
             <hr/>
-            <DateComponent updateDate={updateDateFromChild} updatePeople={updatePeopleFromChild} />
             <hr/>
-            <TimeComponent updateSitting={updateSittingFromChild} date={date} people={people} sitting={sitting}></TimeComponent>
-            <ContactComponent updateUser={updateUserFromChild} date={date} people={people} sitting={sitting}></ContactComponent>
         </div>
-        
     );
 }

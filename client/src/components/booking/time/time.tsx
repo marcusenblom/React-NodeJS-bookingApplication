@@ -13,22 +13,22 @@ export default function TimeComponent(props: ITimeProps) {
 
     function updateParent(e: any){
         let s = parseInt(e.target.value);
-
         props.updateSitting([s]);
     }
     
     let sittingButtons = props.sitting.map((sitting: number) => {
-        return (<div className="time-div">
-        <button
-          className="time-btn"
-          type="button"
-          value={sitting}
-          key={sitting}
-          onClick={updateParent}
-        >
-          Tid: {sitting}.00
-        </button>
-      </div>);
+        return (
+          <div className="time-div">
+            <button
+              className="time-btn"
+              type="button"
+              value={sitting}
+              key={sitting}
+              onClick={updateParent}>
+              Tid: {sitting}.00
+            </button>
+          </div>
+        );
     });
 
     return (
@@ -40,4 +40,4 @@ export default function TimeComponent(props: ITimeProps) {
             <hr/>
         </div>
     );
-}
+}            

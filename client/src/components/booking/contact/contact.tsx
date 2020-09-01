@@ -15,7 +15,7 @@ interface IContactProps {
 }
 
 export default function ContactComponent(props: IContactProps) {
-  const [firstName, setFirstName] = useState("");
+  const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState();
@@ -54,19 +54,19 @@ export default function ContactComponent(props: IContactProps) {
       <hr />
       <div className="date-guest-time-container">
         <div className="presentation">
-          <p>Date</p>
+          <p>Date:</p>
           <p>
             {props.date.getDate()}/{props.date.getMonth() + 1}
           </p>
         </div>
 
         <div className="presentation">
-          <p>Guests</p>
+          <p>Guests:</p>
           <p>{props.people.toString()}</p>
         </div>
 
         <div className="presentation">
-          <p>Time</p>
+          <p>Time:</p>
           <p>{props.sitting.toString()}.00</p>
         </div>
       </div>
