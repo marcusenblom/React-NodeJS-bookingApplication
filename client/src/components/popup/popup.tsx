@@ -14,29 +14,26 @@ interface IContactProps {
 }
 
 export default function Popup(props: IContactProps) {
+
+  class userClass {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: number;
+    constructor(fname: string, lname: string, email:string, phoneNumber: number){
+        this.firstName = fname;
+        this.lastName = lname;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+}
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState();
+  const [user, setUser] = useState(new userClass("", "", "", 0));
 
-  function updateFirstName(e: ChangeEvent<HTMLInputElement>) {
-    setFirstName(e.target.value);
-  }
-  function updateLastName(e: ChangeEvent<HTMLInputElement>) {
-    setLastName(e.target.value);
-  }
-  function updateEmail(e: ChangeEvent<HTMLInputElement>) {
-    setEmail(e.target.value);
-  }
-  function updatePhoneNumber(e: ChangeEvent<HTMLInputElement>) {
-    setPhoneNumber(parseInt(e.target.value));
-  }
-
-  function updateParent(e: any) {
-    // e.preventDefault();
-    props.updateUser(firstName, lastName, email, phoneNumber);
-    console.log(firstName, lastName, email, phoneNumber);
-  }
 
   return (
     <div className="popup-wrapper">
@@ -63,6 +60,7 @@ export default function Popup(props: IContactProps) {
           <div className="information">
             <div className="your-information">
               <p>Your information</p>
+              <p>{JSON.stringify(user)}</p>
             </div>
             <div className="booking-information">
               <p>Booking information</p>

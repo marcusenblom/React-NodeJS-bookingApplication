@@ -69,14 +69,14 @@ export default function Booking() {
             console.log(axiosObject.data); // data from API within the Axios object
             console.log("movie API get is run");
         })
-    }, [])
+    }, []);
 
     if(dateChosen) {
         return <TimeComponent updateSitting={updateSittingFromChild} date={date} people={people} sitting={sitting}></TimeComponent>
     } else if(timeChosen) {
         return <ContactComponent updateUser={updateUserFromChild} date={date} people={people} sitting={sitting}></ContactComponent>
     } else {
-        return <DateComponent updateDate={updateDateFromChild} updatePeople={updatePeopleFromChild} ></DateComponent>
+        return <DateComponent updateDate={updateDateFromChild} updatePeople={updatePeopleFromChild}></DateComponent>
     };
 
     return (
