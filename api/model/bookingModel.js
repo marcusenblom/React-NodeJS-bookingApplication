@@ -21,35 +21,10 @@ const bookingSchema = new Schema({
         required: true,
         minlength: 1
     },
-    customer: {
-        userId: {
-            type: Number,
-            unique: true,
-            required: true
-        },
-        firstName: {
-            type: String,
-            required: true,
-            minlength: 2,
-            maxlength: 100
-        },
-        lastName: {
-            type: String,
-            required: true,
-            minlength: 2,
-            maxlength: 100
-        },
-        email: {
-            type: String,
-            required: true,
-            unique: true,
-            maxlength: 100
-        },
-        phoneNumber: {
-            type: Number,
-            required: true,
-            maxlength: 100
-        }
+    customerId: {
+        type: Number,
+        required: true,
+        minlength: 1
     },
     restaurantId: {
         type: Number,
@@ -66,7 +41,7 @@ function validateBooking(booking) {
         date: joi.date().required(),
         time: joi.number().required(),
         numberOfPeople: joi.number().required().min(1),
-        customer: joi.required(),
+        customer: joi.number().required().min(1),
         restaurantId: joi.number().required()
     }
 

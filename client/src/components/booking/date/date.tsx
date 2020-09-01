@@ -45,7 +45,6 @@ export default function DateComponent(props: IDateProps) {
         <div className="guests">
           <p>Number of party</p>
           <select onChange={updateSelect} className="select" value={people}>
-            <option value="0">Guests</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
