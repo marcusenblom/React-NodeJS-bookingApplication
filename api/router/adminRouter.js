@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const moment = require('moment');
 
 
-router.get("/getBookings/:date", (req, res) => {
+router.get("/getBookings/:date", async (req, res) => {
     var date = new moment(req.params.date).format('L');
     const bookings = await Booking.find({
         date: date
