@@ -89,16 +89,17 @@ router.get("/getAvailability/:restaurantId/:date/:people", async (req, res) => {
 
 router.post("/createUser/:firstName/:lastName/:email/:phoneNumber", async (req, res) => {
 
-    // const userToFind = await User.findOne({
-    //     email: req.body.email
-    // });
-    let userToFind = false;
+    const userToFind = await User.findOne({
+        email: req.params.email
+    });
+    console.log(userToFind);
     const allUsers = await User.find();
+    var lastUserId = allUsers[allUsers.length - 1].userId;
 
     // Om inte användaren finns så skapas en ny user
     if (!userToFind) {
-        let newUser = await new User({
-            userId: allUsers.length + 1,
+        let newUser = new User({
+            userId: lastUserId + 1,
             firstName: req.params.firstName,
             lastName: req.params.lastName,
             email: req.params.email,
@@ -124,13 +125,13 @@ router.post("/createBooking/:restaurantId/:date/:people/:sitting/:email", async 
 
     var lastBookingId = bookings[bookings.length - 1].bookingId;
 
-    let newBooking = await new Booking({
+    let newBooking = new Booking({
         bookingId: lastBookingId + 1,
         restaurantId: req.params.restaurantId,
         date: new moment(req.params.date).format('L'),
         time: req.params.sitting,
         numberOfPeople: req.params.people,
-        customerId: 99 // Måste hämtas från användaren
+        customerId: userToFind.userId // Måste hämtas från användaren
     }).save((error, succes) => {
         if (error) {
             res.send(error.message)

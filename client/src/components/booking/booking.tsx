@@ -55,12 +55,16 @@ export default function Booking() {
     let user = new userClass(firstName, lastName, email, phoneNumber);
     setUser(user);
 
-    axios.post(`http://localhost:4000/createBooking/${restaurantId}/${date}/${people}/${sitting}/${user.email}`).then(response => {
+    // TimeOut in order for user to be saved to DB before creating booking
+    setTimeout(function(){ 
+      axios.post(`http://localhost:4000/createBooking/${restaurantId}/${date}/${people}/${sitting}/${user.email}`).then(response => {
       console.log("CreateBooking post is called from FE");
       console.log(response.data);
-    }).catch(function (err){
+      }).catch(function (err){
         console.log(err);
-    });
+      });
+    }, 1000);
+    
   }
 
   useEffect(() => {
