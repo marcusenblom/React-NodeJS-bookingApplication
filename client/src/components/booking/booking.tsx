@@ -19,20 +19,21 @@ export default function Booking() {
             this.phoneNumber = phoneNumber;
         }
     }
-
+    const [restaurantId, setRestaurantId] = useState(1);
     const [date, setDate] = useState(new Date());
     const [people, setPeople] = useState(0);
     const [sitting, setSitting] = useState([18, 21]);
     const [user, setUser] = useState(new userClass("", "", "", 0));
     const [dateChosen, setDateChosen] = useState(false);
     const [timeChosen, setTimeChosen] = useState(false);
+    //const [componentToShow, setComponentToShow] = useState();
 
     function updateDateFromChild(date: Date) {
         setDate(date);
         setDateChosen(true);
         // Render Time component instead of Date
 
-        axios.get(`http://localhost:4000/getAvailability/1/${date}/${people}`).then(axiosObject => {
+        axios.get(`http://localhost:4000/getAvailability/${restaurantId}/${date}/${people}`).then(axiosObject => {
             console.log(`Bord lediga ${date}: ${JSON.stringify(axiosObject.data)}`); // data from API within the Axios object
             setSitting(axiosObject.data);
         })
@@ -46,7 +47,6 @@ export default function Booking() {
         setSitting(sitting);
         setTimeChosen(true);
         console.log(timeChosen);
-        
         // Render Contact component instead of Time
     }
 
@@ -71,9 +71,10 @@ export default function Booking() {
         })
     }, []);
 
-    if(dateChosen) {
+
+    if(dateChosen && !timeChosen) {
         return <TimeComponent updateSitting={updateSittingFromChild} date={date} people={people} sitting={sitting}></TimeComponent>
-    } else if(timeChosen) {
+    } else if(timeChosen && dateChosen) {
         return <ContactComponent updateUser={updateUserFromChild} date={date} people={people} sitting={sitting}></ContactComponent>
     } else {
         return <DateComponent updateDate={updateDateFromChild} updatePeople={updatePeopleFromChild}></DateComponent>
