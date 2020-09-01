@@ -18,12 +18,11 @@ export default function TimeComponent(props: ITimeProps) {
     
     let sittingButtons = props.sitting.map((sitting: number) => {
         return (
-          <div className="time-div">
+          <div className="time-div" key={sitting}>
             <button
               className="time-btn"
               type="button"
               value={sitting}
-              key={sitting}
               onClick={updateParent}>
               Tid: {sitting}.00
             </button>
