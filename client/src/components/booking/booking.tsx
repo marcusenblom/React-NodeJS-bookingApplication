@@ -25,8 +25,9 @@ export default function Booking() {
     }
   }
 
+  const [restaurantId, setRestaurantId] = useState(1)
   const [date, setDate] = useState(new Date());
-  const [people, setPeople] = useState(0);
+  const [people, setPeople] = useState(1);
   const [sitting, setSitting] = useState([18, 21]);
   const [user, setUser] = useState(new userClass("", "", "", 0));
 
@@ -34,7 +35,7 @@ export default function Booking() {
     setDate(date);
     // Render Time component instead of Date
 
-    axios.get(`http://localhost:4000/getAvailability/1/${date}/${people}`).then(axiosObject => {
+    axios.get(`http://localhost:4000/getAvailability/${restaurantId}/${date}/${people}`).then(axiosObject => {
         console.log(`Bord lediga ${date}: ${JSON.stringify(axiosObject.data)}`);
         setSitting(axiosObject.data);
     });
@@ -53,9 +54,13 @@ export default function Booking() {
   function updateUserFromChild(firstName: string, lastName: string, email: string, phoneNumber: number) {
     let user = new userClass(firstName, lastName, email, phoneNumber);
     setUser(user);
-    console.log("User within parent is updated from Child");
-    
-  
+
+    axios.post(`http://localhost:4000/createBooking/${restaurantId}/${date}/${people}/${sitting}/${user.email}`).then(response => {
+      console.log("CreateBooking post is called from FE");
+      console.log(response.data);
+    }).catch(function (err){
+        console.log(err);
+    });
   }
 
   useEffect(() => {

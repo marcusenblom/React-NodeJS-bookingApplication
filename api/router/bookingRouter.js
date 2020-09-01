@@ -87,7 +87,7 @@ router.get("/getAvailability/:restaurantId/:date/:people", async (req, res) => {
 
 });
 
-router.post("/createUser", async (req, res) => {
+router.post("/createUser/:firstName/:lastName/:email/:phoneNumber", async (req, res) => {
 
     // const userToFind = await User.findOne({
     //     email: req.body.email
@@ -99,71 +99,43 @@ router.post("/createUser", async (req, res) => {
     if (!userToFind) {
         let newUser = await new User({
             userId: allUsers.length + 1,
-            firstName: "test",
-            lastName: "test",
-            email: "hårdkodad5@gmail.com",
-            phoneNumber: 71238182372
-            // firstName: req.body.firstName,
-            // lastName: req.body.lastName,
-            // email: req.body.email,
-            // phoneNumber: req.body.phoneNumber
+            firstName: req.params.firstName,
+            lastName: req.params.lastName,
+            email: req.params.email,
+            phoneNumber: req.params.phoneNumber
         }).save((error, succes) => {
             if (error) {
                 res.send(error.message)
             }
+            if (succes) {
+                res.send(newUser)
+            }
         });
-        res.send(newUser);
-    }
+    };
 
-    
 });
 
-router.post("/createBooking/:email/:date/:sitting/:people/:restaurantId", async (req, res) => {
-    // :date/:sitting/:people/:restaurantId
-
-    // Ta in user input för: Förnamn, Efternamn, Mail, Tele. Kolla sedan om mailen är ledig och skapa upp ett user objekt och skickar till databasen. Om mailen redan finns på ett user objekt i databasen så överskrivs övriga inputs (namn, tele) på det redan befintliga user objektet i databasen
+router.post("/createBooking/:restaurantId/:date/:people/:sitting/:email", async (req, res) => {
 
     const userToFind = await User.findOne({
         email: req.params.email
     });
-    const allUsers = await User.find();
-
-    // Om inte användaren finns så skapas en ny user. Detta måste ändras från hårdkodad
-    let currentUser;
-    if (!userToFind) {
-        currentUser = new User({
-            userId: allUsers.length + 1,
-            firstName: "Ny",
-            lastName: "Kund",
-            email: req.params.email,
-            phoneNumber: 07070234123
-        });
-        await currentUser.save((error, succes) => {
-            if (error) {
-                res.send(error.message)
-            }
-        });
-    } else {
-        currentUser = userToFind;
-    }
-
-    // Skapa en ny booking med nya alt redan existerande användaren (se ovan)
-
     const bookings = await Booking.find();
 
-    let newBooking = new Booking({
-        bookingId: bookings.length + 1,
+    var lastBookingId = bookings[bookings.length - 1].bookingId;
+
+    let newBooking = await new Booking({
+        bookingId: lastBookingId + 1,
+        restaurantId: req.params.restaurantId,
         date: new moment(req.params.date).format('L'),
         time: req.params.sitting,
         numberOfPeople: req.params.people,
-        customer: currentUser,
-        restaurantId: req.params.restaurantId
-    });
-    await newBooking.save((error, succes) => {
+        customerId: 99 // Måste hämtas från användaren
+    }).save((error, succes) => {
         if (error) {
             res.send(error.message)
         } else {
-            res.send("Tillagd: " + newBooking);
+            res.send(newBooking);
         }
     });
 

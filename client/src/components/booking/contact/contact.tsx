@@ -38,28 +38,14 @@ export default function ContactComponent(props: IContactProps) {
 
   function updateParent(e: any) {
     // e.preventDefault();
-    props.updateUser(firstName, lastName, email, phoneNumber);
-
-    let user = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      phoneNumber: phoneNumber,
-    }
-
-    axios.post('http://localhost:4000/createUser').then(response => {
+    axios.post(`http://localhost:4000/createUser/${firstName}/${lastName}/${email}/${phoneNumber}`).then(response => {
       console.log("CreateUser post is called from FE");
-      console.log(response);
+      console.log(response.data);
     }).catch(function (err){
         console.log(err);
     });
 
-    axios.get('http://localhost:4000').then(response => {
-      console.log("CreateUser get is called from FE");
-    }).catch(function (err){
-        console.log(err);
-    });
-    
+    props.updateUser(firstName, lastName, email, phoneNumber);
   }
 
   return (
