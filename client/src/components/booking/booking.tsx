@@ -34,12 +34,13 @@ export default function Booking() {
     setDate(date);
     // Render Time component instead of Date
 
-    axios.get(`http://localhost:4000/getAvailability/1/${date}/${people}`).then(axiosObject => {
+    axios
+      .get(`http://localhost:4000/getAvailability/1/${date}/${people}`)
+      .then(axiosObject => {
         console.log(`Bord lediga ${date}: ${JSON.stringify(axiosObject.data)}`);
         setSitting(axiosObject.data);
-    });
-  };
-
+      });
+  }
 
   function updatePeopleFromChild(people: number) {
     setPeople(people);
