@@ -85,4 +85,3 @@ export default function Booking() {
       </div>
   );
 }
-6
