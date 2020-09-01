@@ -15,13 +15,29 @@ interface IContactProps {
   ): void;
 }
 
+export default function Popup(props: IContactProps) {
 
-export default function Popup( props: IContactProps) {
+  class userClass {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: number;
+    constructor(fname: string, lname: string, email:string, phoneNumber: number){
+        this.firstName = fname;
+        this.lastName = lname;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+}
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [user, setUser] = useState(new userClass("", "", "", 0));
 
 
   return (
-    <div>
-      <button>Open modal</button>
 
     <div className="popup-container">
       <p className="text-center">Thank you for your booking!</p>
@@ -50,19 +66,18 @@ export default function Popup( props: IContactProps) {
       </div>
       <hr />
 
-      <div className="guest-booking-container">
-        <div className="gust">
-          <p>Guest information</p>
-          <p> {/* <p>{JSON.stringify(user)}</p> */}</p>
+          <div className="information">
+            <div className="your-information">
+              <p>Your information</p>
+              <p>{JSON.stringify(user)}</p>
+            </div>
+            <div className="booking-information">
+              <p>Booking information</p>
+              <p>FML</p>
+              <p>#1</p>
+            </div>
+          </div>
         </div>
-        <div className="booking">
-          <p>Booking information</p>
-          <p>FML</p>
-          <p>#1</p>
-        </div>
-      </div>
-    </div>
-    </div>
   );
 }
 

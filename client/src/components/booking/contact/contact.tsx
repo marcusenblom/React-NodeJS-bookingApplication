@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useForm } from "react-hook-form";
 import "./contact.scss";
 import axios from 'axios';
+import Popup from "../../popup/popup";
 
 interface IContactProps {
   date: Date;
@@ -16,10 +17,16 @@ interface IContactProps {
 }
 
 export default function ContactComponent(props: IContactProps) {
-  const [firstName, setFirstName] = useState("");
+
+
+  const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState(0);
+
+  const [date, setDate] = useState(new Date());
+  const [people, setPeople] = useState(0);
+  const [sitting, setSitting] = useState([18, 21]);
 
   const { register, handleSubmit, errors } = useForm();
 
@@ -61,19 +68,19 @@ export default function ContactComponent(props: IContactProps) {
       <hr />
       <div className="date-guest-time-container">
         <div className="presentation">
-          <p>Date</p>
+          <p>Date:</p>
           <p>
             {props.date.getDate()}/{props.date.getMonth() + 1}
           </p>
         </div>
 
         <div className="presentation">
-          <p>Guests</p>
+          <p>Guests:</p>
           <p>{props.people.toString()}</p>
         </div>
 
         <div className="presentation">
-          <p>Time</p>
+          <p>Time:</p>
           <p>{props.sitting.toString()}.00</p>
         </div>
       </div>
