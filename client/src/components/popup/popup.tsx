@@ -1,6 +1,5 @@
 import React, { useState, ChangeEvent, constructor, Component } from "react";
 import "./popup.scss";
-import { render } from "@testing-library/react";
 
 
 interface IContactProps {

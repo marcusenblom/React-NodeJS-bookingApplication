@@ -1,12 +1,9 @@
-import React from 'react';
-import './admin.scss';
-import axios from 'axios';
+import React from "react";
 
+import axios from "axios";
 
 export default function Admin() {
-
-    
-    /* function getBookings() {
+  /* function getBookings() {
         axios.get('http://localhost:4000').then(response => {
             console.log(response.data);
             console.log("Local API is run");
@@ -17,10 +14,9 @@ export default function Admin() {
         });
     } */
 
-
-    return (
-        <div>
-           {/*  <h2>Admin page</h2>
+  return (
+    <div>
+      {/*  <h2>Admin page</h2>
              <input type='text' placeholder='Date for bookings' />
             <button type='button' onClick={getBookings}>Get bookings</button>
             <div className='ul-container'>
@@ -40,6 +36,6 @@ export default function Admin() {
                     </li>
                 </ul>
             </div> */}
-        </div>
-    );
+    </div>
+  );
 }
