@@ -17,9 +17,9 @@ export default function Admin() {
             console.log(`Bord lediga ${date}: ${JSON.stringify(axiosObject.data)}`); // data from API within the Axios object
             setSitting(axiosObject.data);
 
-          /*   let liTags = response.data.map((bookings) => {
+           /*  let liTags = axiosObject.data.map(bookings => {
             return <li className='li'>{bookings}</li>
-    }); */
+            }); */
         })  
     }
 
@@ -36,8 +36,8 @@ export default function Admin() {
             <button type='button' onClick={getBookings}>Get bookings</button>
             <div className='ul-container'>
                 <ul className='ul'>
-                    {/* liTags */} 
-                    <li className='li'>
+{/*                     {liTags} 
+ */}                    <li className='li'>
                         <span>kjsnakjndsa</span>
                         <button type='button'>Change booking</button>
                         <button type='button'>Remove booking</button>
