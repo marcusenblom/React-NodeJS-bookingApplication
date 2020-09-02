@@ -149,11 +149,14 @@ router.post("/createBooking/:restaurantId/:date/:people/:sitting/:email", async 
 router.delete("/deleteBooking/:id", async (req, res) => {
 
     // Tar bort en bokning från databasen. Användaren skickar en delete-request i form av en knapp eller länk där bokingsId skickas med.
+    const deletedBooking = await Booking.findOne({
+        bookingId: req.params.id
+    });
     const booking = await Booking.remove({
         bookingId: req.params.id
     });
 
-    res.send(booking)
+    res.send(JSON.stringify(deletedBooking) + "deleted")
 
 });
 
