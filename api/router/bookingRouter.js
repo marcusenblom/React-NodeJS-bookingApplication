@@ -150,7 +150,7 @@ router.post("/createBooking/:restaurantId/:date/:people/:sitting/:email", async 
         }
     });
 
-    sendMail(userToFind.firstName, date, req.params.sitting, req.params.people);
+    sendMail(userToFind.firstName, userToFind.email, date, req.params.sitting, req.params.people);
 
     // Skicka bekräftelsemail till kunden där denne kan avboka tiden
 
@@ -172,7 +172,7 @@ router.delete("/deleteBooking/:id", async (req, res) => {
 
 });
 
-function sendMail(firstName, date, sitting, people){
+function sendMail(firstName, email, date, sitting, people){
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -183,7 +183,7 @@ function sendMail(firstName, date, sitting, people){
       
       let mailOptions = {
         from: config.mailCredentials.userName,
-        to: 'lindafrancomarcus@mailinator.com',
+        to: email,
         subject: 'Bokningsbekräftelse - FML restaurang',
         text: `<h1>Hej ${firstName} och tack för din beställning</h1>
         <br>
