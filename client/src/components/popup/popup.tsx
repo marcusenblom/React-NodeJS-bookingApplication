@@ -1,6 +1,5 @@
 import React, { useState, ChangeEvent, constructor, Component } from "react";
-import "./popup.scss";
-
+//import "./popup.scss";
 
 interface IContactProps {
   date: Date;
@@ -15,19 +14,23 @@ interface IContactProps {
 }
 
 export default function Popup(props: IContactProps) {
-
   class userClass {
     firstName: string;
     lastName: string;
     email: string;
     phoneNumber: number;
-    constructor(fname: string, lname: string, email:string, phoneNumber: number){
-        this.firstName = fname;
-        this.lastName = lname;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
+    constructor(
+      fname: string,
+      lname: string,
+      email: string,
+      phoneNumber: number
+    ) {
+      this.firstName = fname;
+      this.lastName = lname;
+      this.email = email;
+      this.phoneNumber = phoneNumber;
     }
-}
+  }
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -35,9 +38,7 @@ export default function Popup(props: IContactProps) {
   const [phoneNumber, setPhoneNumber] = useState();
   const [user, setUser] = useState(new userClass("", "", "", 0));
 
-
   return (
-
     <div className="popup-container">
       <p className="text-center">Thank you for your booking!</p>
       <p className="text-center">
@@ -65,19 +66,17 @@ export default function Popup(props: IContactProps) {
       </div>
       <hr />
 
-          <div className="information">
-            <div className="your-information">
-              <p>Your information</p>
-              <p>{JSON.stringify(user)}</p>
-            </div>
-            <div className="booking-information">
-              <p>Booking information</p>
-              <p>FML</p>
-              <p>#1</p>
-            </div>
-          </div>
+      <div className="information">
+        <div className="your-information">
+          <p>Your information</p>
+          <p>{JSON.stringify(user)}</p>
         </div>
+        <div className="booking-information">
+          <p>Booking information</p>
+          <p>FML</p>
+          <p>#1</p>
+        </div>
+      </div>
+    </div>
   );
 }
-
-

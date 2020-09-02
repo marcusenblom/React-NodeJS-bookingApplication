@@ -1,8 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useForm } from "react-hook-form";
-
 import axios from "axios";
-import Popup from "../../popup/popup";
+
 
 interface IContactProps {
   date: Date;
@@ -17,15 +16,15 @@ interface IContactProps {
 }
 
 export default function ContactComponent(props: IContactProps) {
-
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState(Number);
 
   const [date, setDate] = useState(new Date());
   const [people, setPeople] = useState(0);
   const [sitting, setSitting] = useState([18, 21]);
+  const [showPopup, setshowPopup] = useState(false);
 
   const { register, handleSubmit, errors } = useForm();
 
@@ -40,6 +39,11 @@ export default function ContactComponent(props: IContactProps) {
   }
   function updatePhoneNumber(e: ChangeEvent<HTMLInputElement>) {
     setPhoneNumber(parseInt(e.target.value));
+  }
+  function handlePopup() {
+    console.log("hello popup");
+
+    setshowPopup(true)
   }
 
   function updateParent(e: any) {
@@ -187,8 +191,15 @@ export default function ContactComponent(props: IContactProps) {
           <label htmlFor="checkbox">I accept gdpr terms</label>
         </div>
 
-        <button type="submit">Boka!</button>
+        <button onClick={handlePopup}>Boka!</button>
+
+
       </form>
+
+        { showPopup && <div> hello your booking is confirmed  
+
+             Lägg min popup och props som ska få värdet från input fältena .
+         </div>}
     </div>
   );
 }

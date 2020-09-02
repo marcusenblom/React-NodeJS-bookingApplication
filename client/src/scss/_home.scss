@@ -10,23 +10,31 @@
         background-size: cover;
         width: 100%;
         height: 100%;
+
     }
 
     .booking-table {
-        display: flex;
+        align-items: center;
         position: absolute;
-        transform: translateY(30%);
 
 
+        @include tablet {
+            margin-top: 200px;
+            transform: translateX(200%);
+        }
+
+        @include desktop {
+            width: 80%;
+        }
 
         .booking-table-btn {
-            width: 200px;
-            height: 200px;
+            width: 150px;
+            height: 150px;
             background-color: white;
             border: solid 1px rgb(167, 167, 167);
             text-transform: uppercase;
             font-weight: 400;
-            font-size: 90%;
+            font-size: 80%;
             border-radius: 50%;
             cursor: pointer;
         }
