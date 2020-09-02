@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-
 import axios from 'axios';
 import Datepicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import Nav from '../nav/nav';
 
 export default function Admin() {
 
@@ -15,16 +15,17 @@ export default function Admin() {
         axios.get(`http://localhost:4000/getAvailability/${restaurantId}/${date}/${people}`).then(axiosObject => {
             console.log(`Bord lediga ${date}: ${JSON.stringify(axiosObject.data)}`); // data from API within the Axios object
             setSitting(axiosObject.data);
-
-           /*  let liTags = axiosObject.data.map(bookings => {
+            
+             /* let liTags = axiosObject.data.map(bookings => {
             return <li className='li'>{bookings}</li>
-            }); */
+            });  */
         })  
     }
 
 
     return (
         <div>
+            <Nav/>
             <h2>Admin page</h2>
             <label htmlFor='dateInput'>Select date:</label>
             <Datepicker 
@@ -35,8 +36,7 @@ export default function Admin() {
             <button type='button' onClick={getBookings}>Get bookings</button>
             <div className='ul-container'>
                 <ul className='ul'>
-{/*                     {liTags} 
- */}                    <li className='li'>
+                    <li className='li'>
                         <span>kjsnakjndsa</span>
                         <button type='button'>Change booking</button>
                         <button type='button'>Remove booking</button>
