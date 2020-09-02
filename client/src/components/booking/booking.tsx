@@ -46,7 +46,6 @@ export default function Booking() {
   function updateSittingFromChild(sitting: number[]) {
       setSitting(sitting);
       setTimeChosen(true);
-      console.log(timeChosen);
       // Render Contact component instead of Time
   }
 
@@ -58,11 +57,12 @@ export default function Booking() {
     setTimeout(function(){ 
       axios.post(`http://localhost:4000/createBooking/${restaurantId}/${date}/${people}/${sitting}/${user.email}`).then(response => {
       console.log("CreateBooking post is called from FE");
-      console.log(response.data);
+      console.log(response);
     }).catch(function (err){
         console.log(err);});
     }, 1000);
   }
+  
 
   if(dateChosen && !timeChosen) {
       return <TimeComponent updateSitting={updateSittingFromChild} date={date} people={people} sitting={sitting}></TimeComponent>

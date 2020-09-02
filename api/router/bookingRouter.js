@@ -15,6 +15,14 @@ const {
 // Importerade Moment i både api samt client för att lättare kunna arbeta med datumformatering
 const moment = require('moment');
 const { request } = require('express');
+const nodemailer = require('nodemailer');
+const config = require("../config/config");
+
+
+
+
+
+
 
 
 
@@ -125,10 +133,12 @@ router.post("/createBooking/:restaurantId/:date/:people/:sitting/:email", async 
 
     var lastBookingId = bookings[bookings.length - 1].bookingId;
 
+    let date = new moment(req.params.date).format('L')
+
     let newBooking = new Booking({
         bookingId: lastBookingId + 1,
         restaurantId: req.params.restaurantId,
-        date: new moment(req.params.date).format('L'),
+        date: date,
         time: req.params.sitting,
         numberOfPeople: req.params.people,
         customerId: userToFind.userId // Måste hämtas från användaren
@@ -140,6 +150,8 @@ router.post("/createBooking/:restaurantId/:date/:people/:sitting/:email", async 
         }
     });
 
+    sendMail(userToFind.firstName, userToFind.email, date, req.params.sitting, req.params.people);
+
     // Skicka bekräftelsemail till kunden där denne kan avboka tiden
 
 });
@@ -149,12 +161,49 @@ router.post("/createBooking/:restaurantId/:date/:people/:sitting/:email", async 
 router.delete("/deleteBooking/:id", async (req, res) => {
 
     // Tar bort en bokning från databasen. Användaren skickar en delete-request i form av en knapp eller länk där bokingsId skickas med.
-    const booking = await Booking.remove({
+    const deletedBooking = await Booking.findOne({
+        bookingId: req.params.id
+    });
+    const booking = await Booking.deleteOne({
         bookingId: req.params.id
     });
 
-    res.send(booking)
+    res.send(JSON.stringify(deletedBooking) + "deleted")
 
 });
+
+function sendMail(firstName, email, date, sitting, people){
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: config.mailCredentials.userName,
+          pass: config.mailCredentials.password
+        }
+      });
+      
+      let mailOptions = {
+        from: config.mailCredentials.userName,
+        to: email,
+        subject: 'Bokningsbekräftelse - FML restaurang',
+        text: `<h1>Hej ${firstName} och tack för din beställning</h1>
+        <br>
+        Följande datum är bokat:
+        <br>
+        ${date} - Klockan ${sitting}:00 - ${people} personer
+        <br>
+        <h3>Vill du avboka din tid?</h3>
+        <br>
+        Klicka på följande länk: <b>'Här ska avbokningslänken finnas'</b>`
+      };
+      
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Confirmation email has been sent to the customer: ' + info.response);
+        }
+      });
+};
+
 
 module.exports = router;

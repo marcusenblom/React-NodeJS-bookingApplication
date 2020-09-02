@@ -1,5 +1,9 @@
 @import 'mixins';
 
+label {
+    display: block;
+    margin-bottom: 10px;
+}
 .ul-container {
     display: flex;
     justify-content: center;
@@ -10,11 +14,13 @@
         list-style: none;
 
         .li {
-            display: flex;
-            justify-content: space-between;
             width: 100%;
             padding: 10px;
             background: #EFD9BE;
+            button {
+                float: right;
+                margin-left: 10px;
+            }
         }
     }
 }

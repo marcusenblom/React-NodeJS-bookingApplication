@@ -17,10 +17,11 @@ interface IContactProps {
 }
 
 export default function ContactComponent(props: IContactProps) {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState(0);
+
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState(Number);
 
   const [date, setDate] = useState(new Date());
   const [people, setPeople] = useState(0);

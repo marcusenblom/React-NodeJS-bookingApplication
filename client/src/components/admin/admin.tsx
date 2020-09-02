@@ -1,41 +1,58 @@
-import React from "react";
-
-import axios from "axios";
+import React, { useState } from 'react';
+import './admin.scss';
+import axios from 'axios';
+import Datepicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function Admin() {
-  /* function getBookings() {
-        axios.get('http://localhost:4000').then(response => {
-            console.log(response.data);
-            console.log("Local API is run");
 
-            let liTags = response.data.map((bookings) => {
-                return <li className='li'>{bookings}</li>
-            });
-        });
-    } */
+    const [restaurantId, setRestaurantId] = useState(1);
+    const [date, setDate] = useState();
+    const [people, setPeople] = useState(0);
+    const [sitting, setSitting] = useState([18, 21]);
+    
+    function getBookings() {
+        axios.get(`http://localhost:4000/getAvailability/${restaurantId}/${date}/${people}`).then(axiosObject => {
+            console.log(`Bord lediga ${date}: ${JSON.stringify(axiosObject.data)}`); // data from API within the Axios object
+            setSitting(axiosObject.data);
 
-  return (
-    <div>
-      {/*  <h2>Admin page</h2>
-             <input type='text' placeholder='Date for bookings' />
+          /*   let liTags = response.data.map((bookings) => {
+            return <li className='li'>{bookings}</li>
+    }); */
+        })  
+    }
+
+
+    return (
+        <div>
+            <h2>Admin page</h2>
+            <label htmlFor='dateInput'>Select date:</label>
+            <Datepicker 
+                selected={date} 
+                onChange={date => setDate(date)}
+                isClearable
+                />
             <button type='button' onClick={getBookings}>Get bookings</button>
             <div className='ul-container'>
                 <ul className='ul'>
-                     {liTags} 
+                    {/* liTags */} 
                     <li className='li'>
-                        <p>kjsnakjndsa</p>
-                        <button>klick</button>
+                        <span>kjsnakjndsa</span>
+                        <button type='button'>Change booking</button>
+                        <button type='button'>Remove booking</button>
                     </li>
                     <li className='li'>
-                        <p>dasdasdasda</p>
-                        <button>klick</button>
+                        <span>dasdasdasda</span>
+                        <button type='button'>Change booking</button>
+                        <button type='button'>Remove booking</button>
                     </li>
                     <li className='li'>
-                        <p>kdsalkdnsa</p>
-                        <button>klick</button>
+                        <span>kdsalkdnsa</span>
+                        <button type='button'>Change booking</button>
+                        <button type='button'>Remove booking</button>
                     </li>
                 </ul>
-            </div> */}
-    </div>
-  );
+            </div> 
+        </div>
+    );
 }
