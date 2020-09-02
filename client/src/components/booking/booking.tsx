@@ -46,7 +46,6 @@ export default function Booking() {
   function updateSittingFromChild(sitting: number[]) {
       setSitting(sitting);
       setTimeChosen(true);
-      console.log(timeChosen);
       // Render Contact component instead of Time
   }
 
@@ -63,6 +62,7 @@ export default function Booking() {
         console.log(err);});
     }, 1000);
   }
+  
 
   if(dateChosen && !timeChosen) {
       return <TimeComponent updateSitting={updateSittingFromChild} date={date} people={people} sitting={sitting}></TimeComponent>
