@@ -57,7 +57,7 @@ export default function Booking() {
     setTimeout(function(){ 
       axios.post(`http://localhost:4000/createBooking/${restaurantId}/${date}/${people}/${sitting}/${user.email}`).then(response => {
       console.log("CreateBooking post is called from FE");
-      console.log(response.data);
+      console.log(response);
     }).catch(function (err){
         console.log(err);});
     }, 1000);
