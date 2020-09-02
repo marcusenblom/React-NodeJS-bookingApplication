@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import Nav from "../../nav/nav";
 
 interface IContactProps {
   date: Date;
@@ -63,7 +64,7 @@ export default function ContactComponent(props: IContactProps) {
   }
 
   return (
-    <React.Fragment>
+ <React.Fragment>
       <Nav />
       <div className="contact-container">
         <h2>FML</h2>
@@ -210,5 +211,6 @@ export default function ContactComponent(props: IContactProps) {
              Lägg min popup och props som ska få värdet från input fältena .
          </div>}
     </div>
+    </React.Fragment>
   );
 }
