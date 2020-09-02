@@ -1,5 +1,6 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, constructor, Component } from "react";
 import "./popup.scss";
+
 
 interface IContactProps {
   date: Date;
@@ -36,26 +37,33 @@ export default function Popup(props: IContactProps) {
 
 
   return (
-    <div className="popup-wrapper">
-      <div className="popup-header">
-        <span className="close-modal-btn">X</span>
 
-        <p>Thank you for your booking!</p>
-        <p>Check your inbox shortly for a confirmation email.</p>
+    <div className="popup-container">
+      <p className="text-center">Thank you for your booking!</p>
+      <p className="text-center">
+        Check your inbox shortly for a confirmation email.
+      </p>
+      <hr />
+
+      <div className="date-guest-time-container">
+        <div className="date">
+          <p>Date</p>
+          <p>
+            {props.date.getDate()}/{props.date.getMonth() + 1}
+          </p>
+        </div>
+
+        <div className="guest">
+          <p>Guests</p>
+          <p>{props.people.toString()}</p>
+        </div>
+
+        <div className="time">
+          <p>Time</p>
+          <p>{props.sitting.toString()}.00</p>
+        </div>
       </div>
       <hr />
-      <div className="popup-content">
-        <div className="popup-body">
-          <div className="popup-date-guest-time">
-            <p>Your information</p>
-            <p>
-              Date
-              {props.date.getDate()}/{props.date.getMonth() + 1}
-            </p>
-            <p>Guests {props.people.toString()}</p>
-            <p>Sitting {props.sitting.toString()}</p>
-          </div>
-          <hr />
 
           <div className="information">
             <div className="your-information">
@@ -69,7 +77,7 @@ export default function Popup(props: IContactProps) {
             </div>
           </div>
         </div>
-      </div>
-    </div>
   );
 }
+
+

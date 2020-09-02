@@ -1,3 +1,5 @@
+@import 'mixins';
+
 .contact-container {
     width: 90%;
     height: auto;
@@ -102,5 +104,6 @@
         text-transform: uppercase;
         border: solid 1px rgb(158, 158, 158);
     }
+
 
 }

@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useForm } from "react-hook-form";
-import "./contact.scss";
-import axios from 'axios';
+
+import axios from "axios";
 import Popup from "../../popup/popup";
 
 interface IContactProps {
@@ -17,7 +17,6 @@ interface IContactProps {
 }
 
 export default function ContactComponent(props: IContactProps) {
-
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -45,12 +44,17 @@ export default function ContactComponent(props: IContactProps) {
 
   function updateParent(e: any) {
     // e.preventDefault();
-    axios.post(`http://localhost:4000/createUser/${firstName}/${lastName}/${email}/${phoneNumber}`).then(response => {
-      console.log("CreateUser post is called from FE");
-      console.log(response.data);
-    }).catch(function (err){
+    axios
+      .post(
+        `http://localhost:4000/createUser/${firstName}/${lastName}/${email}/${phoneNumber}`
+      )
+      .then(response => {
+        console.log("CreateUser post is called from FE");
+        console.log(response.data);
+      })
+      .catch(function(err) {
         console.log(err);
-    });
+      });
 
     props.updateUser(firstName, lastName, email, phoneNumber);
   }

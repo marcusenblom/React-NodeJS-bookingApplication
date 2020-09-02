@@ -1,0 +1,31 @@
+@import 'mixins';
+// .background {
+//     background: black;
+//     opacity: 0.4;
+//     height: 100vh;
+//     width: 100vh;
+// }
+
+.popup-container {
+    width: 70%;
+    height: auto;
+    margin: 0 auto;
+    font-weight: 400;
+    font-size: 90%;
+
+    .text-center {
+        text-align: center;
+        font-size: 15px;
+        font-weight: 400;
+    }
+
+    .date-guest-time-container {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .guest-booking-container {
+        display: flex;
+        justify-content: space-evenly;
+    }
+}

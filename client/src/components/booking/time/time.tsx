@@ -1,42 +1,43 @@
-import React, { useState, ChangeEvent, MouseEvent} from 'react';
-import './time.scss';
+import React, { useState, ChangeEvent, MouseEvent } from "react";
 
 
 interface ITimeProps {
-    date: Date,
-    people: number,
-    sitting: number[],
-    updateSitting(sitting: number[]): void;
+  date: Date;
+  people: number;
+  sitting: number[];
+  updateSitting(sitting: number[]): void;
 }
 
 export default function TimeComponent(props: ITimeProps) {
+  function updateParent(e: any) {
+    let s = parseInt(e.target.value);
+    props.updateSitting([s]);
+  }
 
-    function updateParent(e: any){
-        let s = parseInt(e.target.value);
-        props.updateSitting([s]);
-    }
-    
-    let sittingButtons = props.sitting.map((sitting: number) => {
-        return (
-          <div className="time-div" key={sitting}>
-            <button
-              className="time-btn"
-              type="button"
-              value={sitting}
-              onClick={updateParent}>
-              Tid: {sitting}.00
-            </button>
-          </div>
-        );
-    });
-
+  let sittingButtons = props.sitting.map((sitting: number) => {
     return (
-        <div>
-            <hr/>
-            <p>{"Datum: " + props.date.getDate()}/{props.date.getMonth() + 1}</p>
-            <p>{"People: " + props.people}</p>
-            {sittingButtons}
-            <hr/>
-        </div>
+      <div className="time-div" key={sitting}>
+        <button
+          className="time-btn"
+          type="button"
+          value={sitting}
+          onClick={updateParent}
+        >
+          Tid: {sitting}.00
+        </button>
+      </div>
     );
-}            
+  });
+
+  return (
+    <div>
+      <hr />
+      <p>
+        {"Datum: " + props.date.getDate()}/{props.date.getMonth() + 1}
+      </p>
+      <p>{"People: " + props.people}</p>
+      {sittingButtons}
+      <hr />
+    </div>
+  );
+}

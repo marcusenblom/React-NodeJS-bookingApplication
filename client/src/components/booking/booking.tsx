@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import './booking.scss';
-import DateComponent from './date/date';
-import TimeComponent from './time/time';
-import ContactComponent from './contact/contact';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+
+import DateComponent from "./date/date";
+import TimeComponent from "./time/time";
+import ContactComponent from "./contact/contact";
+import axios from "axios";
 
 export default function Booking() {
 

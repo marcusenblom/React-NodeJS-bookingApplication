@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import './admin.scss';
+
 import axios from 'axios';
 import Datepicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
 
 export default function Admin() {
 
