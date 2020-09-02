@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, constructor, Component } from "react";
+import React, { useState } from "react";
 //import "./popup.scss";
 
 interface IContactProps {

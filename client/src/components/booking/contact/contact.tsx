@@ -193,14 +193,6 @@ export default function ContactComponent(props: IContactProps) {
             <label htmlFor="checkbox">I accept gdpr terms</label>
           </div>
 
-        <div className="restaurang-last">
-          <p>Read our general terms and conditions</p>
-        </div>
-        <div className="checkbox-div">
-          <input type="radio" className="checkbox" />
-          <label htmlFor="checkbox">I accept gdpr terms</label>
-        </div>
-
         <button onClick={handlePopup}>Boka!</button>
 
 
@@ -208,7 +200,7 @@ export default function ContactComponent(props: IContactProps) {
 
         { showPopup && <div> hello your booking is confirmed  
 
-             Lägg min popup och props som ska få värdet från input fältena .
+             Lägg min popup och props som ska få värdet från input fälten.
          </div>}
     </div>
     </React.Fragment>
