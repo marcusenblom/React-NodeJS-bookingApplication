@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent, MouseEvent } from "react";
+import Nav from "../../nav/nav";
 
 
 interface ITimeProps {
@@ -23,21 +24,24 @@ export default function TimeComponent(props: ITimeProps) {
           value={sitting}
           onClick={updateParent}
         >
-          Tid: {sitting}.00
+          Time: {sitting}.00
         </button>
       </div>
     );
   });
 
   return (
-    <div>
-      <hr />
-      <p>
-        {"Datum: " + props.date.getDate()}/{props.date.getMonth() + 1}
-      </p>
-      <p>{"People: " + props.people}</p>
-      {sittingButtons}
-      <hr />
-    </div>
+    <React.Fragment>
+      <Nav />
+      <div>
+        <hr />
+        <p>
+          {"Date: " + props.date.getDate()}/{props.date.getMonth() + 1}
+        </p>
+        <p>{"Guests: " + props.people}</p>
+        {sittingButtons}
+        <hr />
+      </div>
+    </React.Fragment>
   );
 }

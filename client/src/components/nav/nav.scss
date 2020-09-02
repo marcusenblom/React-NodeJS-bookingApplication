@@ -1,4 +1,15 @@
 
-.h2-container {
-    border: 2px solid blue;
+.nav-container {
+    display: flex;
+    justify-content: center;
+    background-position: top;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 300px;
+    background-image: url('../../image/panoramapizza.png');
+    h1 {
+        color: #EFD9BE;
+    }
 }
