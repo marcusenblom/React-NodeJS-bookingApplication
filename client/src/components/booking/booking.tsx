@@ -26,7 +26,6 @@ export default function Booking() {
   const [user, setUser] = useState(new userClass("", "", "", 0));
   const [dateChosen, setDateChosen] = useState(false);
   const [timeChosen, setTimeChosen] = useState(false);
-  //const [componentToShow, setComponentToShow] = useState();
 
   function updateDateFromChild(date: Date) {
       setDate(date);

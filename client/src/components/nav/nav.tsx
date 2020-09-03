@@ -1,12 +1,11 @@
-import React from 'react';
-import './nav.scss';
+import React from "react";
+import panoramapizza from "../../image/panoramapizza.png";
 
 export default function Nav() {
-    
-    return (
-        <div className='h2-container'>
-            <h1>FML Restaurant</h1>
-            <h2>Enjoy tasty food</h2>
-        </div>
-    );
+  return (
+    <div className="nav-container">
+      <img className="panoramapizza" src={panoramapizza} alt="pizza" />
+      <h1>FML Restaurant</h1>
+    </div>
+  );
 }

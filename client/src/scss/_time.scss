@@ -1,5 +1,5 @@
 .time-div {
-    
+
     .time-btn {
 
         justify-content: center;
@@ -10,7 +10,14 @@
         width: 70%;
         height: 50px;
         cursor: pointer;
-        
+
+        @include tablet {
+            width: 50%;
+        }
+
+        @include desktop {
+            width: 40%;
+        }
 
 
     }
