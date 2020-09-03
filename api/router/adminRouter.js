@@ -2,6 +2,18 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require("mongoose");
 const moment = require('moment');
+const {
+    Booking,
+    validateBooking
+} = require('../model/bookingModel');
+const {
+    User,
+    validateUser
+} = require('../model/userModel');
+const {
+    Restaurant,
+    validateRestaurant
+} = require('../model/restaurantModel');
 
 
 router.get("/getBookings/:date", async (req, res) => {
@@ -9,6 +21,7 @@ router.get("/getBookings/:date", async (req, res) => {
     const bookings = await Booking.find({
         date: date
     });
+    res.send(bookings);
 });
 
 router.put("/changeBooking", (req, res) => {

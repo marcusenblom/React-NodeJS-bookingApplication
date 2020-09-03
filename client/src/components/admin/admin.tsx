@@ -4,22 +4,58 @@ import Datepicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Nav from '../nav/nav';
 
+
+
 export default function Admin() {
+
+    class bookingClass {
+        bookingId: number;
+        date: Date;
+        time: number;
+        numberOfPeople: number;
+        customerId: number;
+        restaurantId: number;
+        constructor(bookingId: number, date: Date, time: number, numberOfPeople: number, customerId: number, restaurantId: number){
+            this.bookingId = bookingId;
+            this.date = date;
+            this.time = time;
+            this.numberOfPeople = numberOfPeople;
+            this.customerId = customerId;
+            this.restaurantId = restaurantId;
+        }
+    }
 
     const [restaurantId, setRestaurantId] = useState(1);
     const [date, setDate] = useState();
     const [people, setPeople] = useState(0);
     const [sitting, setSitting] = useState([18, 21]);
-    
-    function getBookings() {
-        axios.get(`http://localhost:4000/getAvailability/${restaurantId}/${date}/${people}`).then(axiosObject => {
-            console.log(`Bord lediga ${date}: ${JSON.stringify(axiosObject.data)}`); // data from API within the Axios object
-            setSitting(axiosObject.data);
+    const [bookings, setBookings] = useState();
+
+
+/*     [new bookingClass(0, new Date(), 0, 0, 0, 0)]
+ */    function getBookings() {
+        axios.get(`http://localhost:4000/getBookings/${date}`).then(axiosObject => {
+            console.log(axiosObject.data);
+            setBookings(1);
+            setRestaurantId(2);
+            console.log(restaurantId);
+            
+            console.log(bookings);
+            console.log(date);
+            
+            
+            
+            
+            // 1. Hämta UserInput
+            // 2. Hämta bokningar från databasen efter valt datum
+            // 3. Mapa objektet och presentera dessa i listan
+
              /* let liTags = axiosObject.data.map(bookings => {
             return <li className='li'>{bookings}</li>
             });  */
         })  
     }
+
 
 
     return (
@@ -31,6 +67,7 @@ export default function Admin() {
                 selected={date}
                 onChange={date => setDate(date)}
                 isClearable
+                dateFormat='yyyy-MM-dd'
                 />
             <button type='button' onClick={getBookings}>Get bookings</button>
             <div className='ul-container'>
