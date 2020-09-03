@@ -3,6 +3,7 @@ import axios from 'axios';
 import Datepicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Nav from '../nav/nav';
+import DisplayBookings from './displaybookings/displaybookings';
 
 
 
@@ -29,20 +30,17 @@ export default function Admin() {
     const [date, setDate] = useState();
     const [people, setPeople] = useState(0);
     const [sitting, setSitting] = useState([18, 21]);
-    const [bookings, setBookings] = useState();
+    const [bookings, setBookings] = useState([]);
 
 
-/*     [new bookingClass(0, new Date(), 0, 0, 0, 0)]
- */    function getBookings() {
+    
+    function getBookings() {
         axios.get(`http://localhost:4000/getBookings/${date}`).then(axiosObject => {
             console.log(axiosObject.data);
-            setBookings(1);
-            setRestaurantId(2);
-            console.log(restaurantId);
-            
-            console.log(bookings);
-            console.log(date);
-            
+            setBookings(axiosObject.data);
+            setTimeout(function() { 
+                console.log(bookings);
+              }, 1000);
             
             
             
@@ -56,8 +54,6 @@ export default function Admin() {
         })  
     }
 
-
-
     return (
         <div>
             <Nav/>
@@ -70,25 +66,7 @@ export default function Admin() {
                 dateFormat='yyyy-MM-dd'
                 />
             <button type='button' onClick={getBookings}>Get bookings</button>
-            <div className='ul-container'>
-                <ul className='ul'>
-                    <li className='li'>
-                        <span>Blabla</span>
-                        <button type='button'>Change booking</button>
-                        <button type='button'>Remove booking</button>
-                    </li>
-                    <li className='li'>
-                        <span>Blabla</span>
-                        <button type='button'>Change booking</button>
-                        <button type='button'>Remove booking</button>
-                    </li>
-                    <li className='li'>
-                        <span>Blabla</span>
-                        <button type='button'>Change booking</button>
-                        <button type='button'>Remove booking</button>
-                    </li>
-                </ul>
-            </div> 
+            <DisplayBookings bookings={bookings}></DisplayBookings>
         </div>
     );
 }
