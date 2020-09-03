@@ -6,7 +6,6 @@ import Nav from '../nav/nav';
 import DisplayBookings from './displaybookings/displaybookings';
 
 
-
 export default function Admin() {
 
     class bookingClass {
@@ -32,8 +31,6 @@ export default function Admin() {
     const [sitting, setSitting] = useState([18, 21]);
     const [bookings, setBookings] = useState([]);
 
-
-    
     function getBookings() {
         axios.get(`http://localhost:4000/getBookings/${date}`).then(axiosObject => {
             console.log(axiosObject.data);
@@ -42,15 +39,9 @@ export default function Admin() {
                 console.log(bookings);
               }, 1000);
             
-            
-            
             // 1. Hämta UserInput
             // 2. Hämta bokningar från databasen efter valt datum
             // 3. Mapa objektet och presentera dessa i listan
-
-             /* let liTags = axiosObject.data.map(bookings => {
-            return <li className='li'>{bookings}</li>
-            });  */
         })  
     }
 
