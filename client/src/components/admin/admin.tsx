@@ -8,23 +8,29 @@ import DisplayBookings from './displaybookings/displaybookings';
 
 
 export default function Admin() {
-
-    class bookingClass {
-        bookingId: number;
-        date: Date;
-        time: number;
-        numberOfPeople: number;
-        customerId: number;
-        restaurantId: number;
-        constructor(bookingId: number, date: Date, time: number, numberOfPeople: number, customerId: number, restaurantId: number){
-            this.bookingId = bookingId;
-            this.date = date;
-            this.time = time;
-            this.numberOfPeople = numberOfPeople;
-            this.customerId = customerId;
-            this.restaurantId = restaurantId;
-        }
+  class bookingClass {
+    bookingId: number;
+    date: Date;
+    time: number;
+    numberOfPeople: number;
+    customerId: number;
+    restaurantId: number;
+    constructor(
+      bookingId: number,
+      date: Date,
+      time: number,
+      numberOfPeople: number,
+      customerId: number,
+      restaurantId: number
+    ) {
+      this.bookingId = bookingId;
+      this.date = date;
+      this.time = time;
+      this.numberOfPeople = numberOfPeople;
+      this.customerId = customerId;
+      this.restaurantId = restaurantId;
     }
+  }
 
     const [restaurantId, setRestaurantId] = useState(1);
     const [date, setDate] = useState();
@@ -32,8 +38,6 @@ export default function Admin() {
     const [sitting, setSitting] = useState([18, 21]);
     const [bookings, setBookings] = useState([]);
 
-
-    
     function getBookings() {
         axios.get(`http://localhost:4000/getBookings/${date}`).then(axiosObject => {
             console.log(axiosObject.data);

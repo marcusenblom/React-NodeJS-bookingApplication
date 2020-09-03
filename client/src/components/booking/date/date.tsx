@@ -1,8 +1,8 @@
 import React, { useState, ChangeEvent } from "react";
 import Calendar from "react-calendar";
 import Nav from "../../nav/nav";
-//import "react-calendar/dist/Calendar.css";
 
+// Ett interface som beskirver vilka funktioner som ska skickas med från booking och tillbaka igen.
 interface IDateProps {
   updateDate(date: Date): void;
   updatePeople(people: number): void;
@@ -12,11 +12,12 @@ export default function DateComponent(props: IDateProps) {
   const [date, setDate] = useState(new Date());
   const [people, setPeople] = useState(1);
 
+  //Här uppdateras datumet och skickas till booking via props. 
   function updateDate(selectedDate: any) {
     props.updateDate(selectedDate);
     setDate(selectedDate);
   }
-
+  // Här uppdateras personer och skickas till booking via props.
   function updateSelect(e: ChangeEvent<HTMLSelectElement>) {
     let p = parseInt(e.currentTarget.value);
     props.updatePeople(p);
@@ -25,7 +26,7 @@ export default function DateComponent(props: IDateProps) {
   
   return (
     <React.Fragment>
-      <Nav/>
+      <Nav />
       <div className="date-container">
         <hr />
 
@@ -36,9 +37,9 @@ export default function DateComponent(props: IDateProps) {
 
         <p className="text-left-second">
           FML is an Italian Restaurant, featuring homemade fresh pasta,
-          traditional Roman dishes expertly prepared using the finest ingredients.
-          Fine wines and signature cocktails in a spacious, white tablecloth
-          venue.
+          traditional Roman dishes expertly prepared using the finest
+          ingredients. Fine wines and signature cocktails in a spacious, white
+          tablecloth venue.
         </p>
         <hr />
         <p className="text-left">Reservation 1-15 guests</p>
