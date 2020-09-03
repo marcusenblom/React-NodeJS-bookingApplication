@@ -131,12 +131,13 @@ router.post("/createBooking/:restaurantId/:date/:people/:sitting/:email", async 
     });
     const bookings = await Booking.find();
 
-    var lastBookingId = bookings[bookings.length - 1].bookingId;
+    let lastBookingId = bookings[bookings.length - 1].bookingId;
+    let newBookingId = lastBookingId + 1;
 
     let date = new moment(req.params.date).format('L');
 
     let newBooking = new Booking({
-        bookingId: lastBookingId + 1,
+        bookingId: newBookingId,
         restaurantId: req.params.restaurantId,
         date: date,
         time: req.params.sitting,
@@ -150,7 +151,7 @@ router.post("/createBooking/:restaurantId/:date/:people/:sitting/:email", async 
         }
     });
 
-    sendMail(userToFind.firstName, userToFind.email, date, req.params.sitting, req.params.people);
+    sendMail(userToFind.firstName, userToFind.email, date, req.params.sitting, req.params.people, newBookingId);
 
     // Skicka bekräftelsemail till kunden där denne kan avboka tiden
 
@@ -172,7 +173,7 @@ router.delete("/deleteBooking/:id", async (req, res) => {
 
 });
 
-function sendMail(firstName, email, date, sitting, people){
+function sendMail(firstName, email, date, sitting, people, bookingId){
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -193,7 +194,7 @@ function sendMail(firstName, email, date, sitting, people){
         <br>
         <h3>Vill du avboka din tid?</h3>
         <br>
-        Klicka på följande länk: <b>'Här ska avbokningslänken finnas'</b>`
+        Klicka på följande länk: <a href="http://localhost:4000/deleteBooking/${bookingId}">clickheretoremoveyourbooking.aasdsfsg/123123512512563484584655&PushitToTheLimit</a>`
       };
       
       transporter.sendMail(mailOptions, function(error, info){
