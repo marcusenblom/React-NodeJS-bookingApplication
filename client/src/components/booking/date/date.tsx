@@ -1,5 +1,4 @@
 import React, { useState, ChangeEvent } from "react";
-
 import Calendar from "react-calendar";
 import Nav from "../../nav/nav";
 
@@ -11,7 +10,7 @@ interface IDateProps {
 
 export default function DateComponent(props: IDateProps) {
   const [date, setDate] = useState(new Date());
-  const [people, setPeople] = useState(0);
+  const [people, setPeople] = useState(1);
 
   //Här uppdateras datumet och skickas till booking via props. 
   function updateDate(selectedDate: any) {
@@ -24,6 +23,7 @@ export default function DateComponent(props: IDateProps) {
     props.updatePeople(p);
     setPeople(p);
   }
+  
   return (
     <React.Fragment>
       <Nav />

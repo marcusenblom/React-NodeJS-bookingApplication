@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import DateComponent from "./date/date";
 import TimeComponent from "./time/time";
 import ContactComponent from "./contact/contact";
@@ -27,7 +26,7 @@ export default function Booking() {
 
   const [restaurantId, setRestaurantId] = useState(1);
   const [date, setDate] = useState(new Date());
-  const [people, setPeople] = useState(0);
+  const [people, setPeople] = useState(1);
   const [sitting, setSitting] = useState([18, 21]);
   const [user, setUser] = useState(new userClass("", "", "", 0));
   const [dateChosen, setDateChosen] = useState(false);
