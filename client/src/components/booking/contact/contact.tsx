@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Nav from "../../nav/nav";
 
+//Ett interface som beskirver allt som måste skickas med. 
 interface IContactProps {
   date: Date;
   people: number;
@@ -22,9 +23,9 @@ export default function ContactComponent(this: any, props: IContactProps) {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState(Number);
 
-  const [date, setDate] = useState(new Date());
-  const [people, setPeople] = useState(0);
-  const [sitting, setSitting] = useState([18, 21]);
+  // const [date, setDate] = useState(new Date());
+  // const [people, setPeople] = useState(0);
+  // const [sitting, setSitting] = useState([18, 21]);
   const [showPopup, setshowPopup] = useState(false);
 
   const { register, handleSubmit, errors } = useForm();
@@ -49,7 +50,6 @@ export default function ContactComponent(this: any, props: IContactProps) {
   }
 
   function updateParent(e: any) {
-    // e.preventDefault();
     axios
       .post(
         `http://localhost:4000/createUser/${firstName}/${lastName}/${email}/${phoneNumber}`
