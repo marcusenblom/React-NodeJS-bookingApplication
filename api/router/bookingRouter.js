@@ -133,7 +133,7 @@ router.post("/createBooking/:restaurantId/:date/:people/:sitting/:email", async 
 
     var lastBookingId = bookings[bookings.length - 1].bookingId;
 
-    let date = new moment(req.params.date).format('L')
+    let date = new moment(req.params.date).format('L');
 
     let newBooking = new Booking({
         bookingId: lastBookingId + 1,
