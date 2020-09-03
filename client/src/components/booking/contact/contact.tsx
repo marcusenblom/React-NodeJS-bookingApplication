@@ -1,8 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useForm } from "react-hook-form";
-
 import axios from "axios";
-import Popup from "../../popup/popup";
 import Nav from "../../nav/nav";
 
 interface IContactProps {
@@ -18,15 +16,15 @@ interface IContactProps {
 }
 
 export default function ContactComponent(props: IContactProps) {
-
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState(Number);
 
   const [date, setDate] = useState(new Date());
   const [people, setPeople] = useState(0);
   const [sitting, setSitting] = useState([18, 21]);
+  const [showPopup, setshowPopup] = useState(false);
 
   const { register, handleSubmit, errors } = useForm();
 
@@ -41,6 +39,12 @@ export default function ContactComponent(props: IContactProps) {
   }
   function updatePhoneNumber(e: ChangeEvent<HTMLInputElement>) {
     setPhoneNumber(parseInt(e.target.value));
+  }
+  function handlePopup() {
+    setshowPopup(true)
+  }
+  function closePopup(){
+    setshowPopup(false)
   }
 
   function updateParent(e: any) {
@@ -61,7 +65,7 @@ export default function ContactComponent(props: IContactProps) {
   }
 
   return (
-    <React.Fragment>
+ <React.Fragment>
       <Nav />
       <div className="contact-container">
         <h2>FML</h2>
@@ -190,9 +194,55 @@ export default function ContactComponent(props: IContactProps) {
             <label htmlFor="checkbox">I accept gdpr terms</label>
           </div>
 
-          <button type="submit">Boka!</button>
-        </form>
+        <button onClick={handlePopup}>Boka!</button>
+
+
+      </form>
+
+        { showPopup && <div className="background"> 
+        <div className="popup-container">
+        <button onClick={closePopup}>x</button>
+      <p className="text-center">Thank you for your booking!</p>
+      <p className="text-center">
+        Check your inbox shortly for a confirmation email.
+      </p>
+      <hr />
+
+      <div className="date-guest-time-container">
+        <div className="date">
+          <p>Date</p>
+          <p>
+            {props.date.getDate()}/{props.date.getMonth() + 1}
+          </p>
+        </div>
+        
+
+        <div className="guest">
+          <p>Guests</p>
+          <p>{props.people.toString()}</p>
+        </div>
+
+        <div className="time">
+          <p>Time</p>
+          <p>{props.sitting.toString()}.00</p>
+        </div>
       </div>
+      <hr />
+
+      <div className="information">
+        <div className="your-information">
+          <p>Your information</p>
+          {/* <p>{JSON.stringify(user)}</p> */}
+        </div>
+        <div className="booking-information">
+          <p>Booking information</p>
+          <p>FML</p>
+          <p>#1</p>
+        </div>
+      </div>
+    </div>
+         </div>}
+    </div>
     </React.Fragment>
   );
 }
