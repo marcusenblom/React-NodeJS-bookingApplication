@@ -28,7 +28,7 @@ export default function Admin() {
             <h2>Admin</h2>
             <label htmlFor='dateInput'>Select date:</label>
             <Datepicker 
-                selected={date} 
+                selected={date}
                 onChange={date => setDate(date)}
                 isClearable
                 />
