@@ -40,7 +40,7 @@
     .input-one {
         display: flex;
         flex-direction: row;
-        
+
 
         input {
             font-size: 80%;
@@ -115,5 +115,28 @@
         border: solid 1px rgb(158, 158, 158);
     }
 
+    .background {
+        background-color: black;
+        position: absolute;
+        transition: 1s;
+        height: 100%;
+        width: 100%;
+        top: 243px;
+        left: 0;
+
+
+        .popup-container {
+            background-color: white;
+            height: 50%;
+            width: 90%;
+            position: relative;
+            top: 200px;
+            z-index: 9;
+            
+            .text-center{
+                padding-top: 20px;
+            }
+        }
+    }
 
 }
