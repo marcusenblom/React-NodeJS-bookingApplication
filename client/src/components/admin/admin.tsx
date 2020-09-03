@@ -7,23 +7,29 @@ import DisplayBookings from './displaybookings/displaybookings';
 
 
 export default function Admin() {
-
-    class bookingClass {
-        bookingId: number;
-        date: Date;
-        time: number;
-        numberOfPeople: number;
-        customerId: number;
-        restaurantId: number;
-        constructor(bookingId: number, date: Date, time: number, numberOfPeople: number, customerId: number, restaurantId: number){
-            this.bookingId = bookingId;
-            this.date = date;
-            this.time = time;
-            this.numberOfPeople = numberOfPeople;
-            this.customerId = customerId;
-            this.restaurantId = restaurantId;
-        }
+  class bookingClass {
+    bookingId: number;
+    date: Date;
+    time: number;
+    numberOfPeople: number;
+    customerId: number;
+    restaurantId: number;
+    constructor(
+      bookingId: number,
+      date: Date,
+      time: number,
+      numberOfPeople: number,
+      customerId: number,
+      restaurantId: number
+    ) {
+      this.bookingId = bookingId;
+      this.date = date;
+      this.time = time;
+      this.numberOfPeople = numberOfPeople;
+      this.customerId = customerId;
+      this.restaurantId = restaurantId;
     }
+  }
 
     const [restaurantId, setRestaurantId] = useState(1);
     const [date, setDate] = useState();
