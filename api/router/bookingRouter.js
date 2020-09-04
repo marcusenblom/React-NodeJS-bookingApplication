@@ -151,7 +151,7 @@ router.post("/createBooking/:restaurantId/:date/:people/:sitting/:email", async 
         }
     });
 
-    sendMail(userToFind.firstName, userToFind.email, date, req.params.sitting, req.params.people, newBookingId);
+    sendMail(userToFind.firstName, userToFind.email, date, req.params.sitting, req.params.people);
 
     // Skicka bekräftelsemail till kunden där denne kan avboka tiden
 
@@ -173,7 +173,7 @@ router.delete("/deleteBooking/:id", async (req, res) => {
 
 });
 
-function sendMail(firstName, email, date, sitting, people, bookingId){
+function sendMail(firstName, email, date, sitting, people){
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
