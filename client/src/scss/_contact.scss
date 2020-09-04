@@ -37,6 +37,9 @@
         justify-content: space-evenly;
     }
 
+    hr{
+        margin-bottom:30px;
+    }
     .input-one {
         display: flex;
         flex-direction: row;
@@ -48,7 +51,6 @@
             width: 50%;
             height: 70px;
             min-height: 20%;
-            text-transform: uppercase;
             font-weight: 200;
             padding-left: 5px;
 
@@ -128,14 +130,15 @@
     }
 
     .background {
-        background-color: black;
-        opacity: 0.2;
+       
+        background-color: rgba(51, 51, 53, 0.2);
         position: absolute;
         transition: 1s;
         height: 100%;
         width: 100%;
         top: 243px;
         left: 0;
+      
 
 
         .popup-container {
@@ -143,10 +146,19 @@
             height: 50%;
             width: 90%;
             position: relative;
+            opacity: 1;
             top: 200px;
-            z-index: 9999;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             
-            .text-center{
+
+            .closebtn {
+                background-color: white;
+                float: right;
+                border: none;
+
+            }
+
+            .text-center {
                 padding-top: 20px;
             }
         }
