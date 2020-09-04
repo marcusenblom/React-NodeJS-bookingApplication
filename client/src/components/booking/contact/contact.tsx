@@ -1,9 +1,12 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
+//import { ErrorMessage } from '@hookform/error-message';
 import axios from "axios";
 import Nav from "../../nav/nav";
+import Popup from "../../popup/popup";
 
-//Ett interface som beskirver allt som måste skickas med. 
+
+//Ett interface som beskriver allt som måste skickas med. 
 interface IContactProps {
   date: Date;
   people: number;
@@ -96,7 +99,6 @@ export default function ContactComponent(this: any, props: IContactProps) {
             <p>{props.sitting.toString()}.00</p>
           </div>
         </div>
-        <hr />
 
         <form onSubmit={handleSubmit(updateParent)}>
           <div className="input-one">
@@ -111,12 +113,9 @@ export default function ContactComponent(this: any, props: IContactProps) {
               value={firstName}
               ref={register({
                 required: "First name is required.",
-                minLength: 2
-              })}
+                minLength: 2})
+              }
             />
-            <div className="error-message">
-              {errors.firstName && errors.firstName.message}
-            </div>
             <br />
 
             <label htmlFor="lastName"></label>
@@ -129,14 +128,18 @@ export default function ContactComponent(this: any, props: IContactProps) {
               value={lastName}
               ref={register({
                 required: "Last name is required.",
-                minLength: 5
-              })}
-            />
-            <div className="error-message">
-              {errors.lastName && errors.lastName.message}
-            </div>
-
+                minLength: 5 
+              })}/>
             <br />
+          </div>
+
+          <div className='error-container'>
+            <span className="error-message">
+              {errors.firstName && errors.firstName.message}
+            </span>
+            <span className="error-message">
+              {errors.lastName && errors.lastName.message}
+            </span>
           </div>
 
           <div className="input-one">
@@ -154,12 +157,7 @@ export default function ContactComponent(this: any, props: IContactProps) {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                   message: "Invalid email address."
                 }
-              })}
-            />
-            <div className="error-message">
-              {errors.email && errors.email.message}
-            </div>
-
+              })}/>
             <br />
 
             <label htmlFor="phoneNumber"></label>
@@ -176,14 +174,20 @@ export default function ContactComponent(this: any, props: IContactProps) {
               })}
             />
             <br />
-            <div className="error-message">
-              {errors.phoneNumber && errors.phoneNumber.message}
-            </div>
           </div>
 
+          <div className='error-container'>
+            <span className="error-message">
+              {errors.email && errors.email.message}
+            </span>
+            <span className="error-message">
+              {errors.phoneNumber && errors.phoneNumber.message}
+            </span>
+          </div>
           <div className="input-two">
             <div className="restaurang">
               <p>Restaurang</p>
+              <p>FML Vasagatan</p>
             </div>
             <div className="restaurangtwo">
               <p>Please note that we will hold your table for 15 minutes</p>
