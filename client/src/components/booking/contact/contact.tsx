@@ -2,8 +2,9 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Nav from "../../nav/nav";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-//Ett interface som beskirver allt som måste skickas med. 
+//Ett interface som beskirver allt som måste skickas med.
 interface IContactProps {
   date: Date;
   people: number;
@@ -17,7 +18,6 @@ interface IContactProps {
 }
 
 export default function ContactComponent(this: any, props: IContactProps) {
-
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -198,15 +198,14 @@ export default function ContactComponent(this: any, props: IContactProps) {
             <label htmlFor="checkbox">I accept gdpr terms</label>
           </div>
 
-          <button onClick={handlePopup}>
-            Reserve a table!
-          </button>
+          <button onClick={handlePopup}>Reserve a table!</button>
         </form>
 
         {showPopup && (
           <div className="background">
             <div className="popup-container">
-              <button onClick={closePopup}>x</button>
+              <button className="closebtn" onClick={closePopup}>X
+              </button>
               <p className="text-center">Thank you for your booking!</p>
               <p className="text-center">
                 Check your inbox shortly for a confirmation email.

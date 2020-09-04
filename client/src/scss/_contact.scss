@@ -116,8 +116,8 @@
     }
 
     .background {
+
         background-color: black;
-        opacity: 0.2;
         position: absolute;
         transition: 1s;
         height: 100%;
@@ -133,8 +133,15 @@
             position: relative;
             top: 200px;
             z-index: 9999;
-            
-            .text-center{
+
+            .closebtn {
+                background-color: white;
+                float: right;
+                border: none;
+        
+            }
+
+            .text-center {
                 padding-top: 20px;
             }
         }
