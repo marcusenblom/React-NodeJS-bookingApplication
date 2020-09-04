@@ -5,12 +5,7 @@ import axios from "axios";
 import Nav from "../../nav/nav";
 import Popup from "../../popup/popup";
 
-<<<<<<< HEAD
-
-//Ett interface som beskriver allt som måste skickas med. 
-=======
 //Ett interface som beskirver allt som måste skickas med.
->>>>>>> dbd837f5232df28b629d74e622021cd5c0d745cf
 interface IContactProps {
   date: Date;
   people: number;

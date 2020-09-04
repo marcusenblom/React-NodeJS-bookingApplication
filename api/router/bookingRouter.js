@@ -194,7 +194,7 @@ function sendMail(firstName, email, date, sitting, people, bookingId){
         <br>
         <h3>Vill du avboka din tid?</h3>
         <br>
-        Klicka på följande länk: <a href="http://localhost:4000/deleteBooking/${bookingId}">clickheretoremoveyourbooking.aasdsfsg/123123512512563484584655&PushitToTheLimit</a>`
+        Ring vår kundtjänst så hjälper vi dig att avboka din tid.</a>`
       };
       
       transporter.sendMail(mailOptions, function(error, info){
