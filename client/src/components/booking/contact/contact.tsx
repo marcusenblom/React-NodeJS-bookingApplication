@@ -2,7 +2,6 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Nav from "../../nav/nav";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //Ett interface som beskirver allt som måste skickas med.
 interface IContactProps {
@@ -69,15 +68,6 @@ export default function ContactComponent(this: any, props: IContactProps) {
     <React.Fragment>
       <Nav />
       <div className="contact-container">
-        <h2>FML</h2>
-        <hr />
-
-        <p className="text-left">
-          Dinner - FML Restaurant Vasagatan can be found on Tulegatan
-        </p>
-        <hr />
-        <p className="text-left">Reservation 1-15 guests</p>
-        <hr />
         <div className="date-guest-time-container">
           <div className="presentation">
             <p>Date:</p>
@@ -204,7 +194,8 @@ export default function ContactComponent(this: any, props: IContactProps) {
         {showPopup && (
           <div className="background">
             <div className="popup-container">
-              <button className="closebtn" onClick={closePopup}>X
+              <button className="closebtn" onClick={closePopup}>
+                X
               </button>
               <p className="text-center">Thank you for your booking!</p>
               <p className="text-center">
@@ -231,18 +222,6 @@ export default function ContactComponent(this: any, props: IContactProps) {
                 </div>
               </div>
               <hr />
-
-              <div className="information">
-                <div className="your-information">
-                  <p>Your information</p>
-                  {/* <p>{JSON.stringify(user)}</p> */}
-                </div>
-                <div className="booking-information">
-                  <p>Booking information</p>
-                  <p>FML</p>
-                  <p>#1</p>
-                </div>
-              </div>
             </div>
           </div>
         )}
