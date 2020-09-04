@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Nav from "../../nav/nav";
 
-
 //Ett interface som beskirver allt som måste skickas med.
 interface IContactProps {
   date: Date;
