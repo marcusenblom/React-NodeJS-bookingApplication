@@ -1,16 +1,11 @@
 import React, { useState, ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
-//import { ErrorMessage } from '@hookform/error-message';
 import axios from "axios";
 import Nav from "../../nav/nav";
 import Popup from "../../popup/popup";
 
-<<<<<<< HEAD
 
 //Ett interface som beskriver allt som måste skickas med. 
-=======
-//Ett interface som beskirver allt som måste skickas med.
->>>>>>> dbd837f5232df28b629d74e622021cd5c0d745cf
 interface IContactProps {
   date: Date;
   people: number;
@@ -34,7 +29,7 @@ export default function ContactComponent(this: any, props: IContactProps) {
   // const [sitting, setSitting] = useState([18, 21]);
   const [showPopup, setshowPopup] = useState(false);
 
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, formState } = useForm({mode: 'onChange'});
 
   function updateFirstName(e: ChangeEvent<HTMLInputElement>) {
     setFirstName(e.target.value);
@@ -196,7 +191,7 @@ export default function ContactComponent(this: any, props: IContactProps) {
             <label htmlFor="checkbox">I accept gdpr terms</label>
           </div>
 
-          <button onClick={handlePopup}>Reserve a table!</button>
+          <button onClick={handlePopup} disabled={!formState.isValid}>Reserve a table!</button>
         </form>
 
         {showPopup && (

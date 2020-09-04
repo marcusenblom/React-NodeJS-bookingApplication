@@ -7,7 +7,7 @@ import Booking from "./components/booking/booking";
 import Admin from "./components/admin/admin";
 import NoMatch from "./components/noMatch/noMatch";
 import Footer from "./components/footer/footer";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
@@ -30,7 +30,7 @@ function App() {
             <NoMatch />
           </Route>
         </Switch>
-        <Footer></Footer>
+        <Footer />
       </div>
     </Router>
   );
