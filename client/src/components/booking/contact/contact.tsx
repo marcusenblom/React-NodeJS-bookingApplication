@@ -1,9 +1,16 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
+//import { ErrorMessage } from '@hookform/error-message';
 import axios from "axios";
 import Nav from "../../nav/nav";
+import Popup from "../../popup/popup";
 
-//Ett interface som beskirver allt som måste skickas med. 
+<<<<<<< HEAD
+
+//Ett interface som beskriver allt som måste skickas med. 
+=======
+//Ett interface som beskirver allt som måste skickas med.
+>>>>>>> dbd837f5232df28b629d74e622021cd5c0d745cf
 interface IContactProps {
   date: Date;
   people: number;
@@ -17,7 +24,6 @@ interface IContactProps {
 }
 
 export default function ContactComponent(this: any, props: IContactProps) {
-
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -69,15 +75,6 @@ export default function ContactComponent(this: any, props: IContactProps) {
     <React.Fragment>
       <Nav />
       <div className="contact-container">
-        <h2>FML</h2>
-        <hr />
-
-        <p className="text-left">
-          Dinner - FML Restaurant Vasagatan can be found on Tulegatan
-        </p>
-        <hr />
-        <p className="text-left">Reservation 1-15 guests</p>
-        <hr />
         <div className="date-guest-time-container">
           <div className="presentation">
             <p>Date:</p>
@@ -96,7 +93,6 @@ export default function ContactComponent(this: any, props: IContactProps) {
             <p>{props.sitting.toString()}.00</p>
           </div>
         </div>
-        <hr />
 
         <form onSubmit={handleSubmit(updateParent)}>
           <div className="input-one">
@@ -111,12 +107,9 @@ export default function ContactComponent(this: any, props: IContactProps) {
               value={firstName}
               ref={register({
                 required: "First name is required.",
-                minLength: 2
-              })}
+                minLength: 2})
+              }
             />
-            <div className="error-message">
-              {errors.firstName && errors.firstName.message}
-            </div>
             <br />
 
             <label htmlFor="lastName"></label>
@@ -129,14 +122,18 @@ export default function ContactComponent(this: any, props: IContactProps) {
               value={lastName}
               ref={register({
                 required: "Last name is required.",
-                minLength: 5
-              })}
-            />
-            <div className="error-message">
-              {errors.lastName && errors.lastName.message}
-            </div>
-
+                minLength: 5 
+              })}/>
             <br />
+          </div>
+
+          <div className='error-container'>
+            <span className="error-message">
+              {errors.firstName && errors.firstName.message}
+            </span>
+            <span className="error-message">
+              {errors.lastName && errors.lastName.message}
+            </span>
           </div>
 
           <div className="input-one">
@@ -154,12 +151,7 @@ export default function ContactComponent(this: any, props: IContactProps) {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                   message: "Invalid email address."
                 }
-              })}
-            />
-            <div className="error-message">
-              {errors.email && errors.email.message}
-            </div>
-
+              })}/>
             <br />
 
             <label htmlFor="phoneNumber"></label>
@@ -176,14 +168,20 @@ export default function ContactComponent(this: any, props: IContactProps) {
               })}
             />
             <br />
-            <div className="error-message">
-              {errors.phoneNumber && errors.phoneNumber.message}
-            </div>
           </div>
 
+          <div className='error-container'>
+            <span className="error-message">
+              {errors.email && errors.email.message}
+            </span>
+            <span className="error-message">
+              {errors.phoneNumber && errors.phoneNumber.message}
+            </span>
+          </div>
           <div className="input-two">
             <div className="restaurang">
               <p>Restaurang</p>
+              <p>FML Vasagatan</p>
             </div>
             <div className="restaurangtwo">
               <p>Please note that we will hold your table for 15 minutes</p>
@@ -198,15 +196,15 @@ export default function ContactComponent(this: any, props: IContactProps) {
             <label htmlFor="checkbox">I accept gdpr terms</label>
           </div>
 
-          <button onClick={handlePopup}>
-            Reserve a table!
-          </button>
+          <button onClick={handlePopup}>Reserve a table!</button>
         </form>
 
         {showPopup && (
           <div className="background">
             <div className="popup-container">
-              <button onClick={closePopup}>x</button>
+              <button className="closebtn" onClick={closePopup}>
+                X
+              </button>
               <p className="text-center">Thank you for your booking!</p>
               <p className="text-center">
                 Check your inbox shortly for a confirmation email.
@@ -232,18 +230,6 @@ export default function ContactComponent(this: any, props: IContactProps) {
                 </div>
               </div>
               <hr />
-
-              <div className="information">
-                <div className="your-information">
-                  <p>Your information</p>
-                  {/* <p>{JSON.stringify(user)}</p> */}
-                </div>
-                <div className="booking-information">
-                  <p>Booking information</p>
-                  <p>FML</p>
-                  <p>#1</p>
-                </div>
-              </div>
             </div>
           </div>
         )}

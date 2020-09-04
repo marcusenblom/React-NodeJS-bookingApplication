@@ -28,12 +28,6 @@ export default function DateComponent(props: IDateProps) {
     <React.Fragment>
       <Nav />
       <div className="date-container">
-        <hr />
-
-        <p className="text-left">
-          Dinner - FML Restaurant Vasagatan can be found at Tulegatan
-        </p>
-        <hr />
 
         <p className="text-left-second">
           FML is an Italian Restaurant, featuring homemade fresh pasta,
