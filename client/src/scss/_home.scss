@@ -2,25 +2,20 @@
 
 .container {
     display: flex;
-
     .welcome-img {
-        background-position: top;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
         width: 100%;
 
     }
 
     .booking-table {
-        display: flex;
-        justify-content: center;
         position: absolute;
 
-
         @include tablet {
-            margin-top: 200px;
-            transform: translateX(200%);
+            
+        }
+
+        @include desktop {
+            
         }
 
         .booking-table-btn {
@@ -29,7 +24,6 @@
             background-color: white;
             border: solid 1px rgb(167, 167, 167);
             text-transform: uppercase;
-
             font-weight: 400;
             font-size: 80%;
             border-radius: 50%;
