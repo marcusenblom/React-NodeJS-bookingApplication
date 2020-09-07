@@ -1,29 +1,30 @@
-.time-div {
+.mb {
+    margin-bottom: 10%;
+    .time-div {
 
-    .time-btn {
+        .time-btn {
 
-        justify-content: center;
-        align-items: center;
-        margin: 5px;
-        padding: 18px;
-        border: none;
-        width: 70%;
-        height: 50px;
-        cursor: pointer;
+            justify-content: center;
+            align-items: center;
+            margin: 5px;
+            padding: 18px;
+            border: none;
+            width: 70%;
+            height: 50px;
+            cursor: pointer;
 
-        @include tablet {
-            width: 50%;
+            @include tablet {
+                width: 50%;
+            }
+
+            @include desktop {
+                width: 40%;
+            }
+
         }
-
-        @include desktop {
-            width: 40%;
+        button:hover {
+            background: #EFD9BE;
+            box-shadow: 1px 1px rgb(255, 250, 250);
         }
-
-
-    }
-
-    button:hover {
-        background: #EFD9BE;
-        box-shadow: 1px 1px rgb(255, 250, 250);
     }
 }
