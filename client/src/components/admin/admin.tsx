@@ -9,7 +9,7 @@ import DisplayBookings from './displaybookings/displaybookings';
 export default function Admin() {
 
     const [restaurantId, setRestaurantId] = useState(1);
-    const [date, setDate] = useState();
+    const [date, setDate] = useState(new Date());
     const [people, setPeople] = useState(0);
     const [sitting, setSitting] = useState([18, 21]);
     const [bookings, setBookings] = useState([]);
@@ -18,14 +18,15 @@ export default function Admin() {
         axios.get(`http://localhost:4000/getBookings/${date}`).then(axiosObject => {
             console.log(axiosObject.data);
             setBookings(axiosObject.data);
-            setTimeout(function() { 
-                console.log(bookings);
-              }, 1000);
             
             // 1. Hämta UserInput
             // 2. Hämta bokningar från databasen efter valt datum
             // 3. Mapa objektet och presentera dessa i listan
         })  
+    }
+
+    function handleChange(d: Date){
+        setDate(d);
     }
 
     return (
@@ -35,12 +36,13 @@ export default function Admin() {
             <label htmlFor='dateInput'>Select date:</label>
             <Datepicker 
                 selected={date}
-                onChange={date => setDate(date)}
+                // onChange={date => setDate(date)}
+                onChange={handleChange}
                 isClearable
                 dateFormat='yyyy-MM-dd'
                 />
             <button type='button' onClick={getBookings}>Get bookings</button>
-            <DisplayBookings bookings={bookings}></DisplayBookings>
+            <DisplayBookings bookings={bookings} date={date}></DisplayBookings>
         </div>
     );
 }
