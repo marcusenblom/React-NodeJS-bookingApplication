@@ -4,7 +4,6 @@ import axios from "axios";
 import Nav from "../../nav/nav";
 import Popup from "../../popup/popup";
 
-
 //Ett interface som beskriver allt som måste skickas med. 
 interface IContactProps {
   date: Date;
