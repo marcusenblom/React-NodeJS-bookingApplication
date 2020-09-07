@@ -4,5 +4,11 @@
     height: 10%;
     display: flex;
     justify-content: space-around;
-    margin-top: 10%;
+    ul {
+        list-style: none;
+    }
+    a {
+        color: inherit;
+    } 
+
 }

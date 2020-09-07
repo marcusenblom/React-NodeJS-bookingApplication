@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Nav from "../../nav/nav";
 
-
 //Ett interface som beskriver allt som måste skickas med. 
 interface IContactProps {
   date: Date;
@@ -191,7 +190,7 @@ export default function ContactComponent(this: any, props: IContactProps) {
             <label htmlFor="checkbox">I accept gdpr terms</label>
           </div>
 
-          <button onClick={handlePopup} disabled={!formState.isValid}>Reserve a table!</button>
+          <button onClick={handlePopup} disabled={!formState.isValid} className='mb'>Reserve a table!</button>
         </form>
 
         {showPopup && (
