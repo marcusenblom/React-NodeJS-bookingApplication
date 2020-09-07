@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Datepicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -18,12 +18,16 @@ export default function Admin() {
         axios.get(`http://localhost:4000/getBookings/${date}`).then(axiosObject => {
             console.log(axiosObject.data);
             setBookings(axiosObject.data);
-            
-            // 1. Hämta UserInput
-            // 2. Hämta bokningar från databasen efter valt datum
-            // 3. Mapa objektet och presentera dessa i listan
         })  
     }
+
+    // Hämtar dagens datum vid sidoladdning
+    useEffect(() => {
+        axios.get(`http://localhost:4000/getBookings/${date}`).then(axiosObject => {
+            console.log(axiosObject.data);
+            setBookings(axiosObject.data);
+        }) 
+    }, [])
 
     function handleChange(d: Date){
         setDate(d);
@@ -32,7 +36,6 @@ export default function Admin() {
     return (
         <div>
             <Nav/>
-            <h2>Admin</h2>
             <label htmlFor='dateInput'>Select date:</label>
             <Datepicker 
                 selected={date}
