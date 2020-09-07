@@ -33,15 +33,13 @@ export default function TimeComponent(props: ITimeProps) {
   return (
     <React.Fragment>
       <Nav />
-      <div>
-     
         <p>
           {"Date: " + props.date.getDate()}/{props.date.getMonth() + 1}
         </p>
         <p>{"Guests: " + props.people}</p>
         {sittingButtons}
-        <hr />
-      </div>
+      
+   
     </React.Fragment>
   );
 }

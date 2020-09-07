@@ -1,8 +1,11 @@
 .footer-container {
     background: #EFD9BE;
     width: 100%;
-    height: 10%;
+    height: auto;
     display: flex;
     justify-content: space-around;
     margin-top: 10%;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
