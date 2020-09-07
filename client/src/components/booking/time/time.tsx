@@ -30,7 +30,7 @@ export default function TimeComponent(props: ITimeProps) {
     );
   });
 
-  return (
+  return ( 
     <React.Fragment>
       <Nav />
       <div className="mb">
