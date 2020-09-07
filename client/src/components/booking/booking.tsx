@@ -3,26 +3,9 @@ import DateComponent from "./date/date";
 import TimeComponent from "./time/time";
 import ContactComponent from "./contact/contact";
 import axios from "axios";
+import userClass from "../../models/userModel";
 
 export default function Booking() {
-  //Klassen för att skapa upp en user.
-  class userClass {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phoneNumber: number;
-    constructor(
-      fname: string,
-      lname: string,
-      email: string,
-      phoneNumber: number
-    ) {
-      this.firstName = fname;
-      this.lastName = lname;
-      this.email = email;
-      this.phoneNumber = phoneNumber;
-    }
-  }
 
   const [restaurantId, setRestaurantId] = useState(1);
   const [date, setDate] = useState(new Date());
