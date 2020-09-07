@@ -1,39 +1,60 @@
-.booking-wrapper {
+.all-bookings {
     width: 100%;
-    border: 1px solid black;
     display: flex;
     justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
 
+    .date-header {
+        margin: 20px 0;
+        border-top: 1px solid grey;
+        border-bottom: 1px solid grey;
+    }
+
     .booking {
-        width: 90%;
-        height: 80px;
-        border: 1px solid red;
+        width: 80%;
+        height: auto;
+        border: 2px solid #EFD9BE;
+        border-radius: 5px;
         margin: 5px 0;
         font-size: small;
-
         display: flex;
         justify-content: space-evenly;
 
-        .booking-id {
-
+        .booking-wrapper {
+            width: 30%;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            flex-wrap: wrap;
         }
 
-        .customer-id {
+        .id-wrapper {
             
+            .booking-id, .customer-id {
+                width: 100%;
+                text-align: left;
+                margin: 5px 0;
+            }
         }
 
-        .date {
-            
+        .time-people-wrapper {
+            .time, .people {
+                width: 100%;
+                text-align: left;
+                margin: 5px 0;
+            }
         }
 
-        .time {
-            
+        .button-wrapper {
+            flex-direction: column;
+            align-items: flex-end;
+            button {
+                width: 30%;
+                margin: 5px 0;
+            }
         }
 
-        .people {
-            
-        }
     }
 }
