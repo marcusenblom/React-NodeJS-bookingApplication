@@ -2,6 +2,8 @@ import React, { useState, ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Nav from "../../nav/nav";
+import { AiOutlineClockCircle } from 'react-icons/ai';
+import { BsPeopleFill, BsCalendar } from 'react-icons/bs';
 
 //Ett interface som beskriver allt som måste skickas med. 
 interface IContactProps {
@@ -70,6 +72,7 @@ export default function ContactComponent(this: any, props: IContactProps) {
       <div className="contact-container">
         <div className="date-guest-time-container">
           <div className="presentation">
+            <BsCalendar size='2em'/>
             <p>Date:</p>
             <p>
               {props.date.getDate()}/{props.date.getMonth() + 1}
@@ -77,11 +80,13 @@ export default function ContactComponent(this: any, props: IContactProps) {
           </div>
 
           <div className="presentation">
+            <BsPeopleFill size='2em'/>
             <p>Guests:</p>
             <p>{props.people.toString()}</p>
           </div>
 
           <div className="presentation">
+            <AiOutlineClockCircle size='2em'/>
             <p>Time:</p>
             <p>{props.sitting.toString()}.00</p>
           </div>
