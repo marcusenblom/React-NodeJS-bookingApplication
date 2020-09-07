@@ -1,0 +1,15 @@
+.booking-wrapper {
+    width: 100%;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .booking {
+        width: 90%;
+        height: 80px;
+        border: 1px solid red;
+        margin: 5px 0;
+    }
+}
