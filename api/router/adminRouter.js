@@ -57,7 +57,7 @@ router.put('/changeBooking/:Id', async (req, res) => {
     
     })
    
-    console.log(booking)
+    await booking.save()
     if (!booking) return res.status(404).json({
     })
 
