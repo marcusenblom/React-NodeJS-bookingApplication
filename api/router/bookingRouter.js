@@ -18,23 +18,6 @@ const { request } = require('express');
 const nodemailer = require('nodemailer');
 const config = require("../config/config");
 
-
-
-
-
-
-
-
-
-router.get("/", async (req, res) => {
-
-    const allUsers = await User.find();
-    
-    res.send(allUsers);
-    
-});
-
-
 router.get("/getAvailability/:restaurantId/:date/:people", async (req, res) => {
 
     // Skickar med user input: Date + # of people. OBS: Just nu så blir datumet en dag tidigare
