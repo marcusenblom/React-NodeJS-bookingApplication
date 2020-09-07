@@ -1,14 +1,20 @@
 @import 'mixins';
 
 .date-container {
+  font-size: 80%;
+
+  .text-left-second{
+    margin-top: 30px;
+  }
   width: 90%;
   height: auto;
   margin: 0 auto;
   font-weight: 400;
-  font-size: 90%;
+
 
   @include tablet {
-    width: 80%;
+    width: 70%;
+  
   }
 
   @include desktop {
@@ -19,12 +25,12 @@
   h2 {
     text-align: center;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 15px;
   }
 
   .text-left {
     text-align: left;
-    font-size: 15px;
+    font-size: 12px;
   }
 
   .text-left-second {
@@ -54,7 +60,6 @@
   max-width: 100%;
   background: white;
   border: 1px solid #a0a096;
-  font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;
 }
 

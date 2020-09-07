@@ -2,7 +2,6 @@ import React, { useState, ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Nav from "../../nav/nav";
-import Popup from "../../popup/popup";
 
 
 //Ett interface som beskriver allt som måste skickas med. 
@@ -88,6 +87,7 @@ export default function ContactComponent(this: any, props: IContactProps) {
             <p>{props.sitting.toString()}.00</p>
           </div>
         </div>
+        <hr/>
 
         <form onSubmit={handleSubmit(updateParent)}>
           <div className="input-one">
