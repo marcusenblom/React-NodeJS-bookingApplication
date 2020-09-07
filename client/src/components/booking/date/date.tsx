@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent } from "react";
 import Calendar from "react-calendar";
 import Nav from "../../nav/nav";
+import { BsPeopleFill } from 'react-icons/bs';
 
 // Ett interface som beskirver vilka funktioner som ska skickas med från booking och tillbaka igen.
 interface IDateProps {
@@ -36,7 +37,7 @@ export default function DateComponent(props: IDateProps) {
           tablecloth venue.
         </p>
         <hr />
-        <p className="text-left">Reservation 1-15 guests</p>
+        <p className="text-left"><BsPeopleFill size='2em'/> Reservation 1-15 guests</p>
         <hr />
         <div className="date-and-guests">
           <div className="guests">
