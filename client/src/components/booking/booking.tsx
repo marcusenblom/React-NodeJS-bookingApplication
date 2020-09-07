@@ -71,6 +71,8 @@ export default function Booking() {
     }, 1000);
   }
 
+  
+
   // Villkorsstyrds rendering av komponenter. 
   if (dateChosen && !timeChosen) {
     return (
