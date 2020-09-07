@@ -7,12 +7,12 @@ import moment from 'moment';
 
 interface IDisplayBookingsProps {
     bookings: BookingClass[];
-    // date: Date;
+    date: Date;
 }
 
 export default function DisplayBookings(props: IDisplayBookingsProps) {
 
-    // let shortDate = moment(date).format('LL');
+    let shortDate = moment(props.date).format('LL');
 
     let bookingLi = props.bookings.map(b => {
 
@@ -24,7 +24,7 @@ export default function DisplayBookings(props: IDisplayBookingsProps) {
             User ID: {b.customerId}
             </div>
             <div className="date">
-            Date: {b.date}
+            Date: {shortDate}
             </div>
             <div className="time">
             Time: {b.time}.00

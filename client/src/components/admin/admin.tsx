@@ -42,7 +42,7 @@ export default function Admin() {
                 dateFormat='yyyy-MM-dd'
                 />
             <button type='button' onClick={getBookings}>Get bookings</button>
-            <DisplayBookings bookings={bookings}></DisplayBookings>
+            <DisplayBookings bookings={bookings} date={date}></DisplayBookings>
         </div>
     );
 }
