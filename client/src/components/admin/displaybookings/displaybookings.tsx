@@ -25,8 +25,9 @@ export default function DisplayBookings(props: IDisplayBookingsProps) {
   }
   function updateAdmin() {
     Axios.get("http://localhost:4000").then(res => {
-      setBookings(res.data);
+        setBookings(res.data);
     });
+    
   }
 
   let bookingLi = props.bookings.map(b => {

@@ -25,6 +25,7 @@ export default function Admin() {
   function handleChange(d: Date) {
     setDate(d);
   }
+  
   function editBookings() {
     axios.get(
       `http://localhost:4000/getBookings/${restaurantId}/${date}/${people}/${sitting}`
