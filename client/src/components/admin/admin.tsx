@@ -25,6 +25,7 @@ export default function Admin() {
       // 3. Mapa objektet och presentera dessa i listan
     });
   }
+  
 
   function editBookings() {
     axios.get(

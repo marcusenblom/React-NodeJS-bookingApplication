@@ -35,11 +35,10 @@
     .date-guest-time-container {
         display: flex;
         justify-content: space-evenly;
+
     }
 
-    hr {
-        margin-bottom:30px;
-    }
+  
     .input-one {
         display: flex;
         flex-direction: row;
@@ -127,6 +126,16 @@
         font-size: 80%;
         text-transform: uppercase;
         border: solid 1px rgb(158, 158, 158);
+    }
+    .checkbox-div{
+         margin-top: 20px;
+        font-size: 80%;
+        text-transform: uppercase;
+        display: flex;
+        label{
+            margin: 4px;
+        }
+
     }
 
     .background {

@@ -37,29 +37,32 @@ router.delete("/deleteBooking/:id", async (req, res) => {
     const deletedBooking = await Booking.findOne({
         bookingId: req.params.id
     });
-    const booking = await Booking.deleteOne({
-        bookingId: req.params.id
-    });
+    // const booking = await Booking.deleteOne({
+    //     bookingId: req.params.id
+    // });
+
+    deletedBooking.delete();
 
     res.send(JSON.stringify(deletedBooking) + "deleted")
 
 });
 
-router.put('/changeBooking/:Id', async (req, res) => {
+router.put('/admin/:Id', async (req, res) => {
     const booking = await Booking.findOne({
         bookingId: req.params.id
     });
+    (booking.date = req.body.date),
+    (booking.numberOfPeople = req.body.numberOfPeople),
+    (booking.time = req.body.time),
 
-    const editbooking = await Booking.updateOne({
-        bookingSitting: req.body.sitting,
-        bookingDate: req.body.date,
-        bookingTime:req.body.time
-    
-    })
-   
-    await booking.save()
-    if (!booking) return res.status(404).json({
-    })
+    booking.user = {
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+    }
+
+    await booking.save();
+
+    if (!booking) return res.status(404).json({})
 
 
     res.json(booking)
