@@ -1,14 +1,19 @@
 .footer-container {
     background: #EFD9BE;
     width: 100%;
-    height: auto;
     display: flex;
     justify-content: space-around;
-    margin-top: 10%;
-    bottom: 0;
-    width: 100%;
+    margin-top: 200px;
+    padding: 10px;
+    
+    
     ul {
         list-style: none;
+       
+        li{
+            display: inline;
+            margin: 10px;
+        }
     }
     a {
         color: inherit;

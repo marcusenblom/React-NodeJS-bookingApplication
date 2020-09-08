@@ -1,5 +1,18 @@
 .mb {
     margin-bottom: 10%;
+
+    p {
+        font-size: 15px;
+    }
+
+    .calandar {
+        margin-right: 10px;
+    }
+
+    .people {
+        margin-right: 10px;
+    }
+
     .time-div {
 
         .time-btn {
@@ -22,10 +35,7 @@
             }
 
         }
-        button:hover {
-            background: #EFD9BE;
-            box-shadow: 1px 1px rgb(255, 250, 250);
-        }
+
     }
 
 
@@ -33,7 +43,13 @@
         background: #EFD9BE;
         box-shadow: 1px 1px rgb(255, 250, 250);
     }
+
+    button:visited {
+        background: #EFD9BE;
+        box-shadow: 1px 1px rgb(255, 250, 250);
+    }
 }
-p{
+
+p {
     margin-top: 25px;
 }

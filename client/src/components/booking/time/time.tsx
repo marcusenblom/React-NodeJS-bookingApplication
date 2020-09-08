@@ -1,6 +1,6 @@
 import React from "react";
 import Nav from "../../nav/nav";
-import { BsPeopleFill, BsCalendar } from "react-icons/bs";
+import { BsPeopleFill, BsCalendar, BsCalendarFill } from "react-icons/bs";
 
 interface ITimeProps {
   date: Date;
@@ -35,15 +35,15 @@ export default function TimeComponent(props: ITimeProps) {
       <Nav />
       <div className="mb">
         <p>
-          <BsCalendar />
+          <BsCalendarFill size='1.2em' className="calandar" />
           {"Date: " + props.date.getDate()}/{props.date.getMonth() + 1}
         </p>
         <p>
-          <BsPeopleFill />
+        <BsPeopleFill size='1.2em'  className="people"/>
           {"Guests: " + props.people}
         </p>
         {sittingButtons}
-        <hr />
+     
       </div>
     </React.Fragment>
   );

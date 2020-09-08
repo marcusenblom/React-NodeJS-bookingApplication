@@ -3,6 +3,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import BookingClass from '../../../models/bookingModel';
 import "./../../../scss/_displaybookings.scss";
 import moment from 'moment';
+import Axios from 'axios';
 
 
 interface IDisplayBookingsProps {
@@ -15,7 +16,8 @@ export default function DisplayBookings(props: IDisplayBookingsProps) {
     // Konvertera datumet på bokningsobjekten till en sträng innehållande ett moment-datum
     let shortDate = moment(props.date).format('LL');
 
-    function removeBooking() {
+    function removeBooking(bookingId: number) {
+        Axios.delete('http://localhost:4000/'+ bookingId)
 
     }
     
@@ -42,7 +44,7 @@ export default function DisplayBookings(props: IDisplayBookingsProps) {
 
             <div className="button-wrapper booking-wrapper">
                 <button>Change</button>
-                <button type="button" onClick={removeBooking}>Remove</button>
+                <button type="button" onClick={()=>removeBooking(b.bookingId)}>Remove</button>
             </div>
         </div>)
     })
