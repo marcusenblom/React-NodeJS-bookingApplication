@@ -25,21 +25,12 @@ router.get("/getBookings/:date", async (req, res) => {
 });
 
 
-// router.put("/changeBooking", (req, res) => {
-
-//     // Admin gör en ändring på en booking med hjälp av rätt ID
-
-
-// });
 router.delete("/deleteBooking/:id", async (req, res) => {
 
     // Tar bort en bokning från databasen. Användaren skickar en delete-request i form av en knapp eller länk där bokingsId skickas med.
     const deletedBooking = await Booking.findOne({
         bookingId: req.params.id
     });
-    // const booking = await Booking.deleteOne({
-    //     bookingId: req.params.id
-    // });
 
     deletedBooking.delete();
 
@@ -47,7 +38,9 @@ router.delete("/deleteBooking/:id", async (req, res) => {
 
 });
 
-router.put('/admin/:Id', async (req, res) => {
+// Admin gör en ändring på en booking med hjälp av rätt ID
+
+router.put('/changeBooking/:Id', async (req, res) => {
     const booking = await Booking.findOne({
         bookingId: req.params.id
     });
