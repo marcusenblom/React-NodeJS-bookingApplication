@@ -34,14 +34,16 @@ export default function TimeComponent(props: ITimeProps) {
     <React.Fragment>
       <Nav />
       <div className="mb">
-        <p>
-          <BsCalendarFill size='1.2em' className="calandar" />
-          {"Date: " + props.date.getDate()}/{props.date.getMonth() + 1}
-        </p>
-        <p>
-        <BsPeopleFill size='1.2em'  className="people"/>
-          {"Guests: " + props.people}
-        </p>
+        <div className='flexe-these-two'>
+          <p>
+            <BsCalendarFill size='1.2em' className="calandar" />
+            {"Date: " + props.date.getDate()}/{props.date.getMonth() + 1}
+          </p>
+          <p className='ml'>
+          <BsPeopleFill size='1.2em'  className="people"/>
+            {"Guests: " + props.people}
+          </p>
+        </div>
         {sittingButtons}
      
       </div>

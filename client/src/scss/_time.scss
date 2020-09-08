@@ -13,6 +13,14 @@
         margin-right: 10px;
     }
 
+    .flexe-these-two {
+        display: flex;
+        justify-content: center;
+        .ml {
+            margin-left: 5%;
+        }
+    }
+
     .time-div {
 
         .time-btn {

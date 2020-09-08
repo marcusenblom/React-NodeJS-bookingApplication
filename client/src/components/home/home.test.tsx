@@ -9,6 +9,6 @@ test('the link element "a" should contain "href=/booking".', () => {
 
 test('should contain an image with alt="pizza".', () => {
     const { getByAltText } = render(<Home />);
-    const letImgElement = getByAltText('pizza');
-    expect(letImgElement).toBeInTheDocument();
+    const imgElement = getByAltText('pizza');
+    expect(imgElement).toBeInTheDocument();
 });
