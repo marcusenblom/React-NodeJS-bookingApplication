@@ -37,7 +37,7 @@ export default function DateComponent(props: IDateProps) {
           tablecloth venue.
         </p>
         <hr />
-        <p className="text-left"><BsPeopleFill size='2em'/> Reservation 1-15 guests</p>
+        <p className="text-left"><BsPeopleFill size='1.5em'/>  Reservation 1-15 guests</p>
         <hr />
         <div className="date-and-guests">
           <div className="guests">
