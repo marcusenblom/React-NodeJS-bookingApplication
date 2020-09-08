@@ -8,6 +8,7 @@ import Axios from "axios";
 interface IDisplayBookingsProps {
   bookings: BookingClass[];
   date: Date;
+  getbooking(): void;
 }
 
 export default function DisplayBookings(props: IDisplayBookingsProps) {
@@ -19,18 +20,17 @@ export default function DisplayBookings(props: IDisplayBookingsProps) {
   function removeBooking(bookingId: number) {
     Axios.delete("http://localhost:4000/deleteBooking/" + bookingId).then(
       res => {
-        updateAdmin();
+          
+        props.getbooking();
       }
     );
   }
-  
-  function updateAdmin() {
-    Axios.get("http://localhost:4000").then(res => {
-        setBookings(res.data);
-    });
+
+  function editBookings() {
     
   }
 
+  
   let bookingLi = props.bookings.map(b => {
     return (
       <div className="booking" key={b.bookingId}>
@@ -53,7 +53,7 @@ export default function DisplayBookings(props: IDisplayBookingsProps) {
         </div>
 
         <div className="button-wrapper booking-wrapper">
-          <button>Change</button>
+          <button type="button" onClick={() => editBookings()}>Change</button>
           <button type="button" onClick={() => removeBooking(b.bookingId)}>
             Remove
           </button>

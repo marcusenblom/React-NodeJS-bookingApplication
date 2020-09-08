@@ -25,12 +25,8 @@ export default function Admin() {
   function handleChange(d: Date) {
     setDate(d);
   }
-  
-  function editBookings() {
-    axios.get(
-      `http://localhost:4000/getBookings/${restaurantId}/${date}/${people}/${sitting}`
-    );
-  }
+
+
 
   return (
     <div>
@@ -46,7 +42,7 @@ export default function Admin() {
       <button type="button" onClick={getBookings}>
         Get bookings
       </button>
-      <DisplayBookings date={date} bookings={bookings}></DisplayBookings>
+      <DisplayBookings getbooking={getBookings} date={date} bookings={bookings}></DisplayBookings>
     </div>
   );
 }
