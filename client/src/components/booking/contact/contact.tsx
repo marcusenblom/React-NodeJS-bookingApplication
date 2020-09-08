@@ -72,7 +72,7 @@ export default function ContactComponent(this: any, props: IContactProps) {
       <div className="contact-container">
         <div className="date-guest-time-container">
           <div className="presentation">
-            <BsCalendar size='2em'/>
+            <BsCalendar size='1.5em'/>
             <p>Date:</p>
             <p>
               {props.date.getDate()}/{props.date.getMonth() + 1}
@@ -80,13 +80,13 @@ export default function ContactComponent(this: any, props: IContactProps) {
           </div>
 
           <div className="presentation">
-            <BsPeopleFill size='2em'/>
+            <BsPeopleFill size='1.5em'/>
             <p>Guests:</p>
             <p>{props.people.toString()}</p>
           </div>
 
           <div className="presentation">
-            <AiOutlineClockCircle size='2em'/>
+            <AiOutlineClockCircle size='1.5em'/>
             <p>Time:</p>
             <p>{props.sitting.toString()}.00</p>
           </div>
@@ -179,8 +179,7 @@ export default function ContactComponent(this: any, props: IContactProps) {
           </div>
           <div className="input-two">
             <div className="restaurang">
-              <p>Restaurang</p>
-              <p>FML Vasagatan</p>
+              <p>Restaurang - FML Vasagatan</p>
             </div>
             <div className="restaurangtwo">
               <p>Please note that we will hold your table for 15 minutes</p>
@@ -193,6 +192,10 @@ export default function ContactComponent(this: any, props: IContactProps) {
           <div className="checkbox-div">
             <input type="radio" className="checkbox" />
             <label htmlFor="checkbox">I accept gdpr terms</label>
+          </div>
+          <div className="checkbox-div">
+            <input type="radio" className="checkbox" />
+            <label htmlFor="checkbox">Let me know</label>
           </div>
 
           <button onClick={handlePopup} disabled={!formState.isValid} className='mb'>Reserve a table!</button>

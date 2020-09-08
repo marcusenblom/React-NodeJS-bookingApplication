@@ -17,9 +17,16 @@ export default function DisplayBookings(props: IDisplayBookingsProps) {
     let shortDate = moment(props.date).format('LL');
 
     function removeBooking(bookingId: number) {
-        Axios.delete('http://localhost:4000/'+ bookingId)
-
+        Axios.delete('http://localhost:4000/deleteBooking/'+ bookingId).then((res)=>{
+            updateAdmin();
+        })
     }
+    function updateAdmin(){
+        // axios.get('http://localhost:4000').then((res)=>{
+            
+        // })
+    }
+
     
     let bookingLi = props.bookings.map(b => {
 
