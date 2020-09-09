@@ -29,6 +29,7 @@ export default function ContactComponent(this: any, props: IContactProps) {
   const [showPopup, setshowPopup] = useState(false);
   const { register, handleSubmit, errors, formState } = useForm({mode: 'onBlur'});
 
+  // När man klickar på "tillbaka"-knappen så sätts timeChosen som false vilket renderar time-komponenten igen. Sedan görs en ny hämntning av borden för att återställa staten: sitting (då användaren hade ändrat på denna vid tidigare besök på time komponenten)
   function updateTimeAndSitting() {
     props.updateTimeAndSitting();
   }
