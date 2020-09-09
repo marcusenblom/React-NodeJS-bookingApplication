@@ -8,6 +8,7 @@ import Admin from "./components/admin/admin";
 import NoMatch from "./components/noMatch/noMatch";
 import Footer from "./components/footer/footer";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import EditBooking from "./components/admin/editbooking";
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
 
           <Route path="/admin">
             <Admin />
+          </Route>
+          <Route path="/edit/:id">
+            <EditBooking />
           </Route>
 
           <Route path="*">

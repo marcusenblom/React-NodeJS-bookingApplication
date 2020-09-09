@@ -26,8 +26,6 @@ export default function Admin() {
     setDate(d);
   }
 
-
-
   return (
     <div>
       <Nav />
@@ -42,7 +40,11 @@ export default function Admin() {
       <button type="button" onClick={getBookings}>
         Get bookings
       </button>
-      <DisplayBookings getbooking={getBookings} date={date} bookings={bookings}></DisplayBookings>
+      <DisplayBookings
+        getbooking={getBookings}
+        date={date}
+        bookings={bookings}
+      ></DisplayBookings>
     </div>
   );
 }

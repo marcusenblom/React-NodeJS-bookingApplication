@@ -4,6 +4,7 @@ import BookingClass from "../../../models/bookingModel";
 import "./../../../scss/_displaybookings.scss";
 import moment from "moment";
 import Axios from "axios";
+import { Link } from "react-router-dom";
 
 interface IDisplayBookingsProps {
   bookings: BookingClass[];
@@ -12,25 +13,18 @@ interface IDisplayBookingsProps {
 }
 
 export default function DisplayBookings(props: IDisplayBookingsProps) {
-  const [bookings, setBookings] = useState([]);
-
   // Konvertera datumet på bokningsobjekten till en sträng innehållande ett moment-datum
   let shortDate = moment(props.date).format("LL");
 
   function removeBooking(bookingId: number) {
     Axios.delete("http://localhost:4000/deleteBooking/" + bookingId).then(
       res => {
-          
         props.getbooking();
       }
     );
   }
-
-  function editBookings() {
-    
-  }
-
   
+
   let bookingLi = props.bookings.map(b => {
     return (
       <div className="booking" key={b.bookingId}>
@@ -53,7 +47,9 @@ export default function DisplayBookings(props: IDisplayBookingsProps) {
         </div>
 
         <div className="button-wrapper booking-wrapper">
-          <button type="button" onClick={() => editBookings()}>Change</button>
+          <Link to={"/edit/" + b.bookingId}>
+            <button type="button">Change</button>
+          </Link>
           <button type="button" onClick={() => removeBooking(b.bookingId)}>
             Remove
           </button>
