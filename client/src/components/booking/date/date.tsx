@@ -7,11 +7,12 @@ import { BsPeopleFill } from 'react-icons/bs';
 interface IDateProps {
   updateDate(date: Date): void;
   updatePeople(people: number): void;
+  people: number;
 }
 
 export default function DateComponent(props: IDateProps) {
   const [date, setDate] = useState(new Date());
-  const [people, setPeople] = useState(1);
+  const [people, setPeople] = useState(props.people);
 
   //Här uppdateras datumet och skickas till booking via props. 
   function updateDate(selectedDate: any) {

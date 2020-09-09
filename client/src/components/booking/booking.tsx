@@ -22,6 +22,10 @@ export default function Booking() {
     // Render Time component instead of Date
     setDateChosen(true);
 
+    fetchTables();
+  }
+
+  function fetchTables(){
     // Här hämtar vi datan från API som visar tillgänliga bord på ett specífikt datum.
     axios
       .get(
@@ -30,7 +34,7 @@ export default function Booking() {
       .then(axiosObject => {
         console.log(`Bord lediga ${date}: ${JSON.stringify(axiosObject.data)}`); // data from API within the Axios object
         setSitting(axiosObject.data);
-      });
+    });
   }
 
   // Antal personer
@@ -44,6 +48,11 @@ export default function Booking() {
     setTimeChosen(true);
     // Render Contact component instead of Time
   }
+
+  function updateTimeAndSitting(){
+    setTimeChosen(false);
+    fetchTables();
+  };
 
   // Här skapar vi upp en ny user som är baserad på klassen.
   function updateUserFromChild(
@@ -81,6 +90,7 @@ export default function Booking() {
         date={date}
         people={people}
         sitting={sitting}
+        setDateChosen={setDateChosen}
       ></TimeComponent>
     );
   } else if (timeChosen && dateChosen) {
@@ -90,11 +100,13 @@ export default function Booking() {
         date={date}
         people={people}
         sitting={sitting}
+        updateTimeAndSitting={updateTimeAndSitting}
       ></ContactComponent>
     );
   } else {
     return (
       <DateComponent
+        people={people}
         updateDate={updateDateFromChild}
         updatePeople={updatePeopleFromChild}
       ></DateComponent>

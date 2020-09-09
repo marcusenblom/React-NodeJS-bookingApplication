@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Nav from "../../nav/nav";
 import { BsPeopleFill, BsCalendarFill } from "react-icons/bs";
 import { FaArrowCircleLeft } from "react-icons/fa";
@@ -8,9 +8,14 @@ interface ITimeProps {
   people: number;
   sitting: number[];
   updateSitting(sitting: number[]): void;
+  setDateChosen(bool: boolean): void;
 }
 
 export default function TimeComponent(props: ITimeProps) {
+
+  function updateDateChosen() {
+    props.setDateChosen(false);
+  }
 
   function updateParent(e: any) {
     let s = parseInt(e.target.value);
@@ -36,7 +41,7 @@ export default function TimeComponent(props: ITimeProps) {
     <React.Fragment>
       <Nav />
       <div className="mb">
-      <a href='/booking'><FaArrowCircleLeft size='2em' className='go-back-arrow' /></a>
+      <FaArrowCircleLeft size='2em' className='go-back-arrow' onClick={updateDateChosen} />
         <div className='flexe-these-two'>
           <p>
             <BsCalendarFill size='1.2em' className="calandar" />
