@@ -3,88 +3,89 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const moment = require('moment');
 const {
-    Booking,
-    validateBooking
+  Booking,
+  validateBooking
 } = require('../model/bookingModel');
 const {
-    User,
-    validateUser
+  User,
+  validateUser
 } = require('../model/userModel');
 const {
-    Restaurant,
-    validateRestaurant
+  Restaurant,
+  validateRestaurant
 } = require('../model/restaurantModel');
 const nodemailer = require('nodemailer');
 const config = require("../config/config");
 
 
 router.get("/getBookings/:date", async (req, res) => {
-    var date = new moment(req.params.date).format('L');
-    const bookings = await Booking.find({
-        date: date
-    });
-    res.send(bookings);
+  var date = new moment(req.params.date).format('L');
+  const bookings = await Booking.find({
+    date: date
+  });
+  res.send(bookings);
 });
 
 
 router.delete("/deleteBooking/:id", async (req, res) => {
 
-    // Tar bort en bokning från databasen. Användaren skickar en delete-request i form av en knapp eller länk där bokingsId skickas med.
-    const deletedBooking = await Booking.findOne({
-        bookingId: req.params.id
-    });
+  // Tar bort en bokning från databasen. Användaren skickar en delete-request i form av en knapp eller länk där bokingsId skickas med.
+  const deletedBooking = await Booking.findOne({
+    bookingId: req.params.id
+  });
 
-    const userToFind = await User.findOne({
-        userId: deletedBooking.customerId
-    });
-    let date = new moment(deletedBooking.date).format('L');
+  const userToFind = await User.findOne({
+    userId: deletedBooking.customerId
+  });
+  let date = new moment(deletedBooking.date).format('L');
 
-    // Skicka ett avbokningsmail till användaren
-    sendCancellationMail(userToFind.firstName, userToFind.email, date, deletedBooking.time);
+  // Skicka ett avbokningsmail till användaren
+  sendCancellationMail(userToFind.firstName, userToFind.email, date, deletedBooking.time);
 
-    deletedBooking.delete();
+  deletedBooking.delete();
 
-    res.send(JSON.stringify(deletedBooking) + "deleted")
+  res.send(JSON.stringify(deletedBooking) + "deleted")
 
-    
+
 
 });
 
 // Admin gör en ändring på en booking med hjälp av rätt ID
 
-router.put('/edit/:Id', async (req, res) => {
-    const booking = await Booking.findOne({
-        bookingId: req.params.bookingId
-    });
-    (booking.date = req.body.date),
-    (booking.numberOfPeople = req.body.numberOfPeople),
-    (booking.time = req.body.time),
+// router.put('/edit/:id', async (req, res) => {
+//   const editBooking = await Booking.updateOne({
+//     bookingId: req.params.id
+//   }, {
+//     $set: {
+//       date: req.body.updateReservation.date,
+//       time: req.body.updateReservation.time,
+//       numberOfPeople: req.body.updateReservation.numberOfPeople
+//     }
+//   })
+// })
 
-   
-    console.log(booking)
-
-    await booking.save();
-
-    if (!booking) return res.status(404).json({})
-
-
-    res.json(booking)
+router.get('/edit/:id', async (req, res) => {
+  console.log(req.params.id)
+  const updateReservation = await Booking.findOne({
+    bookingId: req.params.id
+  })
+  res.send(updateReservation)
 })
 
-function sendCancellationMail(firstName, email, date, sitting){
-    let transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: config.mailCredentials.userName,
-          pass: config.mailCredentials.password
-        }
-      });
-      
-      let mailOptions = {
-        from: config.mailCredentials.userName,
-        to: email,
-        subject: 'Avbokning - FML restaurang',
-        text: `<h1>Hej ${firstName} och tack för din beställning</h1>
+function sendCancellationMail(firstName, email, date, sitting) {
+  let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: config.mailCredentials.userName,
+      pass: config.mailCredentials.password
+    }
+  });
+
+  let mailOptions = {
+    from: config.mailCredentials.userName,
+    to: email,
+    subject: 'Avbokning - FML restaurang',
+    text: `<h1>Hej ${firstName} och tack för din beställning</h1>
         <br>
         Följande bokning är nu avbokad:
         <br>
@@ -93,15 +94,15 @@ function sendCancellationMail(firstName, email, date, sitting){
         <h3>Har något blivit fel?</h3>
         <br>
         Var vänlig kontakta vår kundtjänst.</a>`
-      };
-      
-      transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('Cancellation email has been sent to the customer: ' + info.response);
-        }
-      });
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Cancellation email has been sent to the customer: ' + info.response);
+    }
+  });
 };
 
 
