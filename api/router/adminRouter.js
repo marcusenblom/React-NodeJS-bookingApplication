@@ -6,46 +6,44 @@ const {
   Booking,
   validateBooking
 } = require('../model/bookingModel');
-const {
-  User,
-  validateUser
-} = require('../model/userModel');
-const {
-  Restaurant,
-  validateRestaurant
-} = require('../model/restaurantModel');
 const nodemailer = require('nodemailer');
 const config = require("../config/config");
 
 
 router.get("/getBookings/:date", async (req, res) => {
+
   var date = new moment(req.params.date).format('L');
+
+  // Hämta alla bokningae för det akutella datumet. .populate krävs för att få tag på användarinfon
   const bookings = await Booking.find({
     date: date
-  });
-  res.send(bookings);
-});
+  }).populate("customer");
 
+  res.send(bookings);
+
+});
 
 router.delete("/deleteBooking/:id", async (req, res) => {
 
   // Tar bort en bokning från databasen. Användaren skickar en delete-request i form av en knapp eller länk där bokingsId skickas med.
   const deletedBooking = await Booking.findOne({
     bookingId: req.params.id
-  });
+  }).populate("customer");
 
-  const userToFind = await User.findOne({
-    userId: deletedBooking.customerId
-  });
+  // const userToFind = await User.findOne({
+  //   userId: deletedBooking.customer
+  // });
+
+  const user = deletedBooking.customer;
+
   let date = new moment(deletedBooking.date).format('L');
 
   // Skicka ett avbokningsmail till användaren
-  sendCancellationMail(userToFind.firstName, userToFind.email, date, deletedBooking.time);
+  sendCancellationMail(user.firstName, user.email, date, deletedBooking.time);
 
   deletedBooking.delete();
 
   res.send(JSON.stringify(deletedBooking) + "deleted")
-
 
 
 });
@@ -80,23 +78,22 @@ function sendCancellationMail(firstName, email, date, sitting) {
       pass: config.mailCredentials.password
     }
   });
-
   let mailOptions = {
     from: config.mailCredentials.userName,
     to: email,
     subject: 'Avbokning - FML restaurang',
     text: `<h1>Hej ${firstName} och tack för din beställning</h1>
-        <br>
-        Följande bokning är nu avbokad:
-        <br>
-        ${date} - Klockan ${sitting}:00
-        <br>
-        <h3>Har något blivit fel?</h3>
-        <br>
-        Var vänlig kontakta vår kundtjänst.</a>`
+    <br>
+    Följande bokning är nu avbokad:
+    <br>
+    ${date} - Klockan ${sitting}:00
+    <br>
+    <h3>Har något blivit fel?</h3>
+    <br>
+    Var vänlig kontakta vår kundtjänst.</a>`
   };
-
-  transporter.sendMail(mailOptions, function (error, info) {
+  
+  transporter.sendMail(mailOptions, function(error, info){
     if (error) {
       console.log(error);
     } else {

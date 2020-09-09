@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-
 interface IContactProps {
   date: Date;
   people: number;

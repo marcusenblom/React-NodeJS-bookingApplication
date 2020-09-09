@@ -30,19 +30,19 @@ export default function DisplayBookings(props: IDisplayBookingsProps) {
       <div className="booking" key={b.bookingId}>
         <div className="id-wrapper booking-wrapper">
           <div className="booking-id">
-            Booking ID: <strong>{b.bookingId}</strong>
+            Booking ID: {b.bookingId}
           </div>
           <div className="customer-id">
-            User ID: <strong>{b.customerId}</strong>
+            User: {b.customer.email}
           </div>
         </div>
 
         <div className="time-people-wrapper booking-wrapper">
           <div className="time">
-            Time: <strong>{b.time}.00</strong>
+            Time: {b.time}.00
           </div>
           <div className="people">
-            People: <strong>{b.numberOfPeople}</strong>
+            People: {b.numberOfPeople}
           </div>
         </div>
 

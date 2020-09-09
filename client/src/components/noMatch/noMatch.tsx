@@ -1,6 +1,13 @@
 import React from "react";
-//import "../../scss/noMatch.scss";
+import Nav from "../nav/nav";
 
 export default function NoMatch() {
-  return <h2>This URL is not available!</h2>;
+  return (
+    <React.Fragment>
+      <Nav />
+      <div>
+          <h2>This URL is not available!</h2>
+      </div>
+    </React.Fragment>
+  );
 }
