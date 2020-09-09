@@ -81,6 +81,7 @@ export default function Booking() {
         date={date}
         people={people}
         sitting={sitting}
+        setDateChosen={setDateChosen}
       ></TimeComponent>
     );
   } else if (timeChosen && dateChosen) {
