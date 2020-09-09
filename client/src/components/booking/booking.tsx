@@ -21,12 +21,12 @@ export default function Booking() {
 
     // Render Time component instead of Date
     setDateChosen(true);
-
+    // Fetch available tables from DB
     fetchTables();
   }
 
   function fetchTables(){
-    // Här hämtar vi datan från API som visar tillgänliga bord på ett specífikt datum.
+    // Här hämtar vi datan från API som visar tillgänliga bord på ett specifikt datum.
     axios
       .get(
         `http://localhost:4000/getAvailability/${restaurantId}/${date}/${people}`
@@ -49,6 +49,7 @@ export default function Booking() {
     // Render Contact component instead of Time
   }
 
+  // Funktion som möjliggör "tillbaka"-knappen i contact component. Denna återställer sittningarna samt renderar på nytt time component
   function updateTimeAndSitting(){
     setTimeChosen(false);
     fetchTables();
