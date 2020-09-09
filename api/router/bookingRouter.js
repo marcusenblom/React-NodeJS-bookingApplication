@@ -137,7 +137,7 @@ router.post("/createBooking/:restaurantId/:date/:people/:sitting/:email", async 
         date: date,
         time: req.params.sitting,
         numberOfPeople: req.params.people,
-        customerId: userToFind.userId
+        customer: userToFind
     }).save((error, succes) => {
         if (error) {
             res.send(error.message)
