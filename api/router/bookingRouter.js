@@ -18,10 +18,12 @@ const { request } = require('express');
 const nodemailer = require('nodemailer');
 const config = require("../config/config");
 
+
+// Hämta alla bokningar för ett specifikt datum och returnera lediga bord för varje sittning
 router.get("/getAvailability/:restaurantId/:date/:people", async (req, res) => {
 
     // Skickar med user input: Date + # of people. OBS: Just nu så blir datumet en dag tidigare
-    // I post-requestens params så måste restaurangens ID (drop down?) samt datum i format YYYY-MM-DD
+
     var date = new moment(req.params.date).format('L');
     const bookings = await Booking.find({
         date: date
@@ -33,15 +35,20 @@ router.get("/getAvailability/:restaurantId/:date/:people", async (req, res) => {
     let sittings = restaurant.sitting;
     let tableAmount = restaurant.tables;
 
+    // Kolla upp om det finns tillräckligt med bord för varje tid. Returnera endast de tider som finns tillgängliga
+    let tablesNeeded = Math.ceil(req.params.people / tableSize);
+
+    // Skapa upp en lista som kommer innehålla varje sittning samt hur många bord som finns tillgängliga. Denna lista kommer slutligen skickas som respons från servern
+    let tablesAvailable = [];
+
+    // Mappa igenom listan av sittningar och returnera en lista som innehåller varje sittning och hur många bord som finns lediga
     let availabilityPerSitting = sittings.map(sitting => {
 
         return getAvailabilityPerSitting(tableSize, tableAmount, sitting);
 
     });
 
-    // Kolla upp om det finns tillräckligt med bord för varje tid. Returnera endast de tider som finns tillgängliga
-    let tablesNeeded = Math.ceil(req.params.people / tableSize);
-    let tablesAvailable = [];
+    // Loopa igenom varje sittning i listan ovan och kolla om det finns tillräckligt många bord för sällskapet. Om det finns tillräckligt med bord så läggs denna sittning till i tablesAvailable
     availabilityPerSitting.forEach(sitting => {
 
         if (sitting.tablesAvailable >= tablesNeeded) {
@@ -73,11 +80,12 @@ router.get("/getAvailability/:restaurantId/:date/:people", async (req, res) => {
         }
     }
 
-    // Få tillbaka: Tillgängliga tider för det datumet / alternativt felmeddelande som säger att det inte finns tillräckligt många bord för det sällskapet
+    // Skicka tillbaka: Tillgängliga tider för det datumet
     res.send(tablesAvailable)
 
 });
 
+// Skapa upp en användare efter att denne har fyllt i sina uppgifter i sista bokningssteget
 router.post("/createUser/:firstName/:lastName/:email/:phoneNumber", async (req, res) => {
 
     const userToFind = await User.findOne({
@@ -107,13 +115,17 @@ router.post("/createUser/:firstName/:lastName/:email/:phoneNumber", async (req, 
 
 });
 
+// Skapa upp bokning
 router.post("/createBooking/:restaurantId/:date/:people/:sitting/:email", async (req, res) => {
 
+    // Hämta användaren som lades till i sista bokningssteget (Se router ovan)
     const userToFind = await User.findOne({
         email: req.params.email
     });
+    // Hämta alla bokningar som finns
     const bookings = await Booking.find();
 
+    // Detta görs för att den nya bokningen ska få nästkommande ID i listan
     let lastBookingId = bookings[bookings.length - 1].bookingId;
     let newBookingId = lastBookingId + 1;
 
@@ -125,7 +137,7 @@ router.post("/createBooking/:restaurantId/:date/:people/:sitting/:email", async 
         date: date,
         time: req.params.sitting,
         numberOfPeople: req.params.people,
-        customerId: userToFind.userId // Måste hämtas från användaren
+        customerId: userToFind.userId
     }).save((error, succes) => {
         if (error) {
             res.send(error.message)
@@ -134,29 +146,14 @@ router.post("/createBooking/:restaurantId/:date/:people/:sitting/:email", async 
         }
     });
 
-    sendMail(userToFind.firstName, userToFind.email, date, req.params.sitting, req.params.people);
-
-    // Skicka bekräftelsemail till kunden där denne kan avboka tiden
-
-});
-
-
-
-router.delete("/deleteBooking/:id", async (req, res) => {
-
-    // Tar bort en bokning från databasen. Användaren skickar en delete-request i form av en knapp eller länk där bokingsId skickas med.
-    const deletedBooking = await Booking.findOne({
-        bookingId: req.params.id
-    });
-    const booking = await Booking.deleteOne({
-        bookingId: req.params.id
-    });
-
-    res.send(JSON.stringify(deletedBooking) + "deleted")
+    // Skicka bekräftelsemail till kunden
+    sendConfirmationMail(userToFind.firstName, userToFind.email, date, req.params.sitting, req.params.people);
 
 });
 
-function sendMail(firstName, email, date, sitting, people){
+
+// Confirmation email that is sent to user upon creating a booking
+function sendConfirmationMail(firstName, email, date, sitting, people){
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
