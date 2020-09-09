@@ -185,7 +185,7 @@ export default function ContactComponent(this: any, props: IContactProps) {
           </div>
           <div className="checkbox-div">
             <input type="radio" className="checkbox" />
-            <label htmlFor="checkbox">I accept gdpr terms</label>
+            <label htmlFor="checkbox">I have read and understood fml's terms and conditions.</label>
           </div>
           <div className="checkbox-div">
             <input type="radio" className="checkbox" />

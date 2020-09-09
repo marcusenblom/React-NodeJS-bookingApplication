@@ -40,18 +40,16 @@ router.delete("/deleteBooking/:id", async (req, res) => {
 
 // Admin gör en ändring på en booking med hjälp av rätt ID
 
-router.put('/changeBooking/:Id', async (req, res) => {
+router.put('/edit/:Id', async (req, res) => {
     const booking = await Booking.findOne({
-        bookingId: req.params.id
+        bookingId: req.params.bookingId
     });
     (booking.date = req.body.date),
     (booking.numberOfPeople = req.body.numberOfPeople),
     (booking.time = req.body.time),
 
-    booking.user = {
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-    }
+   
+    console.log(booking)
 
     await booking.save();
 
