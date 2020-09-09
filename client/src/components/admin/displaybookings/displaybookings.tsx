@@ -39,7 +39,7 @@ export default function DisplayBookings(props: IDisplayBookingsProps) {
             Booking ID: {b.bookingId}
           </div>
           <div className="customer-id">
-            User: {b.customerId.email}
+            User: {b.customer.email}
           </div>
         </div>
 

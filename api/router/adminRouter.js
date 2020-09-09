@@ -6,14 +6,6 @@ const {
     Booking,
     validateBooking
 } = require('../model/bookingModel');
-const {
-    User,
-    validateUser
-} = require('../model/userModel');
-const {
-    Restaurant,
-    validateRestaurant
-} = require('../model/restaurantModel');
 const nodemailer = require('nodemailer');
 const config = require("../config/config");
 
@@ -25,7 +17,7 @@ router.get("/getBookings/:date", async (req, res) => {
   // Hämta alla bokningae för det akutella datumet. .populate krävs för att få tag på användarinfon
   const bookings = await Booking.find({
     date: date
-  }).populate("customerId");
+  }).populate("customer");
 
   res.send(bookings);
 
@@ -36,13 +28,13 @@ router.delete("/deleteBooking/:id", async (req, res) => {
   // Tar bort en bokning från databasen. Användaren skickar en delete-request i form av en knapp eller länk där bokingsId skickas med.
   const deletedBooking = await Booking.findOne({
     bookingId: req.params.id
-  }).populate("customerId");
+  }).populate("customer");
 
   // const userToFind = await User.findOne({
-  //   userId: deletedBooking.customerId
+  //   userId: deletedBooking.customer
   // });
 
-  const user = deletedBooking.customerId;
+  const user = deletedBooking.customer;
 
   let date = new moment(deletedBooking.date).format('L');
 

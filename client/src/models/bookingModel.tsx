@@ -6,14 +6,14 @@ class bookingClass {
     date: Date;
     time: number;
     numberOfPeople: number;
-    customerId: userModel;
+    customer: userModel;
     restaurantId: number;
-    constructor(bookingId: number, date: Date, time: number, numberOfPeople: number, customerId: userModel, restaurantId: number){
+    constructor(bookingId: number, date: Date, time: number, numberOfPeople: number, customer: userModel, restaurantId: number){
         this.bookingId = bookingId;
         this.date = date;
         this.time = time;
         this.numberOfPeople = numberOfPeople;
-        this.customerId = customerId;
+        this.customer = customer;
         this.restaurantId = restaurantId;
     }
 }
