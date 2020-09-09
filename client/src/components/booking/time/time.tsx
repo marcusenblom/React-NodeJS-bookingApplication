@@ -1,6 +1,6 @@
 import React from "react";
 import Nav from "../../nav/nav";
-import { BsPeopleFill, BsCalendar, BsCalendarFill } from "react-icons/bs";
+import { BsPeopleFill, BsCalendarFill } from "react-icons/bs";
 
 interface ITimeProps {
   date: Date;

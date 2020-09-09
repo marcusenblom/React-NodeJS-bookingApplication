@@ -19,17 +19,13 @@ interface IContactProps {
 }
 
 export default function ContactComponent(this: any, props: IContactProps) {
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState(Number);
-
-  // const [date, setDate] = useState(new Date());
-  // const [people, setPeople] = useState(0);
-  // const [sitting, setSitting] = useState([18, 21]);
   const [showPopup, setshowPopup] = useState(false);
-
-  const { register, handleSubmit, errors, formState } = useForm({mode: 'onChange'});
+  const { register, handleSubmit, errors, formState } = useForm({mode: 'onBlur'});
 
   function updateFirstName(e: ChangeEvent<HTMLInputElement>) {
     setFirstName(e.target.value);
@@ -107,8 +103,7 @@ export default function ContactComponent(this: any, props: IContactProps) {
               ref={register({
                 required: "First name is required.",
                 minLength: 2})
-              }
-            />
+              }/>
             <br />
 
             <label htmlFor="lastName"></label>
@@ -164,8 +159,7 @@ export default function ContactComponent(this: any, props: IContactProps) {
               ref={register({
                 required: "Phonenumber is required.",
                 minLength: 8
-              })}
-            />
+              })}/>
             <br />
           </div>
 
@@ -199,7 +193,8 @@ export default function ContactComponent(this: any, props: IContactProps) {
           </div>
 
           <button onClick={handlePopup} disabled={!formState.isValid} className='mb'>Reserve a table!</button>
-        </form>
+           
+         </form>
 
         {showPopup && (
           <div className="background">
