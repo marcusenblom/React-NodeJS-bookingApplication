@@ -4,6 +4,7 @@ import axios from "axios";
 import Nav from "../../nav/nav";
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { BsPeopleFill, BsCalendar } from 'react-icons/bs';
+import { FaArrowCircleLeft } from "react-icons/fa";
 
 //Ett interface som beskriver allt som måste skickas med. 
 interface IContactProps {
@@ -66,6 +67,7 @@ export default function ContactComponent(this: any, props: IContactProps) {
     <React.Fragment>
       <Nav />
       <div className="contact-container">
+        <a href='/booking'><FaArrowCircleLeft size='2.2em' className='go-back-arrow'/></a>
         <div className="date-guest-time-container">
           <div className="presentation">
             <BsCalendar size='1.5em'/>

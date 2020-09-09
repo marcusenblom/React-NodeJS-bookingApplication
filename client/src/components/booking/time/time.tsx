@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Nav from "../../nav/nav";
 import { BsPeopleFill, BsCalendarFill } from "react-icons/bs";
+import { FaArrowCircleLeft } from "react-icons/fa";
 
 interface ITimeProps {
   date: Date;
@@ -10,6 +11,7 @@ interface ITimeProps {
 }
 
 export default function TimeComponent(props: ITimeProps) {
+
   function updateParent(e: any) {
     let s = parseInt(e.target.value);
     props.updateSitting([s]);
@@ -34,6 +36,7 @@ export default function TimeComponent(props: ITimeProps) {
     <React.Fragment>
       <Nav />
       <div className="mb">
+      <a href='/booking'><FaArrowCircleLeft size='2em' className='go-back-arrow' /></a>
         <div className='flexe-these-two'>
           <p>
             <BsCalendarFill size='1.2em' className="calandar" />
@@ -45,7 +48,6 @@ export default function TimeComponent(props: ITimeProps) {
           </p>
         </div>
         {sittingButtons}
-     
       </div>
     </React.Fragment>
   );
