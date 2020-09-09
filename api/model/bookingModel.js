@@ -22,9 +22,9 @@ const bookingSchema = new Schema({
         minlength: 1
     },
     customerId: {
-        type: Number,
-        required: true,
-        minlength: 1
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     },
     restaurantId: {
         type: Number,
