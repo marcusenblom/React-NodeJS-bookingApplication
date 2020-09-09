@@ -134,9 +134,8 @@ router.post("/createBooking/:restaurantId/:date/:people/:sitting/:email", async 
         }
     });
 
-    sendMail(userToFind.firstName, userToFind.email, date, req.params.sitting, req.params.people);
-
-    // Skicka bekräftelsemail till kunden där denne kan avboka tiden
+    // Skicka bekräftelsemail till kunden
+    sendConfirmationMail(userToFind.firstName, userToFind.email, date, req.params.sitting, req.params.people);
 
 });
 
@@ -145,9 +144,12 @@ router.post("/createBooking/:restaurantId/:date/:people/:sitting/:email", async 
 router.delete("/deleteBooking/:id", async (req, res) => {
 
     // Tar bort en bokning från databasen. Användaren skickar en delete-request i form av en knapp eller länk där bokingsId skickas med.
+
+    let id = req.params.id;
     const deletedBooking = await Booking.findOne({
-        bookingId: req.params.id
+        bookingId: id
     });
+
     const booking = await Booking.deleteOne({
         bookingId: req.params.id
     });
@@ -156,7 +158,8 @@ router.delete("/deleteBooking/:id", async (req, res) => {
 
 });
 
-function sendMail(firstName, email, date, sitting, people){
+// Confirmation email that is sent to user upon creating a booking
+function sendConfirmationMail(firstName, email, date, sitting, people){
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {

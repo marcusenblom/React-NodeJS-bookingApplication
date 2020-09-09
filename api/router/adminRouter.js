@@ -14,6 +14,8 @@ const {
     Restaurant,
     validateRestaurant
 } = require('../model/restaurantModel');
+const nodemailer = require('nodemailer');
+const config = require("../config/config");
 
 
 router.get("/getBookings/:date", async (req, res) => {
@@ -32,9 +34,19 @@ router.delete("/deleteBooking/:id", async (req, res) => {
         bookingId: req.params.id
     });
 
+    const userToFind = await User.findOne({
+        userId: deletedBooking.customerId
+    });
+    let date = new moment(deletedBooking.date).format('L');
+
+    // Skicka ett avbokningsmail till användaren
+    sendCancellationMail(userToFind.firstName, userToFind.email, date, deletedBooking.time);
+
     deletedBooking.delete();
 
     res.send(JSON.stringify(deletedBooking) + "deleted")
+
+    
 
 });
 
@@ -58,6 +70,39 @@ router.put('/edit/:Id', async (req, res) => {
 
     res.json(booking)
 })
+
+function sendCancellationMail(firstName, email, date, sitting){
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: config.mailCredentials.userName,
+          pass: config.mailCredentials.password
+        }
+      });
+      
+      let mailOptions = {
+        from: config.mailCredentials.userName,
+        to: email,
+        subject: 'Avbokning - FML restaurang',
+        text: `<h1>Hej ${firstName} och tack för din beställning</h1>
+        <br>
+        Följande bokning är nu avbokad:
+        <br>
+        ${date} - Klockan ${sitting}:00
+        <br>
+        <h3>Har något blivit fel?</h3>
+        <br>
+        Var vänlig kontakta vår kundtjänst.</a>`
+      };
+      
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Cancellation email has been sent to the customer: ' + info.response);
+        }
+      });
+};
 
 
 module.exports = router;
