@@ -17,6 +17,7 @@ interface IContactProps {
     email: string,
     phoneNumber: number
   ): void;
+  updateTimeAndSitting(): void;
 }
 
 export default function ContactComponent(this: any, props: IContactProps) {
@@ -27,6 +28,10 @@ export default function ContactComponent(this: any, props: IContactProps) {
   const [phoneNumber, setPhoneNumber] = useState(Number);
   const [showPopup, setshowPopup] = useState(false);
   const { register, handleSubmit, errors, formState } = useForm({mode: 'onBlur'});
+
+  function updateTimeAndSitting() {
+    props.updateTimeAndSitting();
+  }
 
   function updateFirstName(e: ChangeEvent<HTMLInputElement>) {
     setFirstName(e.target.value);
@@ -67,7 +72,7 @@ export default function ContactComponent(this: any, props: IContactProps) {
     <React.Fragment>
       <Nav />
       <div className="contact-container">
-        <a href='/booking'><FaArrowCircleLeft size='2.2em' className='go-back-arrow'/></a>
+        <FaArrowCircleLeft size='2.2em' className='go-back-arrow' onClick={updateTimeAndSitting}/>
         <div className="date-guest-time-container">
           <div className="presentation">
             <BsCalendar size='1.5em'/>
