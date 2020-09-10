@@ -54,9 +54,11 @@ export default function SingleBooking(props: ISingleBookingsProps) {
 
       <div className="time-people-wrapper booking-wrapper">
         <div className="time">
+          Time:
           <input type="text" onChange={updateTime} value={time}/>
         </div>
         <div className="people">
+          People:
           <input type="number" onChange={updatePeople} value={people}/>
         </div>
       </div>
