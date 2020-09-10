@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import BookingClass from "../../../models/bookingModel";
 import "./../../../scss/_displaybookings.scss";
 import moment from "moment";
-import Axios from "axios";
-import { Link } from "react-router-dom";
+import SingleBooking from "./singleBooking/singleBooking";
 
 interface IDisplayBookingsProps {
   bookings: BookingClass[];
@@ -13,48 +12,14 @@ interface IDisplayBookingsProps {
 }
 
 export default function DisplayBookings(props: IDisplayBookingsProps) {
+
   // Konvertera datumet på bokningsobjekten till en sträng innehållande ett moment-datum
   let shortDate = moment(props.date).format("LL");
 
-  function removeBooking(bookingId: number) {
-    Axios.delete("http://localhost:4000/deleteBooking/" + bookingId).then(
-      res => {
-        props.getbooking();
-      }
-    );
-  }
-  
-
+  // Skapar upp en SingleBooking komponent för varje bokning i propslistan
   let bookingLi = props.bookings.map(b => {
     return (
-      <div className="booking" key={b.bookingId}>
-        <div className="id-wrapper booking-wrapper">
-          <div className="booking-id">
-            Booking ID: {b.bookingId}
-          </div>
-          <div className="customer-id">
-            User: {b.customer.email}
-          </div>
-        </div>
-
-        <div className="time-people-wrapper booking-wrapper">
-          <div className="time">
-            Time: {b.time}.00
-          </div>
-          <div className="people">
-            People: {b.numberOfPeople}
-          </div>
-        </div>
-
-        <div className="button-wrapper booking-wrapper">
-          <Link to={"/edit/" + b.bookingId}>
-            <button type="button">Change</button>
-          </Link>
-          <button type="button" onClick={() => removeBooking(b.bookingId)}>
-            Remove
-          </button>
-        </div>
-      </div>
+      <SingleBooking bookingId={b.bookingId} user={b.customer} time={b.time} date={b.date} people={b.numberOfPeople} getbooking={props.getbooking} key={b.bookingId}></SingleBooking>
     );
   });
 

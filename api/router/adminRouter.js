@@ -50,16 +50,16 @@ router.delete("/deleteBooking/:id", async (req, res) => {
 
 // Admin gör en ändring på en booking med hjälp av rätt ID
 
-router.put('/edit/:id', async (req, res) => {
-  const editBooking = await Booking.updateOne({
+router.post('/editBooking/:id/:time/:people', async (req, res) => {
+  await Booking.updateOne({
     bookingId: req.params.id
   }, {
     $set: {
-      date: req.body.updateReservation.date,
-      time: req.body.updateReservation.time,
-      numberOfPeople: req.body.updateReservation.numberOfPeople
+      time: req.params.time,
+      numberOfPeople: req.params.people
     }
-  })
+  });
+
 })
 
 router.get('/edit/:id', async (req, res) => {
